@@ -29,11 +29,6 @@ const heroSlides: HeroSlide[] = [
         external: true,
       },
     ],
-    image: {
-      desktop: "/hero/bandeira-desktop.webp",
-      mobile: "/hero/bandeira-mobile.webp",
-      alt: "Altar da Igreja Nova Terra decorado com flores e a bandeira de Israel",
-    },
   },
   {
     id: "culto",
@@ -42,11 +37,6 @@ const heroSlides: HeroSlide[] = [
     buttons: [
       { label: "Ver horários dos cultos", href: "/jornada-de-discipulado" },
     ],
-    image: {
-      desktop: "/hero/culto-desktop.webp",
-      mobile: "/hero/culto-mobile.webp",
-      alt: "Culto da Igreja Nova Terra com banda no palco e congregação reunida",
-    },
   },
   {
     id: "avivamento-multiplicacao",
@@ -55,11 +45,6 @@ const heroSlides: HeroSlide[] = [
     buttons: [
       { label: "Nossa missão e visão", href: "/quem-somos/missao-e-visao" },
     ],
-    image: {
-      desktop: "/hero/trigo-desktop.webp",
-      mobile: "/hero/trigo-mobile.webp",
-      alt: "Trigo em destaque durante momento de adoração na Igreja Nova Terra",
-    },
   },
   {
     id: "oracao",
@@ -73,11 +58,6 @@ const heroSlides: HeroSlide[] = [
         external: true,
       },
     ],
-    image: {
-      desktop: "/hero/oracao-desktop.webp",
-      mobile: "/hero/oracao-mobile.webp",
-      alt: "Mulher em momento de oração",
-    },
   },
 ];
 

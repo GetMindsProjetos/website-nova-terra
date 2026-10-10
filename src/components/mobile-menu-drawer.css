@@ -264,7 +264,7 @@
   padding: 0.75rem 1.5rem;
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #171512; /* contraste ~5,6:1 sobre laranja (branco daria 3,11:1) */
+  color: #fff;
   text-decoration: none;
   background: var(--md-accent);
   border-radius: 9999px;
@@ -272,7 +272,7 @@
   transition: background-color 200ms;
 }
 .md-drawer__cta:hover {
-  background: var(--md-accent-hover);
+  background: #cf5307;
 }
 .md-drawer__contacts {
   display: flex;

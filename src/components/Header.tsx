@@ -187,7 +187,7 @@ export default function Header() {
           <Link
             href={donateItem.href}
             aria-current={isCurrent(pathname, donateItem.href) ? "page" : undefined}
-            className={`ml-1 whitespace-nowrap rounded-full bg-terra-600 px-3 py-2 text-[13px] font-semibold text-night-900 shadow-sm shadow-terra-900/10 transition hover:bg-terra-500 2xl:ml-2 2xl:px-4 2xl:text-sm ${focusRing}`}
+            className={`ml-1 whitespace-nowrap rounded-full bg-terra-600 px-3 py-2 text-[13px] font-semibold text-white shadow-sm shadow-terra-900/10 transition hover:bg-terra-700 2xl:ml-2 2xl:px-4 2xl:text-sm ${focusRing}`}
           >
             {donateItem.label}
           </Link>

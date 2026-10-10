@@ -281,7 +281,7 @@ export default function InscricaoForm({ evento }: { evento: Evento }) {
         disabled={isPending}
         aria-disabled={isPending}
         aria-busy={isPending}
-        className="min-h-[48px] w-full rounded-full bg-terra-600 px-6 py-3 text-sm font-semibold text-night-900 transition hover:bg-terra-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900 disabled:cursor-not-allowed disabled:opacity-70"
+        className="min-h-[48px] w-full rounded-full bg-terra-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-terra-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900 disabled:cursor-not-allowed disabled:opacity-70"
       >
         {isPending ? "Enviando..." : "Confirmar inscrição"}
       </button>

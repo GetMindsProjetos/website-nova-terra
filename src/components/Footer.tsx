@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AnimatedGradient from "./AnimatedGradient";
 import FooterLink from "./FooterLink";
 import { donateItem, mainNav, site, socialLinks, whatsappLink } from "@/lib/site";
 
@@ -38,30 +39,12 @@ const columns: { title: string; links: FooterLink[] }[] = [
 ];
 
 const linkClass =
-  "inline-block py-2.5 text-white/70 transition hover:text-terra-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terra-300";
+  "inline-block py-2.5 text-white underline-offset-4 transition hover:text-white hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
 export default function Footer() {
   return (
-    <footer className="on-dark relative overflow-hidden border-t border-terra-900 text-white">
-      <div className="absolute inset-0 -z-20" aria-hidden="true">
-        <Image
-          src="/hero/trigo-mobile.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          quality={60}
-          className="object-cover md:hidden"
-        />
-        <Image
-          src="/hero/trigo-desktop.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          quality={60}
-          className="hidden object-cover md:block"
-        />
-      </div>
-      <div className="absolute inset-0 -z-10 bg-night-900/85" />
+    <footer className="on-dark relative isolate overflow-hidden border-t border-white/10 text-white">
+      <AnimatedGradient className="-z-10" />
 
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.3fr]">
         <div className="md:col-span-2 lg:col-span-1">
@@ -73,11 +56,11 @@ export default function Footer() {
             sizes="160px"
             className="h-10 w-auto"
           />
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-white">
             Existimos para ganhar, cuidar e capacitar vidas para o Reino de
             Deus, em Icoaraci, Belém-PA. {site.closing}
           </p>
-          <p className="mt-4 text-sm text-white/70">{site.address}</p>
+          <p className="mt-4 text-sm text-white">{site.address}</p>
         </div>
 
         {columns.map((col) => (
@@ -135,7 +118,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/15">
-        <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-white/70 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-white sm:px-6">
           <p>
             © {new Date().getFullYear()} Igreja Pentecostal Missionária Nova
             Terra. Todos os direitos reservados.
