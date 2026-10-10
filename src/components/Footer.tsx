@@ -1,5 +1,4 @@
 import Image from "next/image";
-import AnimatedGradient from "./AnimatedGradient";
 import FooterLink from "./FooterLink";
 import { donateItem, mainNav, site, socialLinks, whatsappLink } from "@/lib/site";
 
@@ -39,33 +38,31 @@ const columns: { title: string; links: FooterLink[] }[] = [
 ];
 
 const linkClass =
-  "inline-block py-2.5 text-white underline-offset-4 transition hover:text-white hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
+  "inline-block py-2.5 text-night-900 underline-offset-4 transition hover:text-terra-800 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terra-800";
 
 export default function Footer() {
   return (
-    <footer className="on-dark relative isolate overflow-hidden border-t border-white/10 text-white">
-      <AnimatedGradient className="-z-10" />
-
+    <footer className="relative isolate overflow-hidden border-t border-terra-100 bg-gradient-to-br from-terra-100 via-terra-50 to-white text-night-900">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.3fr]">
         <div className="md:col-span-2 lg:col-span-1">
           <Image
-            src="/logo-igreja-nova-terra-branca.webp"
+            src="/logo-igreja-nova-terra.webp"
             alt="Igreja Nova Terra — ícone de leão e chama com o nome da igreja"
             width={974}
             height={482}
             sizes="160px"
             className="h-10 w-auto"
           />
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-white">
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-night-800/80">
             Existimos para ganhar, cuidar e capacitar vidas para o Reino de
             Deus, em Icoaraci, Belém-PA. {site.closing}
           </p>
-          <p className="mt-4 text-sm text-white">{site.address}</p>
+          <p className="mt-4 text-sm text-night-800/80">{site.address}</p>
         </div>
 
         {columns.map((col) => (
           <nav key={col.title} aria-label={`Rodapé: ${col.title}`}>
-            <h2 className="font-serif text-sm font-semibold uppercase tracking-wide text-white">
+            <h2 className="font-serif text-sm font-semibold uppercase tracking-widest text-terra-800">
               {col.title}
             </h2>
             <ul className="mt-3 text-sm">
@@ -81,7 +78,7 @@ export default function Footer() {
         ))}
 
         <div>
-          <h2 className="font-serif text-sm font-semibold uppercase tracking-wide text-white">
+          <h2 className="font-serif text-sm font-semibold uppercase tracking-widest text-terra-800">
             Contato
           </h2>
           <ul className="mt-3 text-sm">
@@ -117,8 +114,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/15">
-        <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-white sm:px-6">
+      <div className="border-t border-night-900/10">
+        <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-night-800/75 sm:px-6">
           <p>
             © {new Date().getFullYear()} Igreja Pentecostal Missionária Nova
             Terra. Todos os direitos reservados.
