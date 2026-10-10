@@ -24,18 +24,18 @@ export default function MissaoVisaoPage() {
       <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="rounded-2xl glass p-6">
-            <p className="text-sm font-semibold uppercase tracking-wide text-terra-800">
+            <p className="text-sm font-medium uppercase tracking-wide text-terra-800">
               Visão
             </p>
-            <p className="mt-2 font-serif text-xl font-semibold text-night-900">
+            <p className="mt-2 font-serif text-xl font-medium text-night-900">
               Tornar cada membro fruto permanente.
             </p>
           </div>
           <div className="rounded-2xl glass p-6">
-            <p className="text-sm font-semibold uppercase tracking-wide text-terra-800">
+            <p className="text-sm font-medium uppercase tracking-wide text-terra-800">
               Missão
             </p>
-            <p className="mt-2 font-serif text-xl font-semibold text-night-900">
+            <p className="mt-2 font-serif text-xl font-medium text-night-900">
               Ganhar, cuidar e capacitar.
             </p>
           </div>

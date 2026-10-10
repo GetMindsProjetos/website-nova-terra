@@ -25,7 +25,7 @@ export default function PageHero({ eyebrow, title, description, children }: Prop
       <div className="mx-auto max-w-4xl px-4 pb-14 pt-[calc(3.5rem+var(--header-h))] text-center sm:px-6 sm:pb-20 sm:pt-[calc(5rem+var(--header-h))]">
         {eyebrow && (
           <Reveal>
-            <p className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-wide text-night-900">
+            <p className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-wide text-night-900">
               <span aria-hidden="true" className="h-0.5 w-8 rounded-full bg-terra-600" />
               {eyebrow}
               <span aria-hidden="true" className="h-0.5 w-8 rounded-full bg-terra-600" />

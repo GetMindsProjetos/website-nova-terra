@@ -48,35 +48,35 @@ export default function CasaAmarelaPage() {
       </PageHero>
 
       <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">
-        <h2 className="font-serif text-2xl font-bold text-night-900">
+        <h2 className="font-serif text-2xl font-medium text-night-900">
           O que oferecemos
         </h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {ofertas.map((o) => (
             <div key={o.title} className="rounded-2xl glass p-6 shadow-sm">
-              <h3 className="font-serif text-base font-semibold text-night-900">{o.title}</h3>
+              <h3 className="font-serif text-base font-medium text-night-900">{o.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-night-800/70">{o.desc}</p>
             </div>
           ))}
         </div>
 
-        <h2 className="mt-14 font-serif text-2xl font-bold text-night-900">
+        <h2 className="mt-14 font-serif text-2xl font-medium text-night-900">
           Como ajudar
         </h2>
         <div className="mt-6 space-y-4">
           <div className="rounded-xl glass p-5">
-            <p className="font-semibold text-night-900">Doe materiais e produtos</p>
+            <p className="font-medium text-night-900">Doe materiais e produtos</p>
             <Lacuna>lista específica do que é aceito como doação</Lacuna>
           </div>
           <div className="rounded-xl glass p-5">
-            <p className="font-semibold text-night-900">Seja voluntário(a)</p>
+            <p className="font-medium text-night-900">Seja voluntário(a)</p>
             <p className="text-sm text-night-800/70">
               Profissionais de psicologia, terapia, educação e áreas afins.
             </p>
             <Lacuna>canal de inscrição para voluntários</Lacuna>
           </div>
           <div className="rounded-xl glass p-5">
-            <p className="font-semibold text-night-900">Contribua financeiramente</p>
+            <p className="font-medium text-night-900">Contribua financeiramente</p>
             <div className="mt-3 flex flex-col items-center gap-5 sm:flex-row sm:items-start">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -88,17 +88,17 @@ export default function CasaAmarelaPage() {
               />
               <div className="text-center sm:text-left">
                 <p className="text-sm text-night-800/80">
-                  <span className="font-semibold text-night-900">
+                  <span className="font-medium text-night-900">
                     Chave PIX ({site.pix.tipoChave}):
                   </span>{" "}
                   {site.pix.chave}
                 </p>
                 <p className="text-sm text-night-800/80">
-                  <span className="font-semibold text-night-900">Nome:</span>{" "}
+                  <span className="font-medium text-night-900">Nome:</span>{" "}
                   {site.pix.nome}
                 </p>
                 <p className="text-sm text-night-800/80">
-                  <span className="font-semibold text-night-900">Banco:</span>{" "}
+                  <span className="font-medium text-night-900">Banco:</span>{" "}
                   {site.pix.banco}
                 </p>
                 <div className="mt-3">

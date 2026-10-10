@@ -138,12 +138,12 @@ export default function ContatoForm() {
         role="status"
         className="rounded-2xl glass p-8 text-center focus:outline-none"
       >
-        <p className="font-serif text-xl font-semibold text-night-900">{msg.titulo}</p>
+        <p className="font-serif text-xl font-medium text-night-900">{msg.titulo}</p>
         <p className="mt-2 text-sm leading-relaxed text-night-800">{msg.texto}</p>
         <button
           type="button"
           onClick={() => setState({ status: "idle" })}
-          className="mt-5 min-h-[44px] btn-glass rounded-full px-5 py-2.5 text-sm font-semibold text-night-800"
+          className="mt-5 min-h-[44px] btn-glass rounded-full px-5 py-2.5 text-sm font-medium text-night-800"
         >
           Enviar outra mensagem
         </button>
@@ -189,7 +189,7 @@ export default function ContatoForm() {
               key={o.valor}
               className="flex min-h-[44px] cursor-pointer flex-col rounded-xl border border-night-800/30 bg-white p-3 text-sm transition hover:border-terra-600 has-[:checked]:border-terra-600 has-[:checked]:bg-terra-50 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-terra-600"
             >
-              <span className="flex items-center gap-2 font-semibold text-night-900">
+              <span className="flex items-center gap-2 font-medium text-night-900">
                 <input
                   type="radio"
                   name="assunto"
@@ -306,7 +306,7 @@ export default function ContatoForm() {
             <Link
               href="/politica-de-privacidade"
               target="_blank"
-              className="font-semibold text-terra-800 underline underline-offset-2"
+              className="font-medium text-terra-800 underline underline-offset-2"
             >
               Política de Privacidade
             </Link>
@@ -328,7 +328,7 @@ export default function ContatoForm() {
         type="submit"
         disabled={isPending}
         aria-disabled={isPending}
-        className="min-h-[48px] w-full rounded-full btn-glass-accent px-6 py-3 text-sm font-semibold text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900 disabled:cursor-not-allowed disabled:opacity-70"
+        className="min-h-[48px] w-full rounded-full btn-glass-accent px-6 py-3 text-sm font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900 disabled:cursor-not-allowed disabled:opacity-70"
       >
         {isPending ? "Enviando..." : "Enviar"}
       </button>

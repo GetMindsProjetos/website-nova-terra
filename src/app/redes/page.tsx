@@ -35,14 +35,14 @@ export default function RedesPage() {
                 className="group flex h-full flex-col justify-between rounded-2xl glass p-6 shadow-card transition hover:shadow-card-hover motion-safe:hover:-translate-y-0.5"
               >
                 <div>
-                  <h2 className="font-serif text-lg font-semibold text-night-900">
+                  <h2 className="font-serif text-lg font-medium text-night-900">
                     {rede.nome}
                   </h2>
                   <p className="mt-2 text-sm leading-relaxed text-night-800/70">
                     {rede.resumo}
                   </p>
                 </div>
-                <span className="mt-5 inline-flex text-sm font-semibold text-terra-800">
+                <span className="mt-5 inline-flex text-sm font-medium text-terra-800">
                   Saiba mais →
                 </span>
               </Link>

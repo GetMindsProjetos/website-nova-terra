@@ -189,7 +189,7 @@
 .md-group__label {
   margin: 0.25rem 0 0;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--md-accent-text);
@@ -216,7 +216,7 @@
 .md-drawer a[aria-current="page"],
 .md-acc__btn[aria-current="page"] {
   color: var(--md-accent-text);
-  font-weight: 600;
+  font-weight: 500;
 }
 .md-acc__chev {
   width: 1rem;
@@ -258,7 +258,7 @@
   border-bottom-color: transparent;
 }
 .md-acc__inner .md-acc__overview {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--md-accent-text);
 }
 
@@ -271,7 +271,7 @@
   margin-top: 1.5rem;
   padding: 0.75rem 1.5rem;
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #fff;
   text-decoration: none;
   background: rgb(247 99 9 / 0.9);

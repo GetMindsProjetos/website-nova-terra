@@ -88,7 +88,7 @@ export default function Header() {
         >
           {desktopNav.map((item) => {
             const current = isCurrent(pathname, item.href);
-            const linkClass = `whitespace-nowrap rounded-md px-2 py-2 text-[13px] font-medium text-night-900 transition hover:bg-white/70 aria-[current=page]:font-semibold aria-[current=page]:underline aria-[current=page]:decoration-terra-600 aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8 2xl:px-3 2xl:text-sm ${focusRing}`;
+            const linkClass = `whitespace-nowrap rounded-md px-2 py-2 text-[13px] font-medium text-night-900 transition hover:bg-white/70 aria-[current=page]:font-medium aria-[current=page]:underline aria-[current=page]:decoration-terra-600 aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8 2xl:px-3 2xl:text-sm ${focusRing}`;
             return item.children ? (
               <div
                 key={item.href}
@@ -127,7 +127,7 @@ export default function Header() {
                   <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl bg-gradient-to-br from-terra-100 via-terra-50 to-white shadow-2xl ring-1 ring-black/5">
                     <div className="grid gap-8 p-7 sm:p-8 md:grid-cols-[220px_1fr] md:gap-12">
                       <div className="md:border-r md:border-night-900/10 md:pr-8">
-                        <p className="text-xs font-semibold uppercase tracking-widest text-terra-800">
+                        <p className="text-xs font-medium uppercase tracking-widest text-terra-800">
                           {item.label}
                         </p>
                         {item.description && (
@@ -137,7 +137,7 @@ export default function Header() {
                         )}
                         <Link
                           href={item.href}
-                          className={`mt-5 inline-flex items-center gap-1.5 rounded-md text-sm font-semibold text-terra-800 transition-all hover:gap-2.5 ${focusRing}`}
+                          className={`mt-5 inline-flex items-center gap-1.5 rounded-md text-sm font-medium text-terra-800 transition-all hover:gap-2.5 ${focusRing}`}
                         >
                           Ver visão geral
                           <span aria-hidden>→</span>
@@ -187,7 +187,7 @@ export default function Header() {
           <Link
             href={donateItem.href}
             aria-current={isCurrent(pathname, donateItem.href) ? "page" : undefined}
-            className={`ml-1 whitespace-nowrap rounded-full bg-terra-600 px-3 py-2 text-[13px] font-semibold text-white shadow-sm shadow-terra-900/10 transition hover:bg-terra-700 2xl:ml-2 2xl:px-4 2xl:text-sm ${focusRing}`}
+            className={`ml-1 whitespace-nowrap rounded-full bg-terra-600 px-3 py-2 text-[13px] font-medium text-white shadow-sm shadow-terra-900/10 transition hover:bg-terra-700 2xl:ml-2 2xl:px-4 2xl:text-sm ${focusRing}`}
           >
             {donateItem.label}
           </Link>

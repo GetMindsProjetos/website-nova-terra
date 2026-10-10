@@ -55,11 +55,11 @@ export default function QuemSomosPage() {
               href={l.href}
               className="group rounded-2xl glass p-6 shadow-card transition hover:shadow-card-hover motion-safe:hover:-translate-y-0.5"
             >
-              <h2 className="font-serif text-xl font-semibold text-night-900">
+              <h2 className="font-serif text-xl font-medium text-night-900">
                 {l.title}
               </h2>
               <p className="mt-2 text-sm text-night-800/70">{l.desc}</p>
-              <span className="mt-4 inline-flex text-sm font-semibold text-terra-800">
+              <span className="mt-4 inline-flex text-sm font-medium text-terra-800">
                 Ler mais →
               </span>
             </Link>

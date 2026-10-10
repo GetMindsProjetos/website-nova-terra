@@ -30,7 +30,7 @@ export default function EmpresaCard({ empresa }: { empresa: Empresa }) {
               className="h-full w-full object-cover"
             />
           ) : (
-            <span className="font-serif text-xl font-bold text-terra-800">
+            <span className="font-serif text-xl font-medium text-terra-800">
               {empresa.nome.charAt(0)}
             </span>
           )}
@@ -38,10 +38,10 @@ export default function EmpresaCard({ empresa }: { empresa: Empresa }) {
       </div>
 
       <div className="flex flex-1 flex-col p-6 pt-10">
-        <span className="w-fit rounded-full bg-terra-50 px-3 py-1 text-xs font-semibold text-terra-800">
+        <span className="w-fit rounded-full bg-terra-50 px-3 py-1 text-xs font-medium text-terra-800">
           {CATEGORIAS_EMPRESA[empresa.categoria] ?? empresa.categoria}
         </span>
-        <h3 className="mt-3 font-serif text-lg font-semibold text-night-900">
+        <h3 className="mt-3 font-serif text-lg font-medium text-night-900">
           {empresa.nome}
         </h3>
         {empresa.nomeResponsavel && (
@@ -58,7 +58,7 @@ export default function EmpresaCard({ empresa }: { empresa: Empresa }) {
             href={empresaWhatsappLink(empresa.whatsapp, empresa.nome)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 btn-glass-accent rounded-full px-5 py-2.5 text-sm font-semibold text-white"
+            className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 btn-glass-accent rounded-full px-5 py-2.5 text-sm font-medium text-white"
           >
             Falar no WhatsApp
           </a>

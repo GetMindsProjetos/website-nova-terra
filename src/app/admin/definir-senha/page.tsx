@@ -65,7 +65,7 @@ export default function DefinirSenhaPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-terra-50/60 px-4">
       <div className="w-full max-w-sm rounded-2xl border border-terra-100 bg-white p-8 shadow-sm">
-        <p className="text-center font-serif text-xl font-semibold text-night-900">
+        <p className="text-center font-serif text-xl font-medium text-night-900">
           Definir senha
         </p>
         <p className="mt-1 text-center text-sm text-night-800/70">
@@ -125,7 +125,7 @@ export default function DefinirSenhaPage() {
             <button
               type="submit"
               disabled={!ready || loading}
-              className="w-full rounded-full bg-terra-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-terra-700 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-full bg-terra-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-terra-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? "Salvando..." : "Salvar senha"}
             </button>

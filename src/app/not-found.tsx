@@ -3,10 +3,10 @@ import CTAButton from "@/components/CTAButton";
 export default function NotFound() {
   return (
     <section className="mx-auto flex max-w-xl flex-col items-center px-4 py-14 text-center sm:px-6 sm:py-24">
-      <p className="font-serif text-6xl font-bold text-terra-600" aria-hidden="true">
+      <p className="font-serif text-6xl font-medium text-terra-600" aria-hidden="true">
         404
       </p>
-      <h1 className="mt-4 font-serif text-2xl font-bold text-night-900 sm:text-3xl">
+      <h1 className="mt-4 font-serif text-2xl font-medium text-night-900 sm:text-3xl">
         Não encontramos esta página
       </h1>
       <p className="mt-3 leading-relaxed text-night-800/75">

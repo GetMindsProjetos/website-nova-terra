@@ -154,7 +154,7 @@ export default async function EventoDetalhePage({ params }: Props) {
                 />
                 {evento.palestrante && (
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent px-5 pb-4 pt-16">
-                    <p className="font-serif text-2xl font-bold uppercase italic text-white">
+                    <p className="font-serif text-2xl font-medium uppercase italic text-white">
                       {evento.palestrante}
                     </p>
                   </div>
@@ -187,7 +187,7 @@ export default async function EventoDetalhePage({ params }: Props) {
 
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <span
-                className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                className={`rounded-full px-3 py-1 text-xs font-medium ${
                   evento.gratuito
                     ? "bg-terra-50 text-terra-800"
                     : "bg-night-900/5 text-night-900"
@@ -211,7 +211,7 @@ export default async function EventoDetalhePage({ params }: Props) {
             <div className="mt-6">
               <Link
                 href="/eventos"
-                className="inline-flex min-h-[44px] items-center justify-center btn-glass rounded-full px-5 py-2.5 text-sm font-semibold text-night-800"
+                className="inline-flex min-h-[44px] items-center justify-center btn-glass rounded-full px-5 py-2.5 text-sm font-medium text-night-800"
               >
                 Ver todos os eventos
               </Link>
@@ -238,12 +238,12 @@ export default async function EventoDetalhePage({ params }: Props) {
                       decoding="async"
                       className="h-16 w-16 shrink-0 rounded-full object-cover shadow-md"
                     />
-                    <h2 className="font-serif text-2xl font-bold text-night-900">
+                    <h2 className="font-serif text-2xl font-medium text-night-900">
                       Garanta sua vaga agora.
                     </h2>
                   </div>
                 ) : (
-                  <h2 className="mb-6 font-serif text-2xl font-bold text-night-900">
+                  <h2 className="mb-6 font-serif text-2xl font-medium text-night-900">
                     Faça sua Inscrição.
                   </h2>
                 )}
@@ -261,7 +261,7 @@ export default async function EventoDetalhePage({ params }: Props) {
 
         {evento.patrocinadores.length > 0 && (
           <div className="mt-12 pt-4">
-            <p className="text-center text-xs font-semibold uppercase tracking-wide text-night-800/75">
+            <p className="text-center text-xs font-medium uppercase tracking-wide text-night-800/75">
               Patrocinadores
             </p>
             <div className="mt-4 flex flex-wrap items-center justify-center gap-6">
@@ -279,7 +279,7 @@ export default async function EventoDetalhePage({ params }: Props) {
                       className="h-14 w-14 rounded-lg border border-terra-100 object-contain p-1"
                     />
                   ) : (
-                    <div className="flex h-14 w-14 items-center justify-center rounded-lg border border-terra-100 text-xs font-semibold text-terra-800">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-lg border border-terra-100 text-xs font-medium text-terra-800">
                       {p.nome.charAt(0)}
                     </div>
                   )}

@@ -42,7 +42,7 @@ const linkClass =
   "inline-block py-1 text-sm text-night-800 underline-offset-4 transition hover:text-night-900 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900";
 
 const headingClass =
-  "text-xs font-semibold uppercase tracking-wider text-night-900";
+  "text-xs font-medium uppercase tracking-wider text-night-900";
 
 export default function Footer() {
   return (

@@ -43,7 +43,7 @@ export default async function BlogPage() {
       {noticias.length === 0 ? (
         <section className="mx-auto max-w-3xl px-4 py-14 text-center sm:px-6 sm:py-20">
           <div className="rounded-2xl glass p-8 sm:p-10">
-            <p className="font-serif text-lg font-semibold text-night-900">
+            <p className="font-serif text-lg font-medium text-night-900">
               Em breve novas notícias.
             </p>
             <p className="mt-2 text-sm leading-relaxed text-night-800/75">
@@ -88,7 +88,7 @@ export default async function BlogPage() {
                   <p className="text-xs font-medium uppercase tracking-wide text-terra-800">
                     {formatarData(n.publicadoEm)}
                   </p>
-                  <h3 className="mt-1 font-serif text-lg font-semibold text-night-900">
+                  <h3 className="mt-1 font-serif text-lg font-medium text-night-900">
                     {n.titulo}
                   </h3>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-night-800/70">

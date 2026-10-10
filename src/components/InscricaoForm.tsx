@@ -104,7 +104,7 @@ export default function InscricaoForm({ evento }: { evento: Evento }) {
           role="status"
           className="rounded-2xl glass p-8 text-center focus:outline-none"
         >
-          <p className="font-serif text-xl font-semibold text-night-900">
+          <p className="font-serif text-xl font-medium text-night-900">
             Inscrição confirmada! <span aria-hidden="true">🎉</span>
           </p>
           <p className="mt-2 text-sm leading-relaxed text-night-800">
@@ -281,7 +281,7 @@ export default function InscricaoForm({ evento }: { evento: Evento }) {
         disabled={isPending}
         aria-disabled={isPending}
         aria-busy={isPending}
-        className="min-h-[48px] w-full rounded-full btn-glass-accent px-6 py-3 text-sm font-semibold text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900 disabled:cursor-not-allowed disabled:opacity-70"
+        className="min-h-[48px] w-full rounded-full btn-glass-accent px-6 py-3 text-sm font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900 disabled:cursor-not-allowed disabled:opacity-70"
       >
         {isPending ? "Enviando..." : "Confirmar inscrição"}
       </button>
