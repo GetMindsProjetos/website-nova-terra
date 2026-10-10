@@ -58,7 +58,7 @@ export default function EmpresaCard({ empresa }: { empresa: Empresa }) {
             href={empresaWhatsappLink(empresa.whatsapp, empresa.nome)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-full bg-terra-600 px-5 py-2.5 text-sm font-semibold text-night-900 transition hover:bg-terra-500 active:bg-terra-700"
+            className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-full bg-terra-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-700 active:bg-terra-800"
           >
             Falar no WhatsApp
           </a>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import AnimatedGradient from "@/components/AnimatedGradient";
 import CTAButton from "@/components/CTAButton";
 
 export type HeroSlide = {
@@ -14,57 +15,22 @@ export type HeroSlide = {
     variant?: "primary" | "secondary" | "ghost";
     external?: boolean;
   }[];
-  image?: { desktop: string; mobile: string; alt: string };
 };
 
 const AUTOPLAY_MS = 6500;
 
 const controlBase =
-  "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-night-900/70 text-white backdrop-blur transition hover:bg-night-900/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
+  "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white/90 transition hover:bg-white/20 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
 export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [tick, setTick] = useState(0);
   const [userPaused, setUserPaused] = useState(false);
   const [hoverFocusPaused, setHoverFocusPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [parallax, setParallax] = useState(0);
-  const [preload, setPreload] = useState(false);
   const [inView, setInView] = useState(true);
   const [docHidden, setDocHidden] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-
-  // Slides 1+ só carregam imagem após hidratar e (interação ou idle/2,5 s),
-  // para não competir com o LCP do slide 0.
-  useEffect(() => {
-    let done = false;
-    let idleId: number | null = null;
-    let timeoutId: ReturnType<typeof setTimeout> | null = null;
-    const events = ["pointerdown", "touchstart", "keydown", "scroll"] as const;
-
-    function cleanup() {
-      events.forEach((ev) => window.removeEventListener(ev, trigger));
-      if (timeoutId !== null) clearTimeout(timeoutId);
-      if (idleId !== null && "cancelIdleCallback" in window) {
-        window.cancelIdleCallback(idleId);
-      }
-    }
-    function trigger() {
-      if (done) return;
-      done = true;
-      cleanup();
-      setPreload(true);
-    }
-
-    events.forEach((ev) => window.addEventListener(ev, trigger, { passive: true }));
-    if ("requestIdleCallback" in window) {
-      idleId = window.requestIdleCallback(trigger, { timeout: 2500 });
-    } else {
-      timeoutId = setTimeout(trigger, 2500);
-    }
-    return cleanup;
-  }, []);
 
   // Pausa a rotação com a aba oculta ou o hero fora da viewport.
   useEffect(() => {
@@ -95,36 +61,9 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  useEffect(() => {
-    if (reducedMotion) {
-      setParallax(0);
-      return;
-    }
-
-    let rafId: number | null = null;
-    function onScroll() {
-      if (rafId !== null) return;
-      rafId = requestAnimationFrame(() => {
-        rafId = null;
-        const section = sectionRef.current;
-        if (!section) return;
-        const rect = section.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-        setParallax(Math.max(-30, Math.min(30, rect.top * -0.12)));
-      });
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (rafId !== null) cancelAnimationFrame(rafId);
-    };
-  }, [reducedMotion]);
-
   const goTo = useCallback(
     (index: number) => {
-      setPreload(true);
       setActiveIndex((index + slides.length) % slides.length);
-      setTick((t) => t + 1);
     },
     [slides.length]
   );
@@ -165,7 +104,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[560px] overflow-hidden sm:h-[640px] lg:h-[680px]"
+      className="on-dark relative isolate h-[560px] overflow-hidden text-white sm:h-[640px] lg:h-[680px]"
       onMouseEnter={() => setHoverFocusPaused(true)}
       onMouseLeave={() => setHoverFocusPaused(false)}
       onFocus={() => setHoverFocusPaused(true)}
@@ -175,6 +114,8 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       aria-roledescription="carrossel"
       aria-label="Destaques da Igreja Nova Terra"
     >
+      <AnimatedGradient className="-z-10" />
+
       <div
         className="absolute inset-0"
         aria-live={autoRotation ? "off" : "polite"}
@@ -184,7 +125,6 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
           const isActive = index === activeIndex;
           const inertProps = isActive ? {} : ({ inert: "" } as Record<string, string>);
           const Heading = isActive ? "h1" : "h2";
-          const showImage = index === 0 || preload;
           return (
             <div
               key={slide.id}
@@ -197,59 +137,17 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                 isActive ? "opacity-100" : "pointer-events-none opacity-0"
               }`}
             >
-              {slide.image ? (
-                <div
-                  className="absolute -inset-y-8 inset-x-0 overflow-hidden bg-night-900"
-                  style={{ transform: `translateY(${parallax}px)` }}
-                >
-                  <div
-                    key={isActive ? `active-${tick}` : "idle"}
-                    className={`h-full w-full ${isActive ? "hero-ken-burns" : ""}`}
-                  >
-                    {showImage && (
-                      <picture>
-                        <source media="(min-width: 768px)" srcSet={slide.image.desktop} />
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={slide.image.mobile}
-                          alt=""
-                          className="h-full w-full object-cover"
-                          loading={index === 0 ? "eager" : "lazy"}
-                          fetchPriority={index === 0 ? "high" : "auto"}
-                          decoding="async"
-                        />
-                      </picture>
-                    )}
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-black/10" />
-                </div>
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-terra-50 via-white to-white" />
-              )}
-
               <div className="relative mx-auto flex h-full max-w-3xl flex-col items-center justify-center px-4 pb-16 text-center sm:px-6">
                 {slide.eyebrow && (
-                  <p
-                    className={`text-sm font-semibold uppercase tracking-widest ${
-                      slide.image ? "text-terra-300" : "text-terra-800"
-                    }`}
-                  >
+                  <p className="text-sm font-semibold uppercase tracking-widest text-white">
                     {slide.eyebrow}
                   </p>
                 )}
-                <Heading
-                  className={`mt-4 font-serif text-3xl font-bold leading-tight sm:text-5xl ${
-                    slide.image ? "text-white" : "text-night-900"
-                  }`}
-                >
+                <Heading className="mt-4 font-serif text-3xl font-bold leading-tight text-white sm:text-5xl">
                   {slide.title}
                 </Heading>
                 {slide.subtitle && (
-                  <p
-                    className={`mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg ${
-                      slide.image ? "text-white/90" : "text-night-800"
-                    }`}
-                  >
+                  <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white sm:text-lg">
                     {slide.subtitle}
                   </p>
                 )}
@@ -261,6 +159,11 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                         href={btn.href}
                         variant={btn.variant ?? "primary"}
                         external={btn.external}
+                        className={
+                          (btn.variant ?? "primary") === "primary"
+                            ? "ring-2 ring-white/70"
+                            : ""
+                        }
                       >
                         {btn.label}
                       </CTAButton>
@@ -297,12 +200,12 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
           </button>
 
           <div className="absolute inset-x-0 bottom-3 z-10 flex justify-center px-2">
-            <div className="flex max-w-full flex-wrap items-center justify-center gap-1 rounded-full bg-night-900/60 p-1 backdrop-blur">
+            <div className="flex max-w-full flex-wrap items-center justify-center gap-1 rounded-full bg-white/10 p-1">
               <button
                 type="button"
                 onClick={prev}
                 aria-label="Slide anterior"
-                className={`${controlBase} bg-transparent sm:hidden`}
+                className={`${controlBase} sm:hidden`}
               >
                 <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current stroke-2" aria-hidden="true">
                   <path d="M15 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
@@ -315,7 +218,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                   userPaused ? "Retomar rotação automática" : "Pausar rotação automática"
                 }
                 aria-pressed={userPaused}
-                className={`${controlBase} bg-transparent`}
+                className={controlBase}
               >
                 {userPaused || reducedMotion ? (
                   <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
@@ -341,7 +244,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                     className={`block h-2 rounded-full transition-all motion-reduce:transition-none ${
                       index === activeIndex
                         ? "w-6 bg-white"
-                        : "w-2 bg-white/60 group-hover:bg-white/80"
+                        : "w-2 bg-white/50 group-hover:bg-white/80"
                     }`}
                   />
                 </button>
@@ -350,7 +253,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                 type="button"
                 onClick={next}
                 aria-label="Próximo slide"
-                className={`${controlBase} bg-transparent sm:hidden`}
+                className={`${controlBase} sm:hidden`}
               >
                 <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current stroke-2" aria-hidden="true">
                   <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />

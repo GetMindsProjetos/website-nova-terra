@@ -1,5 +1,4 @@
-// D4: botão laranja com texto night-900; para reverter, troque text-night-900 por text-white nas variantes primary.
-// Contrastes: night-900/terra-600 ≈ 5,6:1 (branco/terra-600 seria 3,11:1); terra-800/branco 6,05:1.
+// Botão primário: laranja da marca com texto branco (decisão do dono).
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -13,7 +12,7 @@ type Props = {
 
 const variants: Record<NonNullable<Props["variant"]>, string> = {
   primary:
-    "bg-terra-600 text-night-900 hover:bg-terra-500 active:bg-terra-700 shadow-sm shadow-terra-900/10 focus-visible:outline-terra-800",
+    "bg-terra-600 text-white hover:bg-terra-700 active:bg-terra-800 shadow-sm shadow-terra-900/10 focus-visible:outline-terra-800",
   secondary:
     "bg-white text-terra-800 border border-terra-200 hover:bg-terra-50 focus-visible:outline-terra-800",
   // Sobre fundo escuro/foto: o véu night-900/30 garante texto branco ≥ 4,5:1.

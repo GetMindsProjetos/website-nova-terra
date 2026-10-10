@@ -58,7 +58,7 @@ export default function CopyPixButton({ chave }: { chave: string }) {
       <button
         type="button"
         onClick={handleCopy}
-        className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-terra-600 px-6 py-3 text-sm font-semibold text-night-900 transition hover:bg-terra-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900"
+        className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-terra-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-terra-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900"
       >
         {copiado ? "Chave copiada" : "Copiar chave PIX"}
       </button>
