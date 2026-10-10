@@ -44,7 +44,7 @@ export default function QuemSomosPage() {
       />
       <PageHero
         eyebrow="Quem Somos"
-        title="Uma igreja em avivamento em Icoaraci"
+        title={"Uma igreja em avivamento\nem Icoaraci"}
         description="Desde 2007, propagando o Evangelho de Jesus Cristo e promovendo o crescimento espiritual de cada pessoa que passa por nossas portas."
       />
       <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">

@@ -9,6 +9,12 @@ type Props = {
 };
 
 export default function PageHero({ eyebrow, title, description, children }: Props) {
+  // Quebra do título: "\n" explícito, ou depois de um travessão ("A — B"),
+  // e cada linha é balanceada. Títulos curtos ficam numa linha só.
+  const linhas = title.includes("\n")
+    ? title.split("\n")
+    : title.replace(/ — /g, " —\n").split("\n");
+
   // A seção sobe por baixo do menu (transparente no topo): o fundo fixo passa
   // pelos dois, sem emenda. O padding-top compensa a altura do menu.
   return (
@@ -28,7 +34,12 @@ export default function PageHero({ eyebrow, title, description, children }: Prop
         )}
         <Reveal delay={80}>
           <h1 className="mt-4 text-balance font-serif text-3xl font-medium tracking-[-0.035em] text-night-900 sm:text-4xl lg:text-5xl">
-            {title}
+            {linhas.map((linha, i) => (
+              <span key={i} className="block text-balance">
+                {i > 0 ? " " : null}
+                {linha}
+              </span>
+            ))}
           </h1>
         </Reveal>
         {description && (

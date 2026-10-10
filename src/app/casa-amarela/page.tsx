@@ -39,7 +39,7 @@ export default function CasaAmarelaPage() {
       />
       <PageHero
         eyebrow="Projetos Sociais"
-        title="Casa Amarela — cuidado real para mulheres de Icoaraci"
+        title={"Casa Amarela — cuidado real\npara mulheres de Icoaraci"}
         description="Um projeto voluntário da Igreja Nova Terra dedicado a oferecer suporte emocional, educacional e social para mulheres em situação de vulnerabilidade em Icoaraci. Desde maio de 2024, funciona inteiramente com voluntários e doações — sem fins lucrativos."
       >
         <CTAButton href={whatsappLink("Olá! Quero ajudar o Casa Amarela.")} external>

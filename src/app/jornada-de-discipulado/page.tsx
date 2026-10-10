@@ -57,7 +57,7 @@ export default function JornadaPage() {
       />
       <PageHero
         eyebrow="Jornada de Discipulado"
-        title="Seu próximo passo na Nova Terra"
+        title={"Seu próximo passo\nna Nova Terra"}
         description="Toda pessoa que chega à Nova Terra é convidada a percorrer o mesmo caminho — o caminho que transformou quem já está aqui."
       >
         <CTAButton href={whatsappLink("Olá! Quero começar minha jornada de discipulado na Nova Terra.")} external>

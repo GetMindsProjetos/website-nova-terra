@@ -36,7 +36,7 @@ export default async function BlogPage() {
       />
       <PageHero
         eyebrow="Notícias"
-        title="O que Deus tem feito na Nova Terra"
+        title={"O que Deus tem feito\nna Nova Terra"}
         description="Recapes de eventos, testemunhos reais de membros e histórias de impacto do Casa Amarela."
       />
 

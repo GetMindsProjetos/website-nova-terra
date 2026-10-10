@@ -30,7 +30,7 @@ export default async function EventosPage() {
       />
       <PageHero
         eyebrow="Eventos e Agenda"
-        title="O que está acontecendo na Nova Terra"
+        title={"O que está acontecendo\nna Nova Terra"}
         description="Calendário de eventos das nossas Redes e da igreja como um todo. Agenda em atualização contínua pela Rede de Mídia."
       />
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">

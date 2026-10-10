@@ -17,7 +17,7 @@ const heroSlides: HeroSlide[] = [
   {
     id: "avivamento",
     eyebrow: "Icoaraci, Belém-PA",
-    title: "Nós somos o Avivamento. E ele também pode ter o seu nome.",
+    title: "Nós somos o Avivamento.\nE ele também pode ter o seu nome.",
     subtitle:
       "A Igreja Nova Terra existe para ganhar, cuidar e capacitar vidas para o Reino de Deus. Se você está buscando um lugar para recomeçar, crescer na fé ou servir, este é o seu convite.",
     buttons: [
@@ -32,7 +32,7 @@ const heroSlides: HeroSlide[] = [
   },
   {
     id: "culto",
-    title: "Aqui, cada domingo é um novo começo",
+    title: "Aqui, cada domingo\né um novo começo",
     subtitle: "Vidas sendo transformadas, toda semana",
     buttons: [
       { label: "Ver horários dos cultos", href: "/jornada-de-discipulado" },
@@ -40,7 +40,7 @@ const heroSlides: HeroSlide[] = [
   },
   {
     id: "avivamento-multiplicacao",
-    title: "Avivamento sem multiplicação morre",
+    title: "Avivamento sem\nmultiplicação morre",
     subtitle: "Não basta sentir o fogo — o chamado é repassar a chama, geração após geração",
     buttons: [
       { label: "Nossa missão e visão", href: "/quem-somos/missao-e-visao" },
@@ -48,7 +48,7 @@ const heroSlides: HeroSlide[] = [
   },
   {
     id: "oracao",
-    title: "Um lugar seguro para orar e recomeçar",
+    title: "Um lugar seguro\npara orar e recomeçar",
     subtitle: "Nenhuma dor é grande demais para ser levada até Deus — e ninguém aqui ora sozinho",
     buttons: [
       {
@@ -126,7 +126,7 @@ export default function HomePage() {
               <p className="text-sm font-semibold uppercase tracking-wide text-terra-800">
                 Nossa visão
               </p>
-              <h2 className="mt-3 font-serif text-2xl font-bold tracking-tight text-night-900 sm:text-3xl">
+              <h2 className="mt-3 text-balance font-serif text-2xl font-bold tracking-tight text-night-900 sm:text-3xl">
                 Tornar cada membro fruto permanente.
               </h2>
               <p className="mt-4 leading-relaxed text-night-800">
@@ -163,7 +163,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-4xl px-4 pb-14 text-center sm:px-6 sm:pb-20">
         <div className="glass rounded-2xl px-6 py-10 sm:px-10 sm:py-12">
         <Reveal>
-          <h2 className="font-serif text-2xl font-bold tracking-tight text-night-900 sm:text-3xl">
+          <h2 className="text-balance font-serif text-2xl font-bold tracking-tight text-night-900 sm:text-3xl">
             Primeira vez por aqui?
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-night-800">
