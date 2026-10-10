@@ -10,10 +10,15 @@ type Props = {
 };
 
 export default function PageHero({ eyebrow, title, description, children }: Props) {
+  // A seção sobe por baixo do menu (transparente no topo): o mesmo mesh passa
+  // pelos dois, sem emenda. O padding-top compensa a altura do menu.
   return (
-    <section className="relative isolate overflow-hidden border-b border-terra-100">
+    <section
+      data-header-overlap
+      className="relative isolate -mt-[var(--header-h)] overflow-hidden border-b border-terra-100"
+    >
       <MeshBackground className="-z-10" />
-      <div className="mx-auto max-w-4xl px-4 py-14 text-center sm:px-6 sm:py-20">
+      <div className="mx-auto max-w-4xl px-4 pb-14 pt-[calc(3.5rem+var(--header-h))] text-center sm:px-6 sm:pb-20 sm:pt-[calc(5rem+var(--header-h))]">
         {eyebrow && (
           <Reveal>
             <p className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-wide text-night-900">
@@ -24,7 +29,7 @@ export default function PageHero({ eyebrow, title, description, children }: Prop
           </Reveal>
         )}
         <Reveal delay={80}>
-          <h1 className="mt-4 text-balance font-serif text-3xl font-bold tracking-tight text-night-900 sm:text-4xl lg:text-5xl">
+          <h1 className="mt-4 text-balance font-serif text-3xl font-medium tracking-tight text-night-900 sm:text-4xl lg:text-5xl">
             {title}
           </h1>
         </Reveal>

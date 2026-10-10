@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Altura do menu no topo (sem rolagem): hero e PageHero sobem por baixo dele. */
+  --header-h: 61px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-h: 65px;
+  }
+}
+
 @layer base {
   /* Foco visível global (terra-800: 6,05:1 sobre branco). Utilitários com
      focus-visible:outline-* continuam vencendo por virem depois na cascata. */
@@ -46,15 +57,18 @@ body {
   overflow-x: clip;
 }
 
-/* Fundo "mesh" laranja com toques de amarelo (hero e rodapé): manchas radiais
-   em movimento lento, só transform (barato, sem filter: blur). Suave de
-   propósito: o tom mais saturado é terra-500 a 35%; o resto é terra-300/400 e
-   amarelos claros, então night-900 (texto) passa de 7:1 em qualquer ponto. */
+/* Fundo "mesh" laranja com toques de amarelo (menu, hero e rodapé): manchas
+   elípticas em movimento lento. Tamanhos e deslocamentos em unidades do próprio
+   bloco (cqw/cqh), então qualquer bloco, alto ou baixo, mostra a mesma
+   composição. Só transform (barato, sem filter: blur). O tom mais saturado é
+   terra-500 a 35%; o resto é terra-300/400 e amarelos claros, então night-900
+   (texto) passa de 7:1 em qualquer ponto. */
 .mesh {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  container-type: size;
   background: linear-gradient(180deg, #fffaf5 0%, #fff1e4 100%);
 }
 
@@ -80,94 +94,105 @@ body {
 
 /* terra-300 */
 .mesh__blob--a {
-  top: -75%;
-  left: 18%;
-  width: max(95vw, 700px);
-  height: max(95vw, 700px);
+  left: 10cqw;
+  top: -45cqh;
+  width: 80cqw;
+  height: 130cqh;
   background: radial-gradient(closest-side, rgb(251 174 127 / 0.9), rgb(251 174 127 / 0));
   animation: mesh-a 17s ease-in-out infinite;
 }
 
 /* terra-400 */
 .mesh__blob--b {
-  top: -40%;
-  right: -15%;
-  width: max(75vw, 600px);
-  height: max(75vw, 600px);
+  right: -10cqw;
+  top: -35cqh;
+  width: 62cqw;
+  height: 110cqh;
   background: radial-gradient(closest-side, rgb(249 139 72 / 0.6), rgb(249 139 72 / 0));
   animation: mesh-b 11s ease-in-out infinite;
 }
 
 /* amarelo (#fcd34d) */
 .mesh__blob--c {
-  bottom: -75%;
-  left: 15%;
-  width: max(90vw, 680px);
-  height: max(90vw, 680px);
+  left: 12cqw;
+  bottom: -55cqh;
+  width: 78cqw;
+  height: 130cqh;
   background: radial-gradient(closest-side, rgb(252 211 77 / 1), rgb(252 211 77 / 0));
   animation: mesh-c 23s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 }
 
 /* terra-500: mancha mais profunda, bem suave */
 .mesh__blob--d {
-  top: -20%;
-  left: 30%;
-  width: max(50vw, 420px);
-  height: max(50vw, 420px);
+  left: 30cqw;
+  top: -15cqh;
+  width: 42cqw;
+  height: 75cqh;
   background: radial-gradient(closest-side, rgb(248 114 33 / 0.35), rgb(248 114 33 / 0));
   animation: mesh-d 9s ease-in-out infinite;
 }
 
-/* amarelo claro (#fde68a) */
+/* amarelo claro (#fde68a), elipse que gira */
 .mesh__blob--e {
-  top: -30%;
-  left: -10%;
-  width: max(80vw, 620px);
-  height: max(46vw, 360px);
+  left: -12cqw;
+  top: -30cqh;
+  width: 72cqw;
+  height: 90cqh;
   background: radial-gradient(closest-side, rgb(253 230 138 / 0.95), rgb(253 230 138 / 0));
   animation: mesh-e 19s ease-in-out infinite;
 }
 
 /* terra-400, menor e mais rápida */
 .mesh__blob--f {
-  top: 10%;
-  right: 8%;
-  width: max(36vw, 320px);
-  height: max(36vw, 320px);
+  right: 8cqw;
+  top: 8cqh;
+  width: 32cqw;
+  height: 65cqh;
   background: radial-gradient(closest-side, rgb(249 139 72 / 0.5), rgb(249 139 72 / 0));
   animation: mesh-f 14s ease-in-out infinite;
 }
 
 /* Movimentos distintos por mancha (nenhum igual ao outro):
    a varredura horizontal, b balanço vertical, c órbita, d pulso,
-   e diagonal com giro (elipse), f zigue-zague rápido. */
+   e diagonal com giro, f zigue-zague rápido. */
 @keyframes mesh-a {
-  0%, 100% { transform: translate3d(-24vw, 0, 0) scale(1); }
-  50% { transform: translate3d(26vw, 8vh, 0) scale(1.25); }
+  0%, 100% { transform: translate3d(-18cqw, 0, 0) scale(1); }
+  50% { transform: translate3d(20cqw, 8cqh, 0) scale(1.2); }
 }
 @keyframes mesh-b {
-  0%, 100% { transform: translate3d(8vw, -6vh, 0) scale(1); }
-  50% { transform: translate3d(-12vw, 14vh, 0) scale(1.15); }
+  0%, 100% { transform: translate3d(6cqw, -6cqh, 0) scale(1); }
+  50% { transform: translate3d(-12cqw, 14cqh, 0) scale(1.15); }
 }
 @keyframes mesh-c {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  25% { transform: translate3d(22vw, -9vh, 0) scale(1.1); }
-  50% { transform: translate3d(0, -18vh, 0) scale(0.95); }
-  75% { transform: translate3d(-22vw, -9vh, 0) scale(1.1); }
+  25% { transform: translate3d(16cqw, -10cqh, 0) scale(1.1); }
+  50% { transform: translate3d(0, -18cqh, 0) scale(0.95); }
+  75% { transform: translate3d(-16cqw, -10cqh, 0) scale(1.1); }
 }
 @keyframes mesh-d {
-  0%, 100% { transform: translate3d(-6vw, 2vh, 0) scale(0.75); }
-  50% { transform: translate3d(8vw, -3vh, 0) scale(1.6); }
+  0%, 100% { transform: translate3d(-6cqw, 2cqh, 0) scale(0.75); }
+  50% { transform: translate3d(8cqw, -4cqh, 0) scale(1.6); }
 }
 @keyframes mesh-e {
-  0%, 100% { transform: translate3d(-8vw, -4vh, 0) rotate(-18deg) scale(1); }
-  50% { transform: translate3d(34vw, 12vh, 0) rotate(28deg) scale(1.2); }
+  0%, 100% { transform: translate3d(-6cqw, -4cqh, 0) rotate(-18deg) scale(1); }
+  50% { transform: translate3d(26cqw, 12cqh, 0) rotate(28deg) scale(1.2); }
 }
 @keyframes mesh-f {
-  0%, 100% { transform: translate3d(-20vw, 6vh, 0) scale(0.9); }
-  25% { transform: translate3d(-4vw, -10vh, 0) scale(1.1); }
-  50% { transform: translate3d(18vw, 8vh, 0) scale(0.85); }
-  75% { transform: translate3d(6vw, -6vh, 0) scale(1.2); }
+  0%, 100% { transform: translate3d(-16cqw, 6cqh, 0) scale(0.9); }
+  25% { transform: translate3d(-4cqw, -10cqh, 0) scale(1.1); }
+  50% { transform: translate3d(14cqw, 8cqh, 0) scale(0.85); }
+  75% { transform: translate3d(5cqw, -6cqh, 0) scale(1.2); }
+}
+
+/* Menu: no topo de uma página com hero ele fica transparente (o mesh do hero
+   passa por trás, sem emenda); ao rolar, ou em páginas sem hero, mostra o mesh. */
+.site-header__mesh {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+body:has([data-header-overlap]) .site-header:not(.is-scrolled) .site-header__mesh {
+  opacity: 0;
 }
 
 /* .reveal só é aplicado pelo componente Reveal após a hidratação, e apenas
