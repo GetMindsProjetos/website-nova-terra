@@ -3,6 +3,11 @@
 import { headers } from "next/headers";
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
 import { getEventoBySlug } from "@/lib/eventos";
+import { sendEmail, EMAIL_NOTIFY_TO } from "@/lib/email";
+import {
+  avisoNovaInscricao,
+  confirmacaoInscricao,
+} from "@/lib/emailTemplates";
 
 export type InscricaoState = {
   status: "idle" | "success" | "error";
@@ -192,6 +197,23 @@ export async function inscreverEmEvento(
       message: "Não conseguimos salvar sua inscrição agora. Tente novamente em instantes.",
     };
   }
+
+  // E-mails são efeito colateral: nunca lançam e uma falha aqui não desfaz a
+  // inscrição (já gravada). Confirmação ao inscrito + aviso à equipe.
+  const dados = {
+    nome,
+    email,
+    telefone: limparTelefone(telefone),
+    endereco,
+    membro: membroRaw === "sim",
+    segmento: evento.categoria === "empreendedores" ? segmento : null,
+  };
+  const confirmacao = confirmacaoInscricao(evento, dados);
+  const aviso = avisoNovaInscricao(evento, dados);
+  await Promise.allSettled([
+    sendEmail({ to: email, ...confirmacao }),
+    sendEmail({ to: EMAIL_NOTIFY_TO, replyTo: email, ...aviso }),
+  ]);
 
   return { status: "success" };
 }
