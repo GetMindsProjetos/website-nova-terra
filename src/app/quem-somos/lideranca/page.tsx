@@ -25,7 +25,7 @@ export default function LiderancaPage() {
       <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
         <div className="rounded-2xl glass p-8 text-center shadow-sm">
           <div className="mx-auto h-28 w-28 rounded-full bg-terra-100" aria-hidden="true" />
-          <p className="mt-4 font-serif text-lg font-semibold text-night-900">
+          <p className="mt-4 font-serif text-lg font-medium text-night-900">
             Pastora Yracy
           </p>
           <p className="text-sm text-night-800/75">

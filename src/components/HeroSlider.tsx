@@ -140,11 +140,11 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
             >
               <div className="relative mx-auto flex h-full max-w-5xl flex-col items-center justify-center px-4 pb-8 pt-[var(--header-h)] text-center sm:px-6">
                 {slide.eyebrow && (
-                  <p className="text-sm font-semibold uppercase tracking-widest text-night-900">
+                  <p className="text-sm font-medium uppercase tracking-widest text-night-900">
                     {slide.eyebrow}
                   </p>
                 )}
-                <Heading className="mt-4 font-serif text-3xl font-medium leading-[1.1] tracking-[-0.035em] text-night-900 sm:text-5xl">
+                <Heading className="mt-4 font-serif text-[1.75rem] font-medium leading-[1.1] tracking-[-0.035em] text-night-900 sm:text-5xl">
                   {slide.title.split("\n").map((linha, i) => (
                     <span key={i} className="block text-balance">
                       {i > 0 ? " " : null}

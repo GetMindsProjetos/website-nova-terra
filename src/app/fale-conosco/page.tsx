@@ -30,14 +30,14 @@ export default function FaleConoscoPage() {
       />
       <section className="mx-auto grid max-w-5xl gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-2">
         <div>
-          <h2 className="font-serif text-lg font-semibold text-night-900">
+          <h2 className="font-serif text-lg font-medium text-night-900">
             Endereço
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-night-800/70">
             {site.address}
           </p>
 
-          <h2 className="mt-8 font-serif text-lg font-semibold text-night-900">
+          <h2 className="mt-8 font-serif text-lg font-medium text-night-900">
             Cultos
           </h2>
           <ul className="mt-2 space-y-1 text-sm text-night-800/70">
@@ -49,7 +49,7 @@ export default function FaleConoscoPage() {
             ))}
           </ul>
 
-          <h2 className="mt-8 font-serif text-lg font-semibold text-night-900">
+          <h2 className="mt-8 font-serif text-lg font-medium text-night-900">
             WhatsApp / E-mail
           </h2>
           <p className="mt-2 text-sm text-night-800/70">
@@ -71,7 +71,7 @@ export default function FaleConoscoPage() {
           id="formulario"
           className="scroll-mt-24 rounded-2xl glass p-5 shadow-card sm:p-6"
         >
-          <h2 className="font-serif text-xl font-bold text-night-900">
+          <h2 className="font-serif text-xl font-medium text-night-900">
             Envie uma mensagem
           </h2>
           <p className="mt-1 text-sm text-night-800">

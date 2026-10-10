@@ -8,10 +8,11 @@ import FixedBackground from "@/components/FixedBackground";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SmoothScroll from "@/components/SmoothScroll";
 
-// Pesos 400-700 (4 arquivos pré-carregados). 800 cai em 700; itálico é oblíquo sintético.
+// Só 400 e 500: o dono não quer texto pesado (e são 2 arquivos a menos).
+// Itálico é oblíquo sintético; font-synthesis-weight: none evita negrito falso.
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500"],
   style: "normal",
   display: "swap",
   variable: "--font-poppins",
@@ -63,7 +64,7 @@ export default function RootLayout({
       <body className="flex min-h-screen flex-col bg-white font-sans text-night-900">
         <a
           href="#conteudo"
-          className="sr-only rounded-md bg-night-900 px-4 py-2 text-sm font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-terra-600"
+          className="sr-only rounded-md bg-night-900 px-4 py-2 text-sm font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-terra-600"
         >
           Pular para o conteúdo
         </a>

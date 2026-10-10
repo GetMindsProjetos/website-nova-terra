@@ -52,7 +52,7 @@ export default async function InscritosPage({
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <h1 className="font-serif text-2xl font-semibold text-night-900">
+        <h1 className="font-serif text-2xl font-medium text-night-900">
           Inscritos
         </h1>
 

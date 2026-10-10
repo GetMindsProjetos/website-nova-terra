@@ -38,7 +38,7 @@ export default function EventosList({ eventos }: { eventos: EventoLinha[] }) {
   return (
     <div className="overflow-x-auto rounded-2xl border border-terra-100 bg-white">
       <table className="min-w-full divide-y divide-terra-100 text-sm">
-        <thead className="bg-terra-50/60 text-left text-xs font-semibold uppercase tracking-wide text-night-800/70">
+        <thead className="bg-terra-50/60 text-left text-xs font-medium uppercase tracking-wide text-night-800/70">
           <tr>
             <th className="px-4 py-3">Título</th>
             <th className="px-4 py-3">Categoria</th>
@@ -62,7 +62,7 @@ export default function EventosList({ eventos }: { eventos: EventoLinha[] }) {
               </td>
               <td className="px-4 py-3">
                 <span
-                  className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                  className={`rounded-full px-3 py-1 text-xs font-medium ${
                     e.publicado
                       ? "bg-terra-50 text-terra-700"
                       : "bg-night-900/5 text-night-800/60"

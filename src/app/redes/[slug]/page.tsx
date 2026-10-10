@@ -41,13 +41,13 @@ export default function RedePage({ params }: Props) {
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl glass p-5">
-            <p className="text-xs font-semibold uppercase tracking-wide text-terra-800">
+            <p className="text-xs font-medium uppercase tracking-wide text-terra-800">
               Para quem
             </p>
             <p className="mt-1 text-sm text-night-800/80">{rede.paraQuem}</p>
           </div>
           <div className="rounded-xl glass p-5">
-            <p className="text-xs font-semibold uppercase tracking-wide text-terra-800">
+            <p className="text-xs font-medium uppercase tracking-wide text-terra-800">
               Ritmo de encontros
             </p>
             <p className="mt-1 text-sm text-night-800/80">{rede.ritmo}</p>

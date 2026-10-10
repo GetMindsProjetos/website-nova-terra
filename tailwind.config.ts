@@ -20,6 +20,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Decisão do dono: nenhum texto pesado. Mesmo que alguém use
+      // font-semibold/bold por engano, o resultado é medium (500).
+      fontWeight: {
+        semibold: "500",
+        bold: "500",
+        extrabold: "500",
+      },
       colors: {
         terra: {
           50: "#fff6f0",

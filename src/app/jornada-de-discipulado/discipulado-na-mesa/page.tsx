@@ -58,7 +58,7 @@ export default function DiscipuladoNaMesaPage() {
       </PageHero>
 
       <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
-        <h2 className="font-serif text-2xl font-bold text-night-900">
+        <h2 className="font-serif text-2xl font-medium text-night-900">
           O que é
         </h2>
         <p className="mt-4 text-base leading-relaxed text-night-800/70">
@@ -78,7 +78,7 @@ export default function DiscipuladoNaMesaPage() {
           Imersão, da Escola de Cura e da Escola de Paulo.
         </p>
 
-        <h2 className="mt-12 font-serif text-2xl font-bold text-night-900">
+        <h2 className="mt-12 font-serif text-2xl font-medium text-night-900">
           Como funciona
         </h2>
         <ol className="mt-6 space-y-5">
@@ -87,11 +87,11 @@ export default function DiscipuladoNaMesaPage() {
               key={e.n}
               className="flex gap-5 rounded-2xl glass p-6 shadow-sm"
             >
-              <span className="shrink-0 font-serif text-sm font-bold text-terra-800">
+              <span className="shrink-0 font-serif text-sm font-medium text-terra-800">
                 Encontros {e.n}
               </span>
               <div>
-                <h3 className="font-serif text-lg font-semibold text-night-900">
+                <h3 className="font-serif text-lg font-medium text-night-900">
                   {e.title}
                 </h3>
                 <p className="mt-1 text-sm leading-relaxed text-night-800/70">
@@ -108,7 +108,7 @@ export default function DiscipuladoNaMesaPage() {
           </Lacuna>
         </div>
 
-        <h2 className="mt-12 font-serif text-2xl font-bold text-night-900">
+        <h2 className="mt-12 font-serif text-2xl font-medium text-night-900">
           Como participar
         </h2>
         <p className="mt-4 text-base leading-relaxed text-night-800/70">
@@ -118,7 +118,7 @@ export default function DiscipuladoNaMesaPage() {
           no seu horário.
         </p>
 
-        <h2 className="mt-12 font-serif text-2xl font-bold text-night-900">
+        <h2 className="mt-12 font-serif text-2xl font-medium text-night-900">
           Quer ser anfitrião?
         </h2>
         <p className="mt-4 text-base leading-relaxed text-night-800/70">

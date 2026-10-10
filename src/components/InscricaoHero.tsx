@@ -46,12 +46,12 @@ export default function InscricaoHero({
 
       <div className="relative mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 sm:py-28">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-widest text-terra-200">
+          <p className="text-sm font-medium uppercase tracking-widest text-terra-200">
             {eyebrow}
           </p>
         </Reveal>
         <Reveal delay={80}>
-          <h1 className="mt-4 font-serif text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl">
+          <h1 className="mt-4 font-serif text-4xl font-medium uppercase tracking-tight text-white sm:text-5xl">
             {title}
           </h1>
         </Reveal>

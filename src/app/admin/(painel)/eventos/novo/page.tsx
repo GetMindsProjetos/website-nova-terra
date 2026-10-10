@@ -7,7 +7,7 @@ export const metadata = {
 export default function NovoEventoPage() {
   return (
     <div>
-      <h1 className="font-serif text-2xl font-semibold text-night-900">
+      <h1 className="font-serif text-2xl font-medium text-night-900">
         Novo evento
       </h1>
       <div className="mt-6">

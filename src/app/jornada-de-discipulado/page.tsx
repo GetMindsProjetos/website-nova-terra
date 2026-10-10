@@ -69,9 +69,9 @@ export default function JornadaPage() {
         <ol className="space-y-6">
           {passos.map((p) => (
             <li key={p.n} className="flex gap-5 rounded-2xl glass p-6 shadow-sm">
-              <span className="font-serif text-2xl font-bold text-terra-300">{p.n}</span>
+              <span className="font-serif text-2xl font-medium text-terra-300">{p.n}</span>
               <div>
-                <h2 className="font-serif text-lg font-semibold text-night-900">
+                <h2 className="font-serif text-lg font-medium text-night-900">
                   {p.href ? (
                     <Link href={p.href} className="hover:text-terra-800">
                       {p.title}
@@ -84,7 +84,7 @@ export default function JornadaPage() {
                 {p.href && (
                   <Link
                     href={p.href}
-                    className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-terra-800 transition-all hover:gap-1.5"
+                    className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-terra-800 transition-all hover:gap-1.5"
                   >
                     Saiba mais <span aria-hidden>→</span>
                   </Link>

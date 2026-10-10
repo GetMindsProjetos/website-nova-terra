@@ -56,7 +56,7 @@ export default async function AdminHomePage() {
 
   return (
     <div>
-      <h1 className="font-serif text-2xl font-semibold text-night-900">
+      <h1 className="font-serif text-2xl font-medium text-night-900">
         Bem-vindo{user?.email ? `, ${user.email}` : ""}
       </h1>
       <p className="mt-2 text-sm text-night-800/70">
@@ -70,7 +70,7 @@ export default async function AdminHomePage() {
             href={card.href}
             className="rounded-2xl border border-terra-100 bg-white p-6 transition hover:border-terra-300 hover:shadow-sm"
           >
-            <p className="text-3xl font-semibold text-terra-600">
+            <p className="text-3xl font-medium text-terra-600">
               {card.value ?? "—"}
             </p>
             <p className="mt-1 text-sm text-night-800/70">{card.label}</p>

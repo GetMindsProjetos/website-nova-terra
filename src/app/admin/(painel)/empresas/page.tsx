@@ -26,12 +26,12 @@ export default async function AdminEmpresasPage() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="font-serif text-2xl font-semibold text-night-900">
+        <h1 className="font-serif text-2xl font-medium text-night-900">
           Empresas
         </h1>
         <Link
           href="/admin/empresas/novo"
-          className="rounded-full bg-terra-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-700"
+          className="rounded-full bg-terra-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-terra-700"
         >
           Nova empresa
         </Link>

@@ -36,7 +36,7 @@ export default function PrivacidadePage() {
           Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).
         </p>
 
-        <h2 className="font-serif text-lg font-semibold text-night-900">
+        <h2 className="font-serif text-lg font-medium text-night-900">
           1. Quais dados coletamos
         </h2>
         <p>
@@ -62,7 +62,7 @@ export default function PrivacidadePage() {
           cookies nas configurações do seu navegador.
         </p>
 
-        <h2 className="font-serif text-lg font-semibold text-night-900">
+        <h2 className="font-serif text-lg font-medium text-night-900">
           2. Como usamos seus dados
         </h2>
         <p>
@@ -74,7 +74,7 @@ export default function PrivacidadePage() {
           com terceiros para fins comerciais.
         </p>
 
-        <h2 className="font-serif text-lg font-semibold text-night-900">
+        <h2 className="font-serif text-lg font-medium text-night-900">
           3. Dados sensíveis
         </h2>
         <p>
@@ -85,7 +85,7 @@ export default function PrivacidadePage() {
           publicados sem o seu consentimento.
         </p>
 
-        <h2 className="font-serif text-lg font-semibold text-night-900">
+        <h2 className="font-serif text-lg font-medium text-night-900">
           4. Quem trata os dados por nós
         </h2>
         <p>
@@ -97,7 +97,7 @@ export default function PrivacidadePage() {
           armazenar ou processar dados fora do Brasil.
         </p>
 
-        <h2 className="font-serif text-lg font-semibold text-night-900">
+        <h2 className="font-serif text-lg font-medium text-night-900">
           5. Seus direitos
         </h2>
         <p>
@@ -107,7 +107,7 @@ export default function PrivacidadePage() {
           novidades, basta pedir por esse mesmo e-mail.
         </p>
 
-        <h2 className="font-serif text-lg font-semibold text-night-900">
+        <h2 className="font-serif text-lg font-medium text-night-900">
           6. Contato
         </h2>
         <p>

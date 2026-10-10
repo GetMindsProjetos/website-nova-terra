@@ -102,15 +102,15 @@ export default function HomePage() {
             <Reveal key={item.title} delay={i * 90}>
               <Link
                 href={item.href}
-                className="glass group flex h-full flex-col justify-between rounded-2xl p-6 transition hover:bg-white/70 motion-safe:hover:-translate-y-0.5"
+                className="glass group flex h-full flex-col justify-between rounded-2xl p-6 transition hover:bg-white/50 motion-safe:hover:-translate-y-0.5"
               >
                 <div>
-                  <h3 className="font-serif text-lg font-semibold text-night-900">
+                  <h3 className="font-serif text-lg font-medium text-night-900">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-sm text-night-800">{item.detail}</p>
                 </div>
-                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-terra-800 group-hover:gap-2 transition-all">
+                <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-terra-800 group-hover:gap-2 transition-all">
                   {item.cta} →
                 </span>
               </Link>
@@ -123,10 +123,10 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-6xl gap-6 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-2 md:items-stretch">
           <Reveal>
             <div className="glass h-full rounded-2xl p-6 sm:p-8">
-              <p className="text-sm font-semibold uppercase tracking-wide text-terra-800">
+              <p className="text-sm font-medium uppercase tracking-wide text-terra-800">
                 Nossa visão
               </p>
-              <h2 className="mt-3 text-balance font-serif text-2xl font-bold tracking-tight text-night-900 sm:text-3xl">
+              <h2 className="mt-3 text-balance font-serif text-2xl font-medium tracking-tight text-night-900 sm:text-3xl">
                 Tornar cada membro fruto permanente.
               </h2>
               <p className="mt-4 leading-relaxed text-night-800">
@@ -142,16 +142,16 @@ export default function HomePage() {
               </div>
             </div>
           </Reveal>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid auto-rows-fr grid-cols-2 gap-4">
             {[
               ["17", "Redes de serviço"],
               ["2007", "Ano de fundação"],
               ["6", "Passos na Jornada de Discipulado"],
               ["1", "Projeto social — Casa Amarela"],
             ].map(([n, label], i) => (
-              <Reveal key={label} delay={120 + i * 90}>
-                <div className="glass rounded-2xl p-6 text-center">
-                  <p className="font-serif text-3xl font-bold text-terra-700">{n}</p>
+              <Reveal key={label} delay={120 + i * 90} className="h-full">
+                <div className="glass flex h-full min-h-[8.5rem] flex-col items-center justify-center rounded-2xl p-6 text-center">
+                  <p className="font-serif text-3xl font-normal text-terra-700">{n}</p>
                   <p className="mt-1 text-sm text-night-800">{label}</p>
                 </div>
               </Reveal>
@@ -163,7 +163,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-4xl px-4 pb-14 text-center sm:px-6 sm:pb-20">
         <div className="glass rounded-2xl px-6 py-10 sm:px-10 sm:py-12">
         <Reveal>
-          <h2 className="text-balance font-serif text-2xl font-bold tracking-tight text-night-900 sm:text-3xl">
+          <h2 className="text-balance font-serif text-2xl font-medium tracking-tight text-night-900 sm:text-3xl">
             Primeira vez por aqui?
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-night-800">

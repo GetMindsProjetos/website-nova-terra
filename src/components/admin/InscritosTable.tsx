@@ -112,7 +112,7 @@ export default function InscritosTable({
 
       <div className="overflow-x-auto rounded-2xl border border-terra-100 bg-white">
         <table className="min-w-full divide-y divide-terra-100 text-sm">
-          <thead className="bg-terra-50/60 text-left text-xs font-semibold uppercase tracking-wide text-night-800/70">
+          <thead className="bg-terra-50/60 text-left text-xs font-medium uppercase tracking-wide text-night-800/70">
             <tr>
               <th className="px-4 py-3">Nome</th>
               <th className="px-4 py-3">Contato</th>

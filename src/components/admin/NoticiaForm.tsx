@@ -160,7 +160,7 @@ export default function NoticiaForm({
       <button
         type="submit"
         disabled={isPending}
-        className="rounded-full bg-terra-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-terra-700 disabled:cursor-not-allowed disabled:opacity-60"
+        className="rounded-full bg-terra-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-terra-700 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isPending ? "Salvando..." : "Salvar notícia"}
       </button>

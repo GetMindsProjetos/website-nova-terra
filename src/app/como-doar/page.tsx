@@ -29,7 +29,7 @@ export default function ComoDoarPage() {
       <section className="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-20">
         <div className="space-y-6">
           <div className="rounded-2xl glass p-6 shadow-sm">
-            <h2 className="font-serif text-lg font-semibold text-night-900">
+            <h2 className="font-serif text-lg font-medium text-night-900">
               1. Dízimos e ofertas
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-night-800/70">
@@ -49,17 +49,17 @@ export default function ComoDoarPage() {
               <div className="flex-1 text-center sm:text-left">
                 <dl className="space-y-2 text-sm text-night-800/80">
                   <div>
-                    <dt className="font-semibold text-night-900">
+                    <dt className="font-medium text-night-900">
                       Chave PIX ({site.pix.tipoChave})
                     </dt>
                     <dd>{site.pix.chave}</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold text-night-900">Nome</dt>
+                    <dt className="font-medium text-night-900">Nome</dt>
                     <dd>{site.pix.nome}</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold text-night-900">Banco</dt>
+                    <dt className="font-medium text-night-900">Banco</dt>
                     <dd>{site.pix.banco}</dd>
                   </div>
                 </dl>
@@ -71,7 +71,7 @@ export default function ComoDoarPage() {
           </div>
 
           <div className="rounded-2xl glass p-6 shadow-sm">
-            <h2 className="font-serif text-lg font-semibold text-night-900">
+            <h2 className="font-serif text-lg font-medium text-night-900">
               2. Casa Amarela
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-night-800/70">
@@ -86,7 +86,7 @@ export default function ComoDoarPage() {
           </div>
 
           <div className="rounded-2xl glass p-6 shadow-sm">
-            <h2 className="font-serif text-lg font-semibold text-night-900">
+            <h2 className="font-serif text-lg font-medium text-night-900">
               3. Sirva numa Rede
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-night-800/70">

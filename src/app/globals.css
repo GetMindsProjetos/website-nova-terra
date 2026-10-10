@@ -24,6 +24,18 @@
   [data-theme="dark"] :focus-visible {
     outline-color: #fbae7f;
   }
+
+  /* Nenhum texto pesado (decisão do dono): tags que ficam em negrito por
+     padrão e síntese de negrito do navegador, que engrossaria o texto. */
+  strong,
+  b,
+  th {
+    font-weight: 500;
+  }
+}
+
+html {
+  font-synthesis-weight: none;
 }
 
 html {
@@ -184,16 +196,23 @@ body {
   75% { transform: translate3d(5cqw, -6cqh, 0) scale(1.2); }
 }
 
-/* Vidro: bloco com borda fina, leve transparência e blur sobre o fundo fixo.
+/* Vidro: bloco sem borda, com transparência (35%) e blur sobre o fundo fixo.
    O texto dentro dele deve ser night-800/900 sólido (não usar /70). */
 .glass {
-  background: rgb(255 255 255 / 0.55);
-  border: 1px solid rgb(255 255 255 / 0.8);
+  background: rgb(255 255 255 / 0.35);
+  border: 0;
   box-shadow:
     0 1px 2px rgb(23 21 18 / 0.04),
-    0 10px 30px -12px rgb(168 67 5 / 0.18);
+    0 10px 30px -12px rgb(168 67 5 / 0.2);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* Com 35% de branco o fundo laranja aparece mais: links laranja pequenos dentro
+   do vidro usam terra-900 (>= 5:1) em vez de terra-800. */
+.glass .text-terra-800,
+.glass .text-terra-700 {
+  color: #853504;
 }
 
 /* Sem suporte a blur, ou com "reduzir transparência" no sistema: mais opaco,
