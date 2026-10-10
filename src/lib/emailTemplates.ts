@@ -22,7 +22,7 @@ export function esc(valor: string) {
     .replace(/'/g, "&#39;");
 }
 
-function layout(titulo: string, corpoHtml: string) {
+export function layout(titulo: string, corpoHtml: string) {
   return `<!doctype html>
 <html lang="pt-BR">
 <body style="margin:0;padding:0;background:${COR.fundo};font-family:Arial,Helvetica,sans-serif;color:${COR.texto};">
@@ -152,4 +152,95 @@ export function avisoNovaInscricao(evento: Evento, dados: DadosInscricao) {
     html,
     text,
   };
+}
+
+export type AssuntoContato = "oracao" | "contato" | "novidades";
+
+export const ROTULO_ASSUNTO: Record<AssuntoContato, string> = {
+  oracao: "Pedido de oração",
+  contato: "Contato / dúvida",
+  novidades: "Receber informações e atualizações",
+};
+
+export type DadosContato = {
+  assunto: AssuntoContato;
+  nome: string;
+  email: string;
+  telefone: string;
+  mensagem: string;
+};
+
+const comQuebras = (texto: string) => esc(texto).replace(/\r?\n/g, "<br>");
+const semQuebras = (texto: string) => texto.replace(/\s+/g, " ").trim();
+
+/** Aviso interno: chega em acolhimento@ com Reply-To no visitante. */
+export function avisoContato(d: DadosContato) {
+  const campos = [
+    { rotulo: "Assunto", valor: ROTULO_ASSUNTO[d.assunto] },
+    { rotulo: "Nome", valor: d.nome },
+    { rotulo: "E-mail", valor: d.email },
+    { rotulo: "WhatsApp", valor: d.telefone || "(não informado)" },
+  ];
+
+  const html = layout(
+    ROTULO_ASSUNTO[d.assunto],
+    `<table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;background:${COR.fundo};border:1px solid ${COR.borda};border-radius:8px;margin:0 0 16px;">
+       ${campos
+         .map(
+           (c) =>
+             `<tr><td style="padding:8px 14px;font-size:13px;color:${COR.suave};width:110px;vertical-align:top;">${esc(c.rotulo)}</td><td style="padding:8px 14px;font-size:14px;">${esc(c.valor)}</td></tr>`
+         )
+         .join("")}
+     </table>
+     ${
+       d.mensagem
+         ? `<p style="margin:0 0 6px;font-size:13px;color:${COR.suave};">Mensagem</p>
+            <p style="margin:0;padding:12px 14px;background:${COR.fundo};border-left:3px solid ${COR.terra};border-radius:4px;">${comQuebras(d.mensagem)}</p>`
+         : ""
+     }
+     <p style="margin:16px 0 0;font-size:13px;color:${COR.suave};">Para responder, use "Responder": o Reply-To é o e-mail da pessoa.</p>`
+  );
+
+  const text = [
+    `Assunto: ${ROTULO_ASSUNTO[d.assunto]}`,
+    ...campos.slice(1).map((c) => `${c.rotulo}: ${c.valor}`),
+    ...(d.mensagem ? ["", "Mensagem:", d.mensagem] : []),
+  ].join("\n");
+
+  const tag = { oracao: "Oração", contato: "Contato", novidades: "Novidades" }[d.assunto];
+  return { subject: `[${tag}] ${semQuebras(d.nome)}`, html, text };
+}
+
+/** Confirmação curta para quem enviou (sem links, para não servir de abuso). */
+export function confirmacaoContato(d: DadosContato) {
+  const primeiroNome = semQuebras(d.nome).split(" ")[0] || d.nome;
+  const frase = {
+    oracao:
+      "Recebemos o seu pedido de oração. Nossa equipe estará orando por você.",
+    contato:
+      "Recebemos a sua mensagem e vamos responder o mais breve possível.",
+    novidades:
+      "Você está na nossa lista para receber informações e atualizações da Igreja Nova Terra.",
+  }[d.assunto];
+
+  const html = layout(
+    "Recebemos a sua mensagem",
+    `<p style="margin:0 0 16px;">Olá, <strong>${esc(primeiroNome)}</strong>!</p>
+     <p style="margin:0 0 16px;">${esc(frase)}</p>
+     <p style="margin:0 0 16px;">Se precisar falar com a gente, é só responder a este e-mail ou chamar no WhatsApp ${esc(site.whatsappDisplay)}.</p>
+     <p style="margin:0;font-size:13px;color:${COR.suave};">Se você não fez este pedido, pode ignorar esta mensagem.</p>`
+  );
+
+  const text = [
+    `Olá, ${primeiroNome}!`,
+    "",
+    frase,
+    "",
+    `Para falar com a gente: responda este e-mail ou chame no WhatsApp ${site.whatsappDisplay}.`,
+    "Se você não fez este pedido, pode ignorar esta mensagem.",
+    "",
+    `${site.fullName} — ${site.address}`,
+  ].join("\n");
+
+  return { subject: "Recebemos a sua mensagem — Igreja Nova Terra", html, text };
 }
