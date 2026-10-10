@@ -6,10 +6,11 @@ import { useEffect, useRef, useState, type FocusEvent, type KeyboardEvent } from
 import { usePathname } from "next/navigation";
 import { desktopNav, donateItem, isCurrent } from "@/lib/site";
 import { useScrolled } from "@/lib/useScrolled";
+import MeshBackground from "./MeshBackground";
 import MobileMenuDrawer from "./MobileMenuDrawer";
 
 const focusRing =
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terra-800";
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900";
 
 export default function Header() {
   const [subOpen, setSubOpen] = useState<string | null>(null);
@@ -52,16 +53,21 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b bg-white/95 backdrop-blur transition-shadow duration-300 ${
+      className={`site-header sticky top-0 z-50 border-b transition-shadow duration-300 ${
         scrolled
-          ? "border-terra-100 shadow-sm shadow-night-900/5"
+          ? "is-scrolled border-terra-100 shadow-sm shadow-night-900/5"
           : "border-transparent"
       }`}
     >
+      {/* Fundo igual ao do hero. Transparente no topo de páginas com hero (ver
+          .site-header__mesh em globals.css), para o hero passar por trás. */}
+      <MeshBackground className="site-header__mesh -z-10" />
       {/* Sem "relative" aqui nem nos grupos: o mega-menu posiciona-se em relação ao header (sticky). */}
       <div
-        className={`mx-auto flex max-w-6xl items-center justify-between px-4 transition-[padding] duration-300 sm:px-6 ${
-          scrolled ? "py-2" : "py-3"
+        className={`mx-auto flex max-w-6xl items-center justify-between px-4 transition-[height] duration-300 sm:px-6 ${
+          scrolled
+            ? "h-[calc(var(--header-h)-17px)]"
+            : "h-[calc(var(--header-h)-1px)]"
         }`}
       >
         <Link
@@ -88,7 +94,7 @@ export default function Header() {
         >
           {desktopNav.map((item) => {
             const current = isCurrent(pathname, item.href);
-            const linkClass = `whitespace-nowrap rounded-md px-2 py-2 text-[13px] font-medium text-night-800 transition hover:bg-terra-50 hover:text-terra-800 aria-[current=page]:text-terra-800 2xl:px-3 2xl:text-sm ${focusRing}`;
+            const linkClass = `whitespace-nowrap rounded-md px-2 py-2 text-[13px] font-medium text-night-900 transition hover:bg-white/70 aria-[current=page]:font-semibold aria-[current=page]:underline aria-[current=page]:decoration-terra-600 aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8 2xl:px-3 2xl:text-sm ${focusRing}`;
             return item.children ? (
               <div
                 key={item.href}
@@ -193,7 +199,7 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Botão + painel (portal em document.body): o backdrop-filter do header prenderia um fixed. */}
+        {/* Botão + painel (portal em document.body). */}
         <MobileMenuDrawer />
       </div>
     </header>

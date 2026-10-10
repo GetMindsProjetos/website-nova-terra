@@ -2,7 +2,8 @@
 // se movem em trajetórias diferentes (efeito "mesh gradient"). Só CSS (transform): sem JS nem
 // WebGL, e parado com prefers-reduced-motion. Estilos em globals.css (.mesh).
 // Laranja suave com toques de amarelo; o tom mais saturado é terra-500 a 35%.
-// Texto sobre este fundo deve ser night-900 (> 7:1 no pior ponto).
+// Texto sobre este fundo deve ser night-900 (> 7:1 no pior ponto). Tamanhos
+// em cqw/cqh: o bloco que o contém (menu, hero ou rodapé) define a escala.
 export default function MeshBackground({ className = "" }: { className?: string }) {
   return (
     <div aria-hidden="true" className={`mesh ${className}`}>
