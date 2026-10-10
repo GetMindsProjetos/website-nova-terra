@@ -7,8 +7,7 @@ export const site = {
   address: "Tv. S-7, 107 - Campina de Icoaraci, Belém - PA, 66813-300",
   whatsapp: "5591996088508",
   whatsappDisplay: "(91) 99608-8508",
-  // LACUNA: confirmar e-mail oficial
-  email: "contato@igrejanovaterra.com.br",
+  email: "acolhimento@igrejanovaterra.com.br",
   pix: {
     chave: "08.892.504/0001-75",
     tipoChave: "CNPJ",
