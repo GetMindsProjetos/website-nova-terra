@@ -69,6 +69,12 @@ export async function getEventoBySlug(slug: string): Promise<Evento | null> {
   return data ? mapRow(data) : null;
 }
 
+export function isEventoEncerrado(evento: Evento) {
+  if (evento.inscricoesAbertas || !evento.dataEvento) return false;
+  const [ano, mes, dia] = evento.dataEvento.split("-").map(Number);
+  return new Date(ano, mes - 1, dia) < new Date(new Date().toDateString());
+}
+
 export function formatPreco(preco: number) {
   return preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }

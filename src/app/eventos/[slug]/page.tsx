@@ -4,7 +4,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import CTAButton from "@/components/CTAButton";
 import ShareButton from "@/components/ShareButton";
-import { formatDataEvento, formatPreco, getEventoBySlug } from "@/lib/eventos";
+import { formatDataEvento, formatPreco, getEventoBySlug, isEventoEncerrado } from "@/lib/eventos";
 
 export const dynamic = "force-dynamic";
 
@@ -120,7 +120,7 @@ export default async function EventoDetalhePage({ params }: Props) {
             </CTAButton>
           ) : (
             <span className="inline-flex items-center justify-center rounded-full border border-terra-100 px-5 py-2.5 text-sm font-medium text-night-800/50">
-              Sem inscrição necessária
+              {isEventoEncerrado(evento) ? "Inscrições encerradas" : "Sem inscrição necessária"}
             </span>
           )}
           <Link
