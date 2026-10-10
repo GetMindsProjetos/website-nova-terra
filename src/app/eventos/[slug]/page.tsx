@@ -221,7 +221,7 @@ export default async function EventoDetalhePage({ params }: Props) {
           {/* Inscrição: já visível na própria página do evento */}
           <div
             id="inscricao"
-            className="scroll-mt-24 rounded-2xl border border-terra-100 bg-white p-5 shadow-card sm:p-6"
+            className="scroll-mt-24 rounded-2xl glass p-5 shadow-card sm:p-6"
           >
             {evento.inscricoesAbertas ? (
               <>

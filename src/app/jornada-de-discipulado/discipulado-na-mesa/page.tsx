@@ -85,7 +85,7 @@ export default function DiscipuladoNaMesaPage() {
           {encontros.map((e) => (
             <li
               key={e.n}
-              className="flex gap-5 rounded-2xl border border-terra-100 bg-white p-6 shadow-sm"
+              className="flex gap-5 rounded-2xl glass p-6 shadow-sm"
             >
               <span className="shrink-0 font-serif text-sm font-bold text-terra-800">
                 Encontros {e.n}

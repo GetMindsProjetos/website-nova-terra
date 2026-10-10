@@ -53,7 +53,7 @@ export default function CasaAmarelaPage() {
         </h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {ofertas.map((o) => (
-            <div key={o.title} className="rounded-2xl border border-terra-100 bg-gradient-to-br from-terra-100 via-terra-50 to-white p-6 shadow-sm">
+            <div key={o.title} className="rounded-2xl glass p-6 shadow-sm">
               <h3 className="font-serif text-base font-semibold text-night-900">{o.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-night-800/70">{o.desc}</p>
             </div>
@@ -64,18 +64,18 @@ export default function CasaAmarelaPage() {
           Como ajudar
         </h2>
         <div className="mt-6 space-y-4">
-          <div className="rounded-xl border border-terra-100 bg-terra-50/60 p-5">
+          <div className="rounded-xl glass p-5">
             <p className="font-semibold text-night-900">Doe materiais e produtos</p>
             <Lacuna>lista específica do que é aceito como doação</Lacuna>
           </div>
-          <div className="rounded-xl border border-terra-100 bg-terra-50/60 p-5">
+          <div className="rounded-xl glass p-5">
             <p className="font-semibold text-night-900">Seja voluntário(a)</p>
             <p className="text-sm text-night-800/70">
               Profissionais de psicologia, terapia, educação e áreas afins.
             </p>
             <Lacuna>canal de inscrição para voluntários</Lacuna>
           </div>
-          <div className="rounded-xl border border-terra-100 bg-terra-50/60 p-5">
+          <div className="rounded-xl glass p-5">
             <p className="font-semibold text-night-900">Contribua financeiramente</p>
             <div className="mt-3 flex flex-col items-center gap-5 sm:flex-row sm:items-start">
               {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -40,13 +40,13 @@ export default function RedePage({ params }: Props) {
         <p className="leading-relaxed text-night-800/80">{rede.descricao}</p>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-terra-100 bg-terra-50/60 p-5">
+          <div className="rounded-xl glass p-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-terra-800">
               Para quem
             </p>
             <p className="mt-1 text-sm text-night-800/80">{rede.paraQuem}</p>
           </div>
-          <div className="rounded-xl border border-terra-100 bg-terra-50/60 p-5">
+          <div className="rounded-xl glass p-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-terra-800">
               Ritmo de encontros
             </p>

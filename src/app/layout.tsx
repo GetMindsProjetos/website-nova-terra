@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FixedBackground from "@/components/FixedBackground";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SmoothScroll from "@/components/SmoothScroll";
 
@@ -79,6 +80,7 @@ export default function RootLayout({
           `}
         </Script>
         <SmoothScroll />
+        <FixedBackground />
         <Header />
         <main id="conteudo" tabIndex={-1} className="flex-1 focus:outline-none">
           {children}

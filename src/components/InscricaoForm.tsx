@@ -102,7 +102,7 @@ export default function InscricaoForm({ evento }: { evento: Evento }) {
           ref={successRef}
           tabIndex={-1}
           role="status"
-          className="rounded-2xl border border-terra-100 bg-terra-50/60 p-8 text-center focus:outline-none"
+          className="rounded-2xl glass p-8 text-center focus:outline-none"
         >
           <p className="font-serif text-xl font-semibold text-night-900">
             Inscrição confirmada! <span aria-hidden="true">🎉</span>

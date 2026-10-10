@@ -35,7 +35,7 @@ export default async function EventosPage() {
       />
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
         {eventos.length === 0 ? (
-          <div className="mx-auto max-w-xl rounded-2xl border border-dashed border-terra-200 bg-terra-50/60 p-8 text-center sm:p-10">
+          <div className="mx-auto max-w-xl rounded-2xl glass p-8 text-center sm:p-10">
             <p className="font-serif text-lg font-semibold text-night-900">
               Em breve novos eventos.
             </p>

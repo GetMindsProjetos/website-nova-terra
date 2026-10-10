@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import MeshBackground from "@/components/MeshBackground";
 import Reveal from "@/components/Reveal";
 
 type Props = {
@@ -10,14 +9,13 @@ type Props = {
 };
 
 export default function PageHero({ eyebrow, title, description, children }: Props) {
-  // A seção sobe por baixo do menu (transparente no topo): o mesmo mesh passa
+  // A seção sobe por baixo do menu (transparente no topo): o fundo fixo passa
   // pelos dois, sem emenda. O padding-top compensa a altura do menu.
   return (
     <section
       data-header-overlap
-      className="relative isolate -mt-[var(--header-h)] overflow-hidden border-b border-terra-100"
+      className="relative isolate -mt-[var(--header-h)] overflow-hidden"
     >
-      <MeshBackground className="-z-10" />
       <div className="mx-auto max-w-4xl px-4 pb-14 pt-[calc(3.5rem+var(--header-h))] text-center sm:px-6 sm:pb-20 sm:pt-[calc(5rem+var(--header-h))]">
         {eyebrow && (
           <Reveal>

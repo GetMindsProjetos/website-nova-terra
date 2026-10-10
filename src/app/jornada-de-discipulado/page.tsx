@@ -68,7 +68,7 @@ export default function JornadaPage() {
       <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
         <ol className="space-y-6">
           {passos.map((p) => (
-            <li key={p.n} className="flex gap-5 rounded-2xl border border-terra-100 bg-white p-6 shadow-sm">
+            <li key={p.n} className="flex gap-5 rounded-2xl glass p-6 shadow-sm">
               <span className="font-serif text-2xl font-bold text-terra-300">{p.n}</span>
               <div>
                 <h2 className="font-serif text-lg font-semibold text-night-900">

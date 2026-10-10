@@ -32,7 +32,7 @@ export default function RedesPage() {
             <Reveal key={rede.slug} delay={(i % 6) * 70}>
               <Link
                 href={`/redes/${rede.slug}`}
-                className="group flex h-full flex-col justify-between rounded-2xl border border-terra-100 bg-gradient-to-br from-terra-100 via-terra-50 to-white p-6 shadow-card transition hover:shadow-card-hover motion-safe:hover:-translate-y-0.5"
+                className="group flex h-full flex-col justify-between rounded-2xl glass p-6 shadow-card transition hover:shadow-card-hover motion-safe:hover:-translate-y-0.5"
               >
                 <div>
                   <h2 className="font-serif text-lg font-semibold text-night-900">

@@ -23,7 +23,7 @@ export default function MissaoVisaoPage() {
       <PageHero eyebrow="Quem Somos" title="Missão e Visão" />
       <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
         <div className="grid gap-6 sm:grid-cols-2">
-          <div className="rounded-2xl border border-terra-100 bg-terra-50/60 p-6">
+          <div className="rounded-2xl glass p-6">
             <p className="text-sm font-semibold uppercase tracking-wide text-terra-800">
               Visão
             </p>
@@ -31,7 +31,7 @@ export default function MissaoVisaoPage() {
               Tornar cada membro fruto permanente.
             </p>
           </div>
-          <div className="rounded-2xl border border-terra-100 bg-terra-50/60 p-6">
+          <div className="rounded-2xl glass p-6">
             <p className="text-sm font-semibold uppercase tracking-wide text-terra-800">
               Missão
             </p>
