@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
-import CTAButton from "@/components/CTAButton";
+import InscricaoHero from "@/components/InscricaoHero";
+import PalestranteCard from "@/components/PalestranteCard";
+import InscricaoForm from "@/components/InscricaoForm";
 import ShareButton from "@/components/ShareButton";
 import { formatDataEvento, formatPreco, getEventoBySlug, isEventoEncerrado } from "@/lib/eventos";
 import {
@@ -17,6 +19,11 @@ import { site } from "@/lib/site";
 export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ slug: string }> };
+
+// Assets premium preparados especificamente para o Encontro de Empreendedores
+// (o anúncio do Facebook aponta para /eventos/<slug>/inscricao, que agora
+// redireciona para cá; o layout muda aqui sem alterar o link).
+const HERO_PREMIUM_SLUG = "encontro-de-empreendedores";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -75,7 +82,7 @@ export default async function EventoDetalhePage({ params }: Props) {
           ? {
               offers: {
                 "@type": "Offer",
-                url: absoluteUrl(`/eventos/${evento.slug}/inscricao`),
+                url: absoluteUrl(`/eventos/${evento.slug}`),
                 price: evento.gratuito ? 0 : evento.preco,
                 priceCurrency: "BRL",
                 availability: "https://schema.org/InStock",
@@ -84,6 +91,12 @@ export default async function EventoDetalhePage({ params }: Props) {
           : {}),
       }
     : null;
+
+  const isPremium =
+    evento.slug === HERO_PREMIUM_SLUG && evento.inscricoesAbertas;
+  const descricaoCompleta = evento.gratuito
+    ? evento.descricao
+    : `${evento.descricao} — Valor: ${formatPreco(evento.preco ?? 0)}`;
 
   return (
     <>
@@ -95,90 +108,155 @@ export default async function EventoDetalhePage({ params }: Props) {
           { name: evento.titulo, path: `/eventos/${evento.slug}` },
         ])}
       />
-      <PageHero
-        eyebrow={evento.detalhe ?? "Evento"}
-        title={evento.titulo}
-        description={evento.descricao}
-      />
-      <section className="mx-auto max-w-2xl px-4 py-14 sm:px-6 sm:py-20">
-        {evento.imagemUrl && (
-          <div className="relative mb-8 aspect-[4/3] w-full overflow-hidden rounded-2xl">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={evento.imagemUrl}
-              alt={evento.titulo}
-              width={672}
-              height={504}
-              fetchPriority="high"
-              decoding="async"
-              className="h-full w-full object-cover"
-            />
-            {evento.palestrante && (
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent px-5 pb-4 pt-16">
-                <p className="font-serif text-2xl font-bold uppercase italic text-white">
-                  {evento.palestrante}
-                </p>
+      {isPremium ? (
+        <InscricaoHero
+          eyebrow="Inscrição aberta"
+          title={evento.titulo}
+          description={descricaoCompleta}
+          dataLabel={evento.dataEvento ? formatDataEvento(evento.dataEvento) : null}
+          horaLabel={evento.horaEvento}
+          localLabel="Igreja Nova Terra"
+          bgDesktop="/eventos/empreendedores/hero-desktop.webp"
+          bgMobile="/eventos/empreendedores/hero-mobile.webp"
+        />
+      ) : (
+        // Sem descrição no hero: ela fica nos detalhes, para o conteúdo e o
+        // formulário subirem na tela (principalmente no mobile).
+        <PageHero eyebrow={evento.detalhe ?? "Evento"} title={evento.titulo} />
+      )}
+
+      {isPremium && evento.palestrante && (
+        <section className="px-4 pt-12 sm:px-6">
+          <PalestranteCard
+            nome={evento.palestrante}
+            papel="CEO e Fundador da Comercial do Norte"
+            bio={evento.descricao}
+            fotoUrl="/eventos/empreendedores/palestrante.webp"
+          />
+        </section>
+      )}
+
+      <section className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-12">
+          {/* Detalhes */}
+          <div>
+            {evento.imagemUrl && (
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={evento.imagemUrl}
+                  alt={evento.titulo}
+                  width={672}
+                  height={504}
+                  fetchPriority="high"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+                {evento.palestrante && (
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent px-5 pb-4 pt-16">
+                    <p className="font-serif text-2xl font-bold uppercase italic text-white">
+                      {evento.palestrante}
+                    </p>
+                  </div>
+                )}
               </div>
             )}
-          </div>
-        )}
 
-        {(evento.dataEvento || evento.horaEvento) && (
-          <div className="flex flex-wrap items-center gap-4 text-sm text-night-800/70">
-            {evento.dataEvento && (
-              <span className="flex items-center gap-1.5">
-                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-terra-600 stroke-2">
-                  <rect x="3.5" y="5" width="17" height="16" rx="2.5" />
-                  <path d="M8 3v4M16 3v4M3.5 10h17" strokeLinecap="round" />
-                </svg>
-                {formatDataEvento(evento.dataEvento)}
-              </span>
+            {(evento.dataEvento || evento.horaEvento) && (
+              <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-night-800/70">
+                {evento.dataEvento && (
+                  <span className="flex items-center gap-1.5">
+                    <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-terra-600 stroke-2">
+                      <rect x="3.5" y="5" width="17" height="16" rx="2.5" />
+                      <path d="M8 3v4M16 3v4M3.5 10h17" strokeLinecap="round" />
+                    </svg>
+                    {formatDataEvento(evento.dataEvento)}
+                  </span>
+                )}
+                {evento.horaEvento && (
+                  <span className="flex items-center gap-1.5">
+                    <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-terra-600 stroke-2">
+                      <circle cx="12" cy="12" r="8.5" />
+                      <path d="M12 7.5V12l3 2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {evento.horaEvento}
+                  </span>
+                )}
+              </div>
             )}
-            {evento.horaEvento && (
-              <span className="flex items-center gap-1.5">
-                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-terra-600 stroke-2">
-                  <circle cx="12" cy="12" r="8.5" />
-                  <path d="M12 7.5V12l3 2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                {evento.horaEvento}
+
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <span
+                className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                  evento.gratuito
+                    ? "bg-terra-50 text-terra-800"
+                    : "bg-night-900/5 text-night-900"
+                }`}
+              >
+                {evento.gratuito ? "Gratuito" : formatPreco(evento.preco ?? 0)}
               </span>
+              <ShareButton
+                title={evento.titulo}
+                text={`Confira: ${evento.titulo} — Igreja Nova Terra`}
+                path={`/eventos/${evento.slug}`}
+              />
+            </div>
+
+            {!isPremium && (
+              <p className="mt-4 text-base leading-relaxed text-night-800/75">
+                {descricaoCompleta}
+              </p>
+            )}
+
+            <div className="mt-6">
+              <Link
+                href="/eventos"
+                className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-terra-200 px-5 py-2.5 text-sm font-semibold text-night-800 transition hover:bg-terra-50"
+              >
+                Ver todos os eventos
+              </Link>
+            </div>
+          </div>
+
+          {/* Inscrição: já visível na própria página do evento */}
+          <div
+            id="inscricao"
+            className="scroll-mt-24 rounded-2xl border border-terra-100 bg-white p-5 shadow-card sm:p-6"
+          >
+            {evento.inscricoesAbertas ? (
+              <>
+                {isPremium ? (
+                  <div className="mb-6 flex items-center gap-4">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/eventos/empreendedores/cta.webp"
+                      alt=""
+                      aria-hidden="true"
+                      width={64}
+                      height={64}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-16 w-16 shrink-0 rounded-full object-cover shadow-md"
+                    />
+                    <h2 className="font-serif text-2xl font-bold text-night-900">
+                      Garanta sua vaga agora.
+                    </h2>
+                  </div>
+                ) : (
+                  <h2 className="mb-6 font-serif text-2xl font-bold text-night-900">
+                    Faça sua Inscrição.
+                  </h2>
+                )}
+                <InscricaoForm evento={evento} />
+              </>
+            ) : (
+              <p className="text-center text-sm font-medium text-night-800/75">
+                {isEventoEncerrado(evento)
+                  ? "Inscrições encerradas."
+                  : "Este evento não precisa de inscrição."}
+              </p>
             )}
           </div>
-        )}
-
-        <div className="mt-3 flex flex-wrap items-center gap-3">
-          <span
-            className={`rounded-full px-3 py-1 text-xs font-semibold ${
-              evento.gratuito
-                ? "bg-terra-50 text-terra-800"
-                : "bg-night-900/5 text-night-900"
-            }`}
-          >
-            {evento.gratuito ? "Gratuito" : formatPreco(evento.preco ?? 0)}
-          </span>
-          <ShareButton
-            title={evento.titulo}
-            text={`Confira: ${evento.titulo} — Igreja Nova Terra`}
-            path={`/eventos/${evento.slug}`}
-          />
-        </div>
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          {evento.inscricoesAbertas ? (
-            <CTAButton href={`/eventos/${evento.slug}/inscricao`}>
-              Inscreva-se
-            </CTAButton>
-          ) : (
-            <span className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-terra-100 px-5 py-2.5 text-sm font-medium text-night-800/75">
-              {isEventoEncerrado(evento) ? "Inscrições encerradas" : "Sem inscrição necessária"}
-            </span>
-          )}
-          <Link
-            href="/eventos"
-            className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-terra-200 px-5 py-2.5 text-sm font-semibold text-night-800 transition hover:bg-terra-50"
-          >
-            Ver todos os eventos
-          </Link>
         </div>
 
         {evento.patrocinadores.length > 0 && (
