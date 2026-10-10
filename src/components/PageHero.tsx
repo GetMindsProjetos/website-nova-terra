@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import MeshBackground from "@/components/MeshBackground";
 import Reveal from "@/components/Reveal";
 
 type Props = {
@@ -10,11 +11,12 @@ type Props = {
 
 export default function PageHero({ eyebrow, title, description, children }: Props) {
   return (
-    <section className="border-b border-terra-100 bg-gradient-to-br from-terra-100 via-terra-50 to-white">
+    <section className="relative isolate overflow-hidden border-b border-terra-100">
+      <MeshBackground className="-z-10" />
       <div className="mx-auto max-w-4xl px-4 py-14 text-center sm:px-6 sm:py-20">
         {eyebrow && (
           <Reveal>
-            <p className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-wide text-terra-800">
+            <p className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-wide text-night-900">
               <span aria-hidden="true" className="h-0.5 w-8 rounded-full bg-terra-600" />
               {eyebrow}
               <span aria-hidden="true" className="h-0.5 w-8 rounded-full bg-terra-600" />
@@ -28,14 +30,17 @@ export default function PageHero({ eyebrow, title, description, children }: Prop
         </Reveal>
         {description && (
           <Reveal delay={160}>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-night-800/75 sm:text-lg">
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-night-900 sm:text-lg">
               {description}
             </p>
           </Reveal>
         )}
         {children && (
           <Reveal delay={240}>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">{children}</div>
+            {/* anel branco nos botões: o laranja primário não some no fundo laranja */}
+            <div className="mt-8 flex flex-wrap justify-center gap-3 [&>a]:ring-2 [&>a]:ring-white/80">
+              {children}
+            </div>
           </Reveal>
         )}
       </div>
