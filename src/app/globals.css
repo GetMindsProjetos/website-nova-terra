@@ -210,6 +210,45 @@ body {
   }
 }
 
+/* Botões em vidro: sem borda; translucidez, blur e sombra suave.
+   .btn-glass = branco (secundário); .btn-glass-accent = laranja da marca
+   (texto branco, decisão do dono). */
+.btn-glass,
+.btn-glass-accent {
+  border: 0;
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.btn-glass {
+  background: rgb(255 255 255 / 0.62);
+  box-shadow: 0 6px 18px -8px rgb(168 67 5 / 0.35);
+}
+
+.btn-glass:hover {
+  background: rgb(255 255 255 / 0.85);
+}
+
+.btn-glass-accent {
+  background: rgb(247 99 9 / 0.9);
+  box-shadow: 0 8px 22px -8px rgb(168 67 5 / 0.6);
+}
+
+.btn-glass-accent:hover {
+  background: rgb(207 83 7 / 0.94);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .btn-glass { background: rgb(255 255 255 / 0.92); }
+  .btn-glass-accent { background: rgb(247 99 9); }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .btn-glass { background: rgb(255 255 255 / 0.95); }
+  .btn-glass-accent { background: rgb(247 99 9); }
+}
+
 /* Véu do fundo fixo: nas páginas internas clareia o mesh para o texto corrido
    (que fica direto sobre o fundo) ter contraste; a home o desliga. */
 .fixed-bg::after {
@@ -224,21 +263,31 @@ body:has([data-bg-strong]) .fixed-bg::after {
   opacity: 0;
 }
 
-/* Menu: transparente no topo; ao rolar vira vidro. */
-.site-header.is-scrolled {
+/* Menu: transparente no topo; ao rolar, um vidro (blur) que se dissolve para
+   baixo. Sem borda nem sombra: nenhuma linha de divisão. O vidro fica num
+   pseudo-elemento (atrás do conteúdo) porque a máscara de esmaecer não pode
+   atingir o logo e os links. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -18px 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
   background: rgb(255 255 255 / 0.8);
-  border-bottom-color: rgb(255 255 255 / 0.8);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   backdrop-filter: blur(14px) saturate(140%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
 }
 
-/* Rodapé em vidro sobre o fundo fixo. */
-footer {
-  background: rgb(255 255 255 / 0.4);
-  border-top-color: rgb(255 255 255 / 0.8);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  backdrop-filter: blur(14px) saturate(140%);
+.site-header.is-scrolled::before {
+  opacity: 1;
 }
+
+/* O rodapé não tem fundo próprio: o fundo fixo do site continua por baixo,
+   sem faixa nem linha entre o conteúdo e o rodapé. */
 
 /* .reveal só é aplicado pelo componente Reveal após a hidratação, e apenas
    em elementos abaixo da dobra; sem JS o conteúdo permanece visível. */

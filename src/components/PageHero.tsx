@@ -27,7 +27,7 @@ export default function PageHero({ eyebrow, title, description, children }: Prop
           </Reveal>
         )}
         <Reveal delay={80}>
-          <h1 className="mt-4 text-balance font-serif text-3xl font-medium tracking-tight text-night-900 sm:text-4xl lg:text-5xl">
+          <h1 className="mt-4 text-balance font-serif text-3xl font-medium tracking-[-0.035em] text-night-900 sm:text-4xl lg:text-5xl">
             {title}
           </h1>
         </Reveal>
@@ -40,8 +40,7 @@ export default function PageHero({ eyebrow, title, description, children }: Prop
         )}
         {children && (
           <Reveal delay={240}>
-            {/* anel branco nos botões: o laranja primário não some no fundo laranja */}
-            <div className="mt-8 flex flex-wrap justify-center gap-3 [&>a]:ring-2 [&>a]:ring-white/80">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
               {children}
             </div>
           </Reveal>

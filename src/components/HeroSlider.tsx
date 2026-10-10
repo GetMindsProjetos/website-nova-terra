@@ -143,7 +143,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                     {slide.eyebrow}
                   </p>
                 )}
-                <Heading className="mt-4 font-serif text-3xl font-medium leading-tight text-night-900 sm:text-5xl">
+                <Heading className="mt-4 font-serif text-3xl font-medium leading-[1.1] tracking-[-0.035em] text-night-900 sm:text-5xl">
                   {slide.title}
                 </Heading>
                 {slide.subtitle && (
@@ -159,11 +159,6 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                         href={btn.href}
                         variant={btn.variant ?? "primary"}
                         external={btn.external}
-                        className={
-                          (btn.variant ?? "primary") === "primary"
-                            ? "ring-2 ring-white/80"
-                            : ""
-                        }
                       >
                         {btn.label}
                       </CTAButton>

@@ -143,7 +143,7 @@ export default function ContatoForm() {
         <button
           type="button"
           onClick={() => setState({ status: "idle" })}
-          className="mt-5 min-h-[44px] rounded-full border border-terra-200 px-5 py-2.5 text-sm font-semibold text-night-800 transition hover:bg-terra-50"
+          className="mt-5 min-h-[44px] btn-glass rounded-full px-5 py-2.5 text-sm font-semibold text-night-800"
         >
           Enviar outra mensagem
         </button>
@@ -328,7 +328,7 @@ export default function ContatoForm() {
         type="submit"
         disabled={isPending}
         aria-disabled={isPending}
-        className="min-h-[48px] w-full rounded-full bg-terra-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-terra-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900 disabled:cursor-not-allowed disabled:opacity-70"
+        className="min-h-[48px] w-full rounded-full btn-glass-accent px-6 py-3 text-sm font-semibold text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900 disabled:cursor-not-allowed disabled:opacity-70"
       >
         {isPending ? "Enviando..." : "Enviar"}
       </button>

@@ -126,7 +126,7 @@ export default function HomePage() {
               <p className="text-sm font-semibold uppercase tracking-wide text-terra-800">
                 Nossa visão
               </p>
-              <h2 className="mt-3 font-serif text-2xl font-bold text-night-900 sm:text-3xl">
+              <h2 className="mt-3 font-serif text-2xl font-bold tracking-tight text-night-900 sm:text-3xl">
                 Tornar cada membro fruto permanente.
               </h2>
               <p className="mt-4 leading-relaxed text-night-800">
@@ -163,7 +163,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-4xl px-4 pb-14 text-center sm:px-6 sm:pb-20">
         <div className="glass rounded-2xl px-6 py-10 sm:px-10 sm:py-12">
         <Reveal>
-          <h2 className="font-serif text-2xl font-bold text-night-900 sm:text-3xl">
+          <h2 className="font-serif text-2xl font-bold tracking-tight text-night-900 sm:text-3xl">
             Primeira vez por aqui?
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-night-800">
