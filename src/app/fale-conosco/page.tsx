@@ -69,7 +69,7 @@ export default function FaleConoscoPage() {
 
         <div
           id="formulario"
-          className="scroll-mt-24 rounded-2xl border border-terra-100 bg-white p-5 shadow-card sm:p-6"
+          className="scroll-mt-24 rounded-2xl glass p-5 shadow-card sm:p-6"
         >
           <h2 className="font-serif text-xl font-bold text-night-900">
             Envie uma mensagem

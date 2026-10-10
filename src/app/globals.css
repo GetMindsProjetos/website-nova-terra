@@ -184,15 +184,60 @@ body {
   75% { transform: translate3d(5cqw, -6cqh, 0) scale(1.2); }
 }
 
-/* Menu: no topo de uma página com hero ele fica transparente (o mesh do hero
-   passa por trás, sem emenda); ao rolar, ou em páginas sem hero, mostra o mesh. */
-.site-header__mesh {
-  opacity: 1;
-  transition: opacity 0.3s ease;
+/* Vidro: bloco com borda fina, leve transparência e blur sobre o fundo fixo.
+   O texto dentro dele deve ser night-800/900 sólido (não usar /70). */
+.glass {
+  background: rgb(255 255 255 / 0.55);
+  border: 1px solid rgb(255 255 255 / 0.8);
+  box-shadow:
+    0 1px 2px rgb(23 21 18 / 0.04),
+    0 10px 30px -12px rgb(168 67 5 / 0.18);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
 }
 
-body:has([data-header-overlap]) .site-header:not(.is-scrolled) .site-header__mesh {
+/* Sem suporte a blur, ou com "reduzir transparência" no sistema: mais opaco,
+   para o texto continuar legível sobre o fundo em movimento. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: rgb(255 255 255 / 0.9); }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: rgb(255 255 255 / 0.92);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* Véu do fundo fixo: nas páginas internas clareia o mesh para o texto corrido
+   (que fica direto sobre o fundo) ter contraste; a home o desliga. */
+.fixed-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(255 255 255 / 0.55);
+  transition: opacity 0.4s ease;
+}
+
+body:has([data-bg-strong]) .fixed-bg::after {
   opacity: 0;
+}
+
+/* Menu: transparente no topo; ao rolar vira vidro. */
+.site-header.is-scrolled {
+  background: rgb(255 255 255 / 0.8);
+  border-bottom-color: rgb(255 255 255 / 0.8);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* Rodapé em vidro sobre o fundo fixo. */
+footer {
+  background: rgb(255 255 255 / 0.4);
+  border-top-color: rgb(255 255 255 / 0.8);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
 }
 
 /* .reveal só é aplicado pelo componente Reveal após a hidratação, e apenas

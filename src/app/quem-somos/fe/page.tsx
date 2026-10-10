@@ -31,7 +31,7 @@ export default function FePage() {
       <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
         <ul className="space-y-4">
           {cremos.map((item) => (
-            <li key={item} className="flex gap-3 rounded-xl border border-terra-100 bg-white p-5 shadow-sm">
+            <li key={item} className="flex gap-3 rounded-xl glass p-5 shadow-sm">
               <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-terra-600" />
               <p className="leading-relaxed text-night-800/80">{item}</p>
             </li>

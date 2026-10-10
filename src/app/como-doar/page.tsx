@@ -28,7 +28,7 @@ export default function ComoDoarPage() {
       />
       <section className="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-20">
         <div className="space-y-6">
-          <div className="rounded-2xl border border-terra-100 bg-white p-6 shadow-sm">
+          <div className="rounded-2xl glass p-6 shadow-sm">
             <h2 className="font-serif text-lg font-semibold text-night-900">
               1. Dízimos e ofertas
             </h2>
@@ -70,7 +70,7 @@ export default function ComoDoarPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-terra-100 bg-white p-6 shadow-sm">
+          <div className="rounded-2xl glass p-6 shadow-sm">
             <h2 className="font-serif text-lg font-semibold text-night-900">
               2. Casa Amarela
             </h2>
@@ -85,7 +85,7 @@ export default function ComoDoarPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-terra-100 bg-white p-6 shadow-sm">
+          <div className="rounded-2xl glass p-6 shadow-sm">
             <h2 className="font-serif text-lg font-semibold text-night-900">
               3. Sirva numa Rede
             </h2>

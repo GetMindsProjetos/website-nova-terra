@@ -40,7 +40,7 @@ export default async function EmpreendedoresPage() {
             ))}
           </div>
         ) : (
-          <div className="mx-auto max-w-xl rounded-2xl border border-dashed border-terra-200 bg-terra-50/60 p-8 text-center">
+          <div className="mx-auto max-w-xl rounded-2xl glass p-8 text-center">
             <p className="text-sm leading-relaxed text-night-800/75">
               Em breve, os primeiros empreendedores cadastrados aparecerão
               aqui.

@@ -6,7 +6,6 @@ import { useEffect, useRef, useState, type FocusEvent, type KeyboardEvent } from
 import { usePathname } from "next/navigation";
 import { desktopNav, donateItem, isCurrent } from "@/lib/site";
 import { useScrolled } from "@/lib/useScrolled";
-import MeshBackground from "./MeshBackground";
 import MobileMenuDrawer from "./MobileMenuDrawer";
 
 const focusRing =
@@ -59,9 +58,8 @@ export default function Header() {
           : "border-transparent"
       }`}
     >
-      {/* Fundo igual ao do hero. Transparente no topo de páginas com hero (ver
-          .site-header__mesh em globals.css), para o hero passar por trás. */}
-      <MeshBackground className="site-header__mesh -z-10" />
+      {/* Transparente no topo (o fundo fixo do site passa por trás); ao rolar vira
+          vidro (.site-header.is-scrolled em globals.css). */}
       {/* Sem "relative" aqui nem nos grupos: o mega-menu posiciona-se em relação ao header (sticky). */}
       <div
         className={`mx-auto flex max-w-6xl items-center justify-between px-4 transition-[height] duration-300 sm:px-6 ${

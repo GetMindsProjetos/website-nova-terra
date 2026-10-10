@@ -42,7 +42,7 @@ export default async function BlogPage() {
 
       {noticias.length === 0 ? (
         <section className="mx-auto max-w-3xl px-4 py-14 text-center sm:px-6 sm:py-20">
-          <div className="rounded-2xl border border-dashed border-terra-200 bg-terra-50/60 p-8 sm:p-10">
+          <div className="rounded-2xl glass p-8 sm:p-10">
             <p className="font-serif text-lg font-semibold text-night-900">
               Em breve novas notícias.
             </p>
@@ -64,7 +64,7 @@ export default async function BlogPage() {
               <Link
                 key={n.slug}
                 href={`/blog/${n.slug}`}
-                className="flex flex-col overflow-hidden rounded-2xl border border-terra-100 bg-white shadow-card transition hover:shadow-card-hover motion-safe:hover:-translate-y-0.5"
+                className="flex flex-col overflow-hidden rounded-2xl glass transition hover:shadow-card-hover motion-safe:hover:-translate-y-0.5"
               >
                 <div className="relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-terra-100 via-terra-50 to-white">
                   {n.imagemUrl ? (

@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import CTAButton from "@/components/CTAButton";
-import MeshBackground from "@/components/MeshBackground";
 
 export type HeroSlide = {
   id: string;
@@ -106,7 +105,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
     <section
       ref={sectionRef}
       data-header-overlap
-      className="relative isolate -mt-[var(--header-h)] h-[100vh] min-h-[560px] overflow-hidden border-b border-terra-100 text-night-900 supports-[height:100svh]:h-[100svh]"
+      className="relative isolate -mt-[var(--header-h)] h-[100vh] min-h-[560px] overflow-hidden text-night-900 supports-[height:100svh]:h-[100svh]"
       onMouseEnter={() => setHoverFocusPaused(true)}
       onMouseLeave={() => setHoverFocusPaused(false)}
       onFocus={() => setHoverFocusPaused(true)}
@@ -117,8 +116,6 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       aria-roledescription="carrossel"
       aria-label="Destaques da Igreja Nova Terra"
     >
-      <MeshBackground className="-z-10" />
-
       <div
         className="absolute inset-0"
         aria-live={autoRotation ? "off" : "polite"}

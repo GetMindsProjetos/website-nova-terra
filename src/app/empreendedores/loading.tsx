@@ -10,7 +10,7 @@ export default function Loading() {
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className="animate-pulse overflow-hidden rounded-2xl border border-terra-100 bg-white motion-reduce:animate-none"
+            className="animate-pulse overflow-hidden rounded-2xl glass motion-reduce:animate-none"
           >
             <div className="h-24 bg-terra-100" />
             <div className="space-y-3 p-6 pt-10">

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import FooterLink from "./FooterLink";
-import MeshBackground from "./MeshBackground";
 import { donateItem, mainNav, site, socialLinks, whatsappLink } from "@/lib/site";
 
 type FooterLink = { href: string; label: string };
@@ -44,8 +43,7 @@ const linkClass =
 
 export default function Footer() {
   return (
-    <footer className="relative isolate overflow-hidden border-t border-terra-100 text-night-900">
-      <MeshBackground className="-z-10" />
+    <footer className="relative isolate overflow-hidden border-t text-night-900">
 
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.3fr]">
         <div className="md:col-span-2 lg:col-span-1">

@@ -14,7 +14,7 @@ export default function AdminPanelLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-terra-50/40">
+    <div className="min-h-screen bg-[rgb(255_251_249)]">
       <header className="sticky top-0 z-10 flex items-center justify-between border-b border-terra-100 bg-white px-6 py-4">
         <Link
           href="/admin"

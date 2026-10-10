@@ -10,7 +10,7 @@ type Props = {
 export default function PalestranteCard({ nome, papel, bio, fotoUrl }: Props) {
   return (
     <Reveal>
-      <div className="mx-auto flex max-w-xl flex-col items-center gap-6 rounded-3xl border border-terra-100 bg-gradient-to-br from-terra-100 via-terra-50 to-white p-6 text-center shadow-sm sm:flex-row sm:text-left">
+      <div className="mx-auto flex max-w-xl flex-col items-center gap-6 rounded-3xl glass p-6 text-center shadow-sm sm:flex-row sm:text-left">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={fotoUrl}

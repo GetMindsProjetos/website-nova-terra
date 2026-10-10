@@ -31,7 +31,7 @@ export default function EventCard({ evento }: { evento: Evento }) {
   return (
     // Card inteiro clicável: o link do título cobre o card (after:inset-0);
     // compartilhar e o botão ficam acima (z-10) para continuarem clicáveis.
-    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-terra-100 bg-terra-50/50 shadow-card transition focus-within:ring-2 focus-within:ring-terra-600 hover:shadow-card-hover motion-safe:hover:-translate-y-0.5">
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl glass transition focus-within:ring-2 focus-within:ring-terra-600 hover:shadow-card-hover motion-safe:hover:-translate-y-0.5">
       <div className="relative aspect-[3/2] overflow-hidden bg-gradient-to-br from-terra-100 via-terra-50 to-white">
         {evento.imagemUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
