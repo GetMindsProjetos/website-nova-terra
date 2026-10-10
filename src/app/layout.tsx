@@ -1,10 +1,26 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Poppins } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SmoothScroll from "@/components/SmoothScroll";
+
+// Pesos 400-700 (4 arquivos pré-carregados). 800 cai em 700; itálico é oblíquo sintético.
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: "normal",
+  display: "swap",
+  variable: "--font-poppins",
+});
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#f76309",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://igrejanovaterra.com.br"),
@@ -14,12 +30,27 @@ export const metadata: Metadata = {
   },
   description:
     "A Igreja Nova Terra existe para ganhar, cuidar e capacitar vidas para o Reino de Deus, em Icoaraci, Belém-PA. Conheça as Redes, o projeto Casa Amarela e venha nos visitar.",
+  formatDetection: { telephone: false },
   openGraph: {
     title: "Igreja Nova Terra",
     description:
       "Uma igreja em avivamento em Icoaraci, Belém-PA. Venha conhecer.",
+    siteName: "Igreja Nova Terra",
     locale: "pt_BR",
     type: "website",
+    images: [
+      {
+        url: "/hero/fachada-desktop.webp",
+        alt: "Fachada da Igreja Nova Terra, em Icoaraci, Belém-PA",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Igreja Nova Terra",
+    description:
+      "Uma igreja em avivamento em Icoaraci, Belém-PA. Venha conhecer.",
+    images: ["/hero/fachada-desktop.webp"],
   },
 };
 
@@ -27,21 +58,19 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="pt-BR" className={poppins.variable}>
       <body className="flex min-h-screen flex-col bg-white font-sans text-night-900">
+        <a
+          href="#conteudo"
+          className="sr-only rounded-md bg-night-900 px-4 py-2 text-sm font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-terra-600"
+        >
+          Pular para o conteúdo
+        </a>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-5CGBS4S5XB"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -51,7 +80,9 @@ export default function RootLayout({
         </Script>
         <SmoothScroll />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="conteudo" tabIndex={-1} className="flex-1 focus:outline-none">
+          {children}
+        </main>
         <Footer />
         <WhatsAppButton />
       </body>

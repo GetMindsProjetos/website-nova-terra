@@ -1,8 +1,17 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import CTAButton from "@/components/CTAButton";
 import HeroSlider, { type HeroSlide } from "@/components/HeroSlider";
 import Reveal from "@/components/Reveal";
-import { site, whatsappLink } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
+import { JsonLd, churchLd, pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: { absolute: "Igreja Nova Terra | Icoaraci, Belém-PA" },
+  description:
+    "A Igreja Nova Terra existe para ganhar, cuidar e capacitar vidas para o Reino de Deus, em Icoaraci, Belém-PA. Conheça as Redes e venha nos visitar.",
+  path: "/",
+});
 
 const heroSlides: HeroSlide[] = [
   {
@@ -102,15 +111,16 @@ const destaques = [
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={churchLd()} />
       <HeroSlider slides={heroSlides} />
 
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {destaques.map((item, i) => (
             <Reveal key={item.title} delay={i * 90}>
               <Link
                 href={item.href}
-                className="group flex h-full flex-col justify-between rounded-2xl border border-terra-100 bg-gradient-to-br from-terra-100 via-terra-50 to-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                className="group flex h-full flex-col justify-between rounded-2xl border border-terra-100 bg-gradient-to-br from-terra-100 via-terra-50 to-white p-6 shadow-card transition hover:shadow-card-hover motion-safe:hover:-translate-y-0.5"
               >
                 <div>
                   <h3 className="font-serif text-lg font-semibold text-night-900">
@@ -118,7 +128,7 @@ export default function HomePage() {
                   </h3>
                   <p className="mt-2 text-sm text-night-800/70">{item.detail}</p>
                 </div>
-                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-terra-700 group-hover:gap-2 transition-all">
+                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-terra-800 group-hover:gap-2 transition-all">
                   {item.cta} →
                 </span>
               </Link>
@@ -128,10 +138,10 @@ export default function HomePage() {
       </section>
 
       <section className="bg-terra-50/60">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-2 md:items-center">
           <Reveal>
             <div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-terra-600">
+              <p className="text-sm font-semibold uppercase tracking-wide text-terra-800">
                 Nossa visão
               </p>
               <h2 className="mt-3 font-serif text-2xl font-bold text-night-900 sm:text-3xl">
@@ -168,7 +178,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6">
+      <section className="mx-auto max-w-4xl px-4 py-14 text-center sm:px-6 sm:py-20">
         <Reveal>
           <h2 className="font-serif text-2xl font-bold text-night-900 sm:text-3xl">
             Primeira vez por aqui?

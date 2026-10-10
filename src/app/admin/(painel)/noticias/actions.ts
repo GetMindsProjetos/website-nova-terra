@@ -3,11 +3,53 @@
 import { revalidatePath } from "next/cache";
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
 import { optimizeImage } from "@/lib/imageProcessing";
+import { createClient } from "@/lib/supabase/server";
 
 export type NoticiaFormState = {
   status: "idle" | "success" | "error";
   message?: string;
 };
+
+const MSG_SEM_SESSAO = "Sessão expirada. Entre novamente no painel.";
+const MSG_ID_INVALIDO = "Identificador inválido.";
+const UUID_REGEX =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+// Server Actions são endpoints POST públicos: não confiar só no middleware.
+async function temSessaoAdmin(): Promise<boolean> {
+  try {
+    const client = await createClient();
+    const {
+      data: { user },
+    } = await client.auth.getUser();
+    return Boolean(user);
+  } catch {
+    return false;
+  }
+}
+
+function texto(formData: FormData, nome: string): string {
+  const v = formData.get(nome);
+  return typeof v === "string" ? v.trim() : "";
+}
+
+function arquivo(formData: FormData, nome: string): File | null {
+  const v = formData.get(nome);
+  return v instanceof File ? v : null;
+}
+
+function validarCampos(c: ReturnType<typeof lerCamposComuns>): string | null {
+  if (!c.titulo || !c.slug || !c.resumo || !c.conteudo) {
+    return "Preencha título, slug, resumo e conteúdo.";
+  }
+  if (c.titulo.length > 200) return "O título deve ter até 200 caracteres.";
+  if (c.slug.length > 100) return "O slug deve ter até 100 caracteres.";
+  if (c.resumo.length > 500) return "O resumo deve ter até 500 caracteres.";
+  if (c.conteudo.length > 50000) {
+    return "O conteúdo deve ter até 50.000 caracteres.";
+  }
+  return null;
+}
 
 async function uploadImagem(
   supabase: NonNullable<ReturnType<typeof getSupabaseServerClient>>,
@@ -36,14 +78,13 @@ async function uploadImagem(
 
 function lerCamposComuns(formData: FormData) {
   return {
-    titulo: String(formData.get("titulo") || "").trim(),
-    slug: String(formData.get("slug") || "")
-      .trim()
+    titulo: texto(formData, "titulo"),
+    slug: texto(formData, "slug")
       .toLowerCase()
       .replace(/[^a-z0-9-]/g, "-")
       .replace(/-+/g, "-"),
-    resumo: String(formData.get("resumo") || "").trim(),
-    conteudo: String(formData.get("conteudo") || "").trim(),
+    resumo: texto(formData, "resumo"),
+    conteudo: texto(formData, "conteudo"),
     publicado: formData.get("publicado") === "on",
   };
 }
@@ -52,23 +93,28 @@ export async function criarNoticia(
   _prevState: NoticiaFormState,
   formData: FormData
 ): Promise<NoticiaFormState> {
+  if (!(await temSessaoAdmin())) {
+    return { status: "error", message: MSG_SEM_SESSAO };
+  }
+
   const supabase = getSupabaseServerClient();
   if (!supabase) {
     return { status: "error", message: "Conexão com o banco indisponível." };
   }
 
   const campos = lerCamposComuns(formData);
-  if (!campos.titulo || !campos.slug || !campos.resumo || !campos.conteudo) {
-    return {
-      status: "error",
-      message: "Preencha título, slug, resumo e conteúdo.",
-    };
+  const erroCampos = validarCampos(campos);
+  if (erroCampos) {
+    return { status: "error", message: erroCampos };
   }
 
   let imagemUrl: string | null = null;
   try {
-    const imagemFile = formData.get("imagem") as File | null;
-    imagemUrl = await uploadImagem(supabase, imagemFile, campos.slug);
+    imagemUrl = await uploadImagem(
+      supabase,
+      arquivo(formData, "imagem"),
+      campos.slug
+    );
   } catch (e) {
     return { status: "error", message: (e as Error).message };
   }
@@ -100,23 +146,31 @@ export async function atualizarNoticia(
   _prevState: NoticiaFormState,
   formData: FormData
 ): Promise<NoticiaFormState> {
+  if (!(await temSessaoAdmin())) {
+    return { status: "error", message: MSG_SEM_SESSAO };
+  }
+  if (typeof id !== "string" || !UUID_REGEX.test(id)) {
+    return { status: "error", message: MSG_ID_INVALIDO };
+  }
+
   const supabase = getSupabaseServerClient();
   if (!supabase) {
     return { status: "error", message: "Conexão com o banco indisponível." };
   }
 
   const campos = lerCamposComuns(formData);
-  if (!campos.titulo || !campos.slug || !campos.resumo || !campos.conteudo) {
-    return {
-      status: "error",
-      message: "Preencha título, slug, resumo e conteúdo.",
-    };
+  const erroCampos = validarCampos(campos);
+  if (erroCampos) {
+    return { status: "error", message: erroCampos };
   }
 
   let imagemUrl: string | null = null;
   try {
-    const imagemFile = formData.get("imagem") as File | null;
-    imagemUrl = await uploadImagem(supabase, imagemFile, campos.slug);
+    imagemUrl = await uploadImagem(
+      supabase,
+      arquivo(formData, "imagem"),
+      campos.slug
+    );
   } catch (e) {
     return { status: "error", message: (e as Error).message };
   }
@@ -146,6 +200,13 @@ export async function atualizarNoticia(
 }
 
 export async function excluirNoticia(id: string) {
+  if (!(await temSessaoAdmin())) {
+    return { error: MSG_SEM_SESSAO };
+  }
+  if (typeof id !== "string" || !UUID_REGEX.test(id)) {
+    return { error: MSG_ID_INVALIDO };
+  }
+
   const supabase = getSupabaseServerClient();
   if (!supabase) {
     return { error: "Conexão com o banco indisponível." };

@@ -1,12 +1,14 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import { JsonLd, breadcrumbLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Quem Somos",
   description:
-    "Conheça a história, a fé, a missão e a liderança da Igreja Nova Terra, em Icoaraci, Belém-PA.",
-};
+    "Conheça a história, a fé, a missão e a liderança da Igreja Nova Terra, uma igreja em avivamento em Icoaraci, Belém-PA, desde 2007.",
+  path: "/quem-somos",
+});
 
 const links = [
   {
@@ -34,24 +36,30 @@ const links = [
 export default function QuemSomosPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Início", path: "/" },
+          { name: "Quem Somos", path: "/quem-somos" },
+        ])}
+      />
       <PageHero
         eyebrow="Quem Somos"
         title="Uma igreja em avivamento em Icoaraci"
         description="Desde 2007, propagando o Evangelho de Jesus Cristo e promovendo o crescimento espiritual de cada pessoa que passa por nossas portas."
       />
-      <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">
         <div className="grid gap-6 sm:grid-cols-2">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="group rounded-2xl border border-terra-100 bg-gradient-to-br from-terra-100 via-terra-50 to-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              className="group rounded-2xl border border-terra-100 bg-gradient-to-br from-terra-100 via-terra-50 to-white p-6 shadow-card transition hover:shadow-card-hover motion-safe:hover:-translate-y-0.5"
             >
               <h2 className="font-serif text-xl font-semibold text-night-900">
                 {l.title}
               </h2>
               <p className="mt-2 text-sm text-night-800/70">{l.desc}</p>
-              <span className="mt-4 inline-flex text-sm font-semibold text-terra-700">
+              <span className="mt-4 inline-flex text-sm font-semibold text-terra-800">
                 Ler mais →
               </span>
             </Link>

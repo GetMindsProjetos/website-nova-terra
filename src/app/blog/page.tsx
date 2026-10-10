@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import CTAButton from "@/components/CTAButton";
 import { getNoticias } from "@/lib/noticias";
+import { JsonLd, breadcrumbLd, pageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Notícias",
-  description: "Notícias, testemunhos e conteúdo da Igreja Nova Terra.",
-};
+  description:
+    "Recapes de eventos, testemunhos de membros e histórias de impacto do Casa Amarela: notícias da Igreja Nova Terra, em Icoaraci.",
+  path: "/blog",
+});
 
 function formatarData(iso: string) {
   return new Date(iso).toLocaleDateString("pt-BR", {
@@ -19,10 +23,17 @@ function formatarData(iso: string) {
 }
 
 export default async function BlogPage() {
-  const noticias = await getNoticias();
+  // Falha na consulta é tratada como lista vazia (estado vazio acolhedor).
+  const noticias = await getNoticias().catch(() => []);
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Início", path: "/" },
+          { name: "Notícias", path: "/blog" },
+        ])}
+      />
       <PageHero
         eyebrow="Notícias"
         title="O que Deus tem feito na Nova Terra"
@@ -30,27 +41,30 @@ export default async function BlogPage() {
       />
 
       {noticias.length === 0 ? (
-        <section className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
-          <div className="rounded-2xl border border-dashed border-terra-200 bg-terra-50/60 p-10">
+        <section className="mx-auto max-w-3xl px-4 py-14 text-center sm:px-6 sm:py-20">
+          <div className="rounded-2xl border border-dashed border-terra-200 bg-terra-50/60 p-8 sm:p-10">
             <p className="font-serif text-lg font-semibold text-night-900">
-              Primeiras publicações em breve
+              Em breve novas notícias.
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-night-800/70">
-              Esta seção foi estruturada para receber recapes de eventos,
-              testemunhos e conteúdo de ensino. Assim que os primeiros
-              textos forem publicados pela Rede de Mídia, eles aparecerão
-              aqui.
+            <p className="mt-2 text-sm leading-relaxed text-night-800/75">
+              Recapes de eventos, testemunhos e conteúdo de ensino aparecerão
+              aqui assim que forem publicados.
             </p>
+            <div className="mt-6 flex justify-center">
+              <CTAButton href="/fale-conosco" variant="secondary">
+                Fale Conosco
+              </CTAButton>
+            </div>
           </div>
         </section>
       ) : (
-        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {noticias.map((n) => (
               <Link
                 key={n.slug}
                 href={`/blog/${n.slug}`}
-                className="flex flex-col overflow-hidden rounded-2xl border border-terra-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                className="flex flex-col overflow-hidden rounded-2xl border border-terra-100 bg-white shadow-card transition hover:shadow-card-hover motion-safe:hover:-translate-y-0.5"
               >
                 <div className="relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-terra-100 via-terra-50 to-white">
                   {n.imagemUrl ? (
@@ -58,6 +72,10 @@ export default async function BlogPage() {
                     <img
                       src={n.imagemUrl}
                       alt={n.titulo}
+                      width={400}
+                      height={160}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover"
                     />
                   ) : (
@@ -67,7 +85,7 @@ export default async function BlogPage() {
                   )}
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <p className="text-xs font-medium uppercase tracking-wide text-terra-600">
+                  <p className="text-xs font-medium uppercase tracking-wide text-terra-800">
                     {formatarData(n.publicadoEm)}
                   </p>
                   <h3 className="mt-1 font-serif text-lg font-semibold text-night-900">

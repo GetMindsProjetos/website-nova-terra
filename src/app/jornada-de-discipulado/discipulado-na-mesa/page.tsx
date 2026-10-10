@@ -4,12 +4,14 @@ import PageHero from "@/components/PageHero";
 import CTAButton from "@/components/CTAButton";
 import Lacuna from "@/components/Lacuna";
 import { whatsappLink } from "@/lib/site";
+import { JsonLd, breadcrumbLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Discipulado na Mesa",
   description:
     "O que é o Discipulado na Mesa e como participar: 8 encontros em grupos pequenos, na casa de anfitriões, para trabalhar caráter e caminhar em comunhão real.",
-};
+  path: "/jornada-de-discipulado/discipulado-na-mesa",
+});
 
 const encontros = [
   {
@@ -32,6 +34,16 @@ const encontros = [
 export default function DiscipuladoNaMesaPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Início", path: "/" },
+          { name: "Jornada de Discipulado", path: "/jornada-de-discipulado" },
+          {
+            name: "Discipulado na Mesa",
+            path: "/jornada-de-discipulado/discipulado-na-mesa",
+          },
+        ])}
+      />
       <PageHero
         eyebrow="Jornada de Discipulado"
         title="Discipulado na Mesa"
@@ -45,7 +57,7 @@ export default function DiscipuladoNaMesaPage() {
         </CTAButton>
       </PageHero>
 
-      <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
         <h2 className="font-serif text-2xl font-bold text-night-900">
           O que é
         </h2>
@@ -59,7 +71,7 @@ export default function DiscipuladoNaMesaPage() {
         </p>
         <p className="mt-4 text-base leading-relaxed text-night-800/70">
           Faz parte do terceiro passo da{" "}
-          <Link href="/jornada-de-discipulado" className="font-medium text-terra-700 hover:underline">
+          <Link href="/jornada-de-discipulado" className="font-medium text-terra-800 hover:underline">
             Jornada de Discipulado
           </Link>
           , depois do acolhimento e da integração como membro, e antes da
@@ -75,7 +87,7 @@ export default function DiscipuladoNaMesaPage() {
               key={e.n}
               className="flex gap-5 rounded-2xl border border-terra-100 bg-white p-6 shadow-sm"
             >
-              <span className="shrink-0 font-serif text-sm font-bold text-terra-400">
+              <span className="shrink-0 font-serif text-sm font-bold text-terra-800">
                 Encontros {e.n}
               </span>
               <div>

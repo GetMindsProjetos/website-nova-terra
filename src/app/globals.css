@@ -2,8 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* Foco visível global (terra-800: 6,05:1 sobre branco). Utilitários com
+     focus-visible:outline-* continuam vencendo por virem depois na cascata. */
+  :focus-visible {
+    outline: 2px solid #a84305;
+    outline-offset: 2px;
+  }
+
+  /* Fundos escuros: aplicar a classe .on-dark no container (terra-300). */
+  .on-dark :focus-visible,
+  [data-theme="dark"] :focus-visible {
+    outline-color: #fbae7f;
+  }
+}
+
 html {
+  scrollbar-gutter: stable;
   scroll-behavior: smooth;
+  /* Âncoras não ficam sob o header sticky. */
+  scroll-padding-top: 5rem;
 }
 
 html.lenis {
@@ -15,8 +33,19 @@ html.lenis body {
   height: auto;
 }
 
+/* Padrões do Lenis */
+html.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
 body {
   color: #1f1c1a;
+  /* clip (não hidden) não cria contêiner de rolagem: não quebra position: sticky. */
+  overflow-x: clip;
 }
 
 @keyframes hero-ken-burns {
@@ -32,12 +61,13 @@ body {
   animation: hero-ken-burns 8s ease-out forwards;
 }
 
+/* .reveal só é aplicado pelo componente Reveal após a hidratação, e apenas
+   em elementos abaixo da dobra; sem JS o conteúdo permanece visível. */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
 }
 
 .reveal-visible {
@@ -46,6 +76,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .hero-ken-burns {
     animation: none;
   }
@@ -54,5 +88,13 @@ body {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

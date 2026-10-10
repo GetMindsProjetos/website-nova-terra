@@ -3,12 +3,14 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import CTAButton from "@/components/CTAButton";
 import { whatsappLink } from "@/lib/site";
+import { JsonLd, breadcrumbLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Jornada de Discipulado",
   description:
-    "Seu próximo passo na Nova Terra: do acolhimento ao serviço numa Rede.",
-};
+    "Do acolhimento ao serviço numa Rede: conheça os 6 passos da Jornada de Discipulado da Igreja Nova Terra, em Icoaraci, Belém-PA.",
+  path: "/jornada-de-discipulado",
+});
 
 const passos = [
   {
@@ -47,6 +49,12 @@ const passos = [
 export default function JornadaPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Início", path: "/" },
+          { name: "Jornada de Discipulado", path: "/jornada-de-discipulado" },
+        ])}
+      />
       <PageHero
         eyebrow="Jornada de Discipulado"
         title="Seu próximo passo na Nova Terra"
@@ -57,7 +65,7 @@ export default function JornadaPage() {
         </CTAButton>
       </PageHero>
 
-      <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
         <ol className="space-y-6">
           {passos.map((p) => (
             <li key={p.n} className="flex gap-5 rounded-2xl border border-terra-100 bg-white p-6 shadow-sm">
@@ -65,7 +73,7 @@ export default function JornadaPage() {
               <div>
                 <h2 className="font-serif text-lg font-semibold text-night-900">
                   {p.href ? (
-                    <Link href={p.href} className="hover:text-terra-700">
+                    <Link href={p.href} className="hover:text-terra-800">
                       {p.title}
                     </Link>
                   ) : (
@@ -76,7 +84,7 @@ export default function JornadaPage() {
                 {p.href && (
                   <Link
                     href={p.href}
-                    className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-terra-700 transition-all hover:gap-1.5"
+                    className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-terra-800 transition-all hover:gap-1.5"
                   >
                     Saiba mais <span aria-hidden>→</span>
                   </Link>

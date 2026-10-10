@@ -4,12 +4,14 @@ import CTAButton from "@/components/CTAButton";
 import CopyPixButton from "@/components/CopyPixButton";
 import Lacuna from "@/components/Lacuna";
 import { site, whatsappLink } from "@/lib/site";
+import { JsonLd, breadcrumbLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Casa Amarela",
+export const metadata: Metadata = pageMetadata({
+  title: "Projeto Casa Amarela",
   description:
-    "Casa Amarela — cuidado real para mulheres de Icoaraci. Um projeto voluntário da Igreja Nova Terra.",
-};
+    "Casa Amarela: projeto voluntário da Igreja Nova Terra com apoio emocional, educacional e capacitação para mulheres de Icoaraci, Belém-PA.",
+  path: "/casa-amarela",
+});
 
 const ofertas = [
   {
@@ -29,6 +31,12 @@ const ofertas = [
 export default function CasaAmarelaPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Início", path: "/" },
+          { name: "Projeto Casa Amarela", path: "/casa-amarela" },
+        ])}
+      />
       <PageHero
         eyebrow="Projetos Sociais"
         title="Casa Amarela — cuidado real para mulheres de Icoaraci"
@@ -39,11 +47,11 @@ export default function CasaAmarelaPage() {
         </CTAButton>
       </PageHero>
 
-      <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">
         <h2 className="font-serif text-2xl font-bold text-night-900">
           O que oferecemos
         </h2>
-        <div className="mt-6 grid gap-5 sm:grid-cols-3">
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {ofertas.map((o) => (
             <div key={o.title} className="rounded-2xl border border-terra-100 bg-gradient-to-br from-terra-100 via-terra-50 to-white p-6 shadow-sm">
               <h3 className="font-serif text-base font-semibold text-night-900">{o.title}</h3>

@@ -1,23 +1,76 @@
 import Image from "next/image";
-import Link from "next/link";
-import { mainNav, site } from "@/lib/site";
+import FooterLink from "./FooterLink";
+import { donateItem, mainNav, site, socialLinks, whatsappLink } from "@/lib/site";
+
+type FooterLink = { href: string; label: string };
+
+const byHref = (href: string) => mainNav.find((i) => i.href === href)!;
+const quemSomos = byHref("/quem-somos");
+const redes = byHref("/redes");
+
+const columns: { title: string; links: FooterLink[] }[] = [
+  {
+    title: "Quem somos",
+    links: [
+      { href: quemSomos.href, label: "Visão geral" },
+      ...(quemSomos.children ?? []),
+    ],
+  },
+  {
+    title: "Participe",
+    links: [
+      { href: redes.href, label: redes.label },
+      { href: "/jornada-de-discipulado", label: "Jornada de Discipulado" },
+      byHref("/casa-amarela"),
+      byHref("/eventos"),
+      byHref("/empreendedores"),
+      donateItem,
+    ],
+  },
+  {
+    title: "Informação",
+    links: [
+      byHref("/blog"),
+      byHref("/fale-conosco"),
+      { href: "/politica-de-privacidade", label: "Política de Privacidade" },
+    ],
+  },
+];
+
+const linkClass =
+  "inline-block py-2.5 text-white/70 transition hover:text-terra-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terra-300";
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-terra-900 text-white">
-      <div
-        className="absolute inset-0 -z-20 bg-cover bg-center"
-        style={{ backgroundImage: "url(/hero/trigo-desktop.webp)" }}
-      />
+    <footer className="on-dark relative overflow-hidden border-t border-terra-900 text-white">
+      <div className="absolute inset-0 -z-20" aria-hidden="true">
+        <Image
+          src="/hero/trigo-mobile.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          quality={60}
+          className="object-cover md:hidden"
+        />
+        <Image
+          src="/hero/trigo-desktop.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          quality={60}
+          className="hidden object-cover md:block"
+        />
+      </div>
       <div className="absolute inset-0 -z-10 bg-night-900/85" />
 
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
-        <div className="md:col-span-2">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.3fr]">
+        <div className="md:col-span-2 lg:col-span-1">
           <Image
             src="/logo-igreja-nova-terra-branca.webp"
             alt="Igreja Nova Terra — ícone de leão e chama com o nome da igreja"
             width={974}
             height={482}
+            sizes="160px"
             className="h-10 w-auto"
           />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
@@ -27,62 +80,66 @@ export default function Footer() {
           <p className="mt-4 text-sm text-white/70">{site.address}</p>
         </div>
 
-        <div>
-          <h3 className="font-serif text-sm font-semibold uppercase tracking-wide text-white">
-            Navegue
-          </h3>
-          <ul className="mt-4 space-y-2 text-sm">
-            {mainNav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="text-white/70 hover:text-terra-300">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {columns.map((col) => (
+          <nav key={col.title} aria-label={`Rodapé: ${col.title}`}>
+            <h2 className="font-serif text-sm font-semibold uppercase tracking-wide text-white">
+              {col.title}
+            </h2>
+            <ul className="mt-3 text-sm">
+              {col.links.map((l) => (
+                <li key={l.href}>
+                  <FooterLink href={l.href} className={linkClass}>
+                    {l.label}
+                  </FooterLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))}
 
         <div>
-          <h3 className="font-serif text-sm font-semibold uppercase tracking-wide text-white">
+          <h2 className="font-serif text-sm font-semibold uppercase tracking-wide text-white">
             Contato
-          </h3>
-          <ul className="mt-4 space-y-2 text-sm text-white/70">
-            <li>WhatsApp: {site.whatsappDisplay}</li>
-            <li>E-mail: {site.email}</li>
-            <li className="flex gap-3 pt-2">
+          </h2>
+          <ul className="mt-3 text-sm">
+            <li>
               <a
-                href={site.social.instagram}
+                href={whatsappLink("Olá! Gostaria de mais informações.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-terra-300"
+                className={linkClass}
               >
-                Instagram
+                WhatsApp: {site.whatsappDisplay}
               </a>
-              <a href={site.social.youtube} className="hover:text-terra-300">
-                YouTube
+            </li>
+            <li>
+              <a href={`mailto:${site.email}`} className={`${linkClass} break-all`}>
+                {site.email}
               </a>
-              <a
-                href={site.social.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-terra-300"
-              >
-                Facebook
-              </a>
+            </li>
+            <li className="flex flex-wrap gap-x-4 pt-1">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClass}
+                >
+                  {s.label}
+                </a>
+              ))}
             </li>
           </ul>
         </div>
       </div>
 
       <div className="border-t border-white/15">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-white/70 sm:px-6">
           <p>
             © {new Date().getFullYear()} Igreja Pentecostal Missionária Nova
             Terra. Todos os direitos reservados.
           </p>
-          <Link href="/politica-de-privacidade" className="hover:text-terra-300">
-            Política de Privacidade
-          </Link>
         </div>
       </div>
     </footer>

@@ -24,7 +24,7 @@ export const site = {
   social: {
     instagram: "https://www.instagram.com/novaterrabelem/",
     // LACUNA: confirmar link do YouTube
-    youtube: "#",
+    youtube: "",
     facebook: "https://www.facebook.com/profile.php?id=61592750885655",
   },
   founded: "25 de janeiro de 2007",
@@ -91,6 +91,41 @@ export const mainNav: NavItem[] = [
   { href: "/blog", label: "Notícias" },
   { href: "/fale-conosco", label: "Fale Conosco" },
 ];
+
+export const donateHref = "/como-doar";
+
+/** Item de doação: renderizado como CTA/pílula, fora das listas de links. */
+export const donateItem = mainNav.find((i) => i.href === donateHref)!;
+
+/** Navegação sem o CTA de doação (desktop e drawer). */
+export const desktopNav: NavItem[] = mainNav.filter((i) => i.href !== donateHref);
+
+function pick(hrefs: string[]): NavItem[] {
+  return hrefs
+    .map((h) => mainNav.find((i) => i.href === h))
+    .filter((i): i is NavItem => Boolean(i));
+}
+
+/** Agrupamento visual do drawer; nenhum link some. */
+export const navGroups: { label: string; items: NavItem[] }[] = [
+  { label: "Conheça", items: pick(["/", "/quem-somos", "/redes", "/casa-amarela"]) },
+  { label: "Participe", items: pick(["/eventos", "/empreendedores"]) },
+  { label: "Informação", items: pick(["/blog", "/fale-conosco"]) },
+];
+
+/** Redes sociais com URL preenchida (lacunas não renderizam link morto). */
+export const socialLinks: { label: string; href: string }[] = [
+  { label: "Instagram", href: site.social.instagram },
+  { label: "YouTube", href: site.social.youtube },
+  { label: "Facebook", href: site.social.facebook },
+].filter((s) => Boolean(s.href));
+
+/** Rota atual: "/" só exato; demais, exato ou subrota. */
+export function isCurrent(pathname: string | null, href: string) {
+  if (!pathname) return false;
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(href + "/");
+}
 
 export function whatsappLink(message: string) {
   const text = encodeURIComponent(message);
