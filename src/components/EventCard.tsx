@@ -122,12 +122,12 @@ export default function EventCard({ evento }: { evento: Evento }) {
           {evento.inscricoesAbertas ? (
             <Link
               href={href}
-              className="relative z-10 inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-terra-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-terra-700 active:bg-terra-800"
+              className="relative z-10 inline-flex min-h-[44px] w-full items-center justify-center btn-glass-accent rounded-full px-5 py-2 text-sm font-semibold text-white"
             >
               Inscreva-se
             </Link>
           ) : (
-            <span className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full border border-terra-100 px-5 py-2 text-sm font-medium text-night-800/75">
+            <span className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-night-900/5 px-5 py-2 text-sm font-medium text-night-800">
               {isEventoEncerrado(evento) ? "Inscrições encerradas" : "Sem inscrição necessária"}
             </span>
           )}

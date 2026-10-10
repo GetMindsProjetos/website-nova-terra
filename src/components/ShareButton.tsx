@@ -90,7 +90,7 @@ export default function ShareButton({
         type="button"
         onClick={handleShare}
         aria-label={`Compartilhar: ${title}`}
-        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-terra-700 text-terra-800 transition hover:bg-terra-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terra-800"
+        className="flex h-11 w-11 shrink-0 items-center justify-center btn-glass rounded-full text-terra-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900"
       >
         {copiado ? (
           <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current stroke-2" aria-hidden="true">

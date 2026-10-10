@@ -1,4 +1,5 @@
-// Botão primário: laranja da marca com texto branco (decisão do dono).
+// Botões em vidro, sem borda. Primário: laranja da marca com texto branco
+// (decisão do dono); secundário: vidro branco com texto terra-800.
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -11,13 +12,11 @@ type Props = {
 };
 
 const variants: Record<NonNullable<Props["variant"]>, string> = {
-  primary:
-    "bg-terra-600 text-white hover:bg-terra-700 active:bg-terra-800 shadow-sm shadow-terra-900/10 focus-visible:outline-terra-800",
-  secondary:
-    "bg-white text-terra-800 border border-terra-200 hover:bg-terra-50 focus-visible:outline-terra-800",
+  primary: "btn-glass-accent text-white focus-visible:outline-night-900",
+  secondary: "btn-glass text-terra-800 focus-visible:outline-night-900",
   // Sobre fundo escuro/foto: o véu night-900/30 garante texto branco ≥ 4,5:1.
   ghost:
-    "bg-night-900/30 text-white border border-white/50 hover:bg-white/20 focus-visible:outline-terra-300",
+    "bg-night-900/30 text-white backdrop-blur-sm hover:bg-night-900/45 focus-visible:outline-terra-300",
 };
 
 export default function CTAButton({

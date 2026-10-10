@@ -52,14 +52,10 @@ export default function Header() {
 
   return (
     <header
-      className={`site-header sticky top-0 z-50 border-b transition-shadow duration-300 ${
-        scrolled
-          ? "is-scrolled border-terra-100 shadow-sm shadow-night-900/5"
-          : "border-transparent"
-      }`}
+      className={`site-header sticky top-0 z-50 ${scrolled ? "is-scrolled" : ""}`}
     >
       {/* Transparente no topo (o fundo fixo do site passa por trás); ao rolar vira
-          vidro (.site-header.is-scrolled em globals.css). */}
+          vidro que se dissolve para baixo, sem linha (.site-header::before). */}
       {/* Sem "relative" aqui nem nos grupos: o mega-menu posiciona-se em relação ao header (sticky). */}
       <div
         className={`mx-auto flex max-w-6xl items-center justify-between px-4 transition-[height] duration-300 sm:px-6 ${

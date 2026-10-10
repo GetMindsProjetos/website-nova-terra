@@ -211,7 +211,7 @@ export default async function EventoDetalhePage({ params }: Props) {
             <div className="mt-6">
               <Link
                 href="/eventos"
-                className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-terra-200 px-5 py-2.5 text-sm font-semibold text-night-800 transition hover:bg-terra-50"
+                className="inline-flex min-h-[44px] items-center justify-center btn-glass rounded-full px-5 py-2.5 text-sm font-semibold text-night-800"
               >
                 Ver todos os eventos
               </Link>
@@ -260,7 +260,7 @@ export default async function EventoDetalhePage({ params }: Props) {
         </div>
 
         {evento.patrocinadores.length > 0 && (
-          <div className="mt-12 border-t border-terra-100 pt-8">
+          <div className="mt-12 pt-4">
             <p className="text-center text-xs font-semibold uppercase tracking-wide text-night-800/75">
               Patrocinadores
             </p>

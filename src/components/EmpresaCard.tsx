@@ -58,7 +58,7 @@ export default function EmpresaCard({ empresa }: { empresa: Empresa }) {
             href={empresaWhatsappLink(empresa.whatsapp, empresa.nome)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-full bg-terra-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-700 active:bg-terra-800"
+            className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 btn-glass-accent rounded-full px-5 py-2.5 text-sm font-semibold text-white"
           >
             Falar no WhatsApp
           </a>
@@ -68,7 +68,7 @@ export default function EmpresaCard({ empresa }: { empresa: Empresa }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Instagram de ${empresa.nome}`}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-terra-100 text-terra-800 transition hover:bg-terra-50"
+              className="flex h-11 w-11 shrink-0 items-center justify-center btn-glass rounded-full text-terra-800"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current stroke-[1.5]">
                 <rect x="3" y="3" width="18" height="18" rx="5" />
