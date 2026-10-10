@@ -6,6 +6,7 @@ import CTAButton from "@/components/CTAButton";
 export type HeroSlide = {
   id: string;
   eyebrow?: string;
+  /** Use "\n" para quebrar o título em frases; cada linha é balanceada. */
   title: string;
   subtitle?: string;
   buttons: {
@@ -137,14 +138,19 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                 isActive ? "opacity-100" : "pointer-events-none opacity-0"
               }`}
             >
-              <div className="relative mx-auto flex h-full max-w-3xl flex-col items-center justify-center px-4 pb-8 pt-[var(--header-h)] text-center sm:px-6">
+              <div className="relative mx-auto flex h-full max-w-5xl flex-col items-center justify-center px-4 pb-8 pt-[var(--header-h)] text-center sm:px-6">
                 {slide.eyebrow && (
                   <p className="text-sm font-semibold uppercase tracking-widest text-night-900">
                     {slide.eyebrow}
                   </p>
                 )}
                 <Heading className="mt-4 font-serif text-3xl font-medium leading-[1.1] tracking-[-0.035em] text-night-900 sm:text-5xl">
-                  {slide.title}
+                  {slide.title.split("\n").map((linha, i) => (
+                    <span key={i} className="block text-balance">
+                      {i > 0 ? " " : null}
+                      {linha}
+                    </span>
+                  ))}
                 </Heading>
                 {slide.subtitle && (
                   <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-night-900 sm:text-lg">
