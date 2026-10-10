@@ -7,8 +7,7 @@
   --md-stagger-start: 180ms;
   --md-stagger-step: 45ms;
   --md-overlay: rgb(23 21 18 / 0.3);
-  --md-panel-bg: rgb(255 255 255 / 0.92);
-  --md-panel-border: rgb(255 255 255 / 0.5);
+  --md-panel-bg: rgb(255 255 255 / 0.62); /* vidro: o conteúdo da página aparece borrado atrás */
   --md-panel-width: 86%;
   --md-panel-max: 24rem;
   --md-ink: #171512;
@@ -101,11 +100,11 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   color: var(--md-ink);
-  border-left: 1px solid var(--md-panel-border);
+  border: 0;
   background: var(--md-panel-bg);
-  -webkit-backdrop-filter: blur(40px) saturate(1.5);
-  backdrop-filter: blur(40px) saturate(1.5);
-  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  backdrop-filter: blur(28px) saturate(1.4);
+  box-shadow: 0 25px 50px -12px rgb(23 21 18 / 0.28);
   transform: translateX(100%);
   transition: transform var(--md-duration) var(--md-ease);
 }
@@ -118,6 +117,13 @@
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .md-drawer__panel {
     background: #fff;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .md-drawer__panel {
+    background: rgb(255 255 255 / 0.96);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 }
 
@@ -135,9 +141,11 @@
   height: 2.75rem;
   margin-right: -0.5rem;
   color: var(--md-ink);
-  background: none;
+  background: rgb(255 255 255 / 0.62);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
   border: 0;
-  border-radius: 0.375rem;
+  border-radius: 0.75rem;
   cursor: pointer;
   transition: transform 200ms;
 }
@@ -209,8 +217,6 @@
 .md-acc__btn[aria-current="page"] {
   color: var(--md-accent-text);
   font-weight: 600;
-  box-shadow: inset 3px 0 0 var(--md-accent);
-  padding-left: 0.625rem;
 }
 .md-acc__chev {
   width: 1rem;
@@ -243,7 +249,6 @@
 }
 .md-acc__inner .md-list {
   padding: 0.25rem 0 0.5rem 0.75rem;
-  border-left: 2px solid var(--md-accent);
   margin-left: 0.25rem;
 }
 .md-acc__inner .md-drawer__link {
@@ -269,13 +274,15 @@
   font-weight: 600;
   color: #fff;
   text-decoration: none;
-  background: var(--md-accent);
+  background: rgb(247 99 9 / 0.9);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
   border-radius: 9999px;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+  box-shadow: 0 8px 22px -8px rgb(168 67 5 / 0.6);
   transition: background-color 200ms;
 }
 .md-drawer__cta:hover {
-  background: #cf5307;
+  background: rgb(207 83 7 / 0.94);
 }
 .md-drawer__contacts {
   display: flex;
