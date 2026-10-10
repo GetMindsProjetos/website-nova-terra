@@ -3,22 +3,30 @@ import PageHero from "@/components/PageHero";
 import CTAButton from "@/components/CTAButton";
 import CopyPixButton from "@/components/CopyPixButton";
 import { site, whatsappLink } from "@/lib/site";
+import { JsonLd, breadcrumbLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Como Doar",
   description:
     "Três formas de contribuir com a Igreja Nova Terra: dízimos e ofertas, o projeto Casa Amarela, ou servindo numa Rede.",
-};
+  path: "/como-doar",
+});
 
 export default function ComoDoarPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Início", path: "/" },
+          { name: "Como Doar", path: "/como-doar" },
+        ])}
+      />
       <PageHero
         eyebrow="Como Doar"
         title="Três formas de contribuir"
         description="O tempo, os talentos e os recursos que você oferece sustentam a missão da Nova Terra e do Casa Amarela."
       />
-      <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-20">
         <div className="space-y-6">
           <div className="rounded-2xl border border-terra-100 bg-white p-6 shadow-sm">
             <h2 className="font-serif text-lg font-semibold text-night-900">

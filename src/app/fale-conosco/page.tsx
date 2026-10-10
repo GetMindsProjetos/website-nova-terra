@@ -3,21 +3,30 @@ import PageHero from "@/components/PageHero";
 import CTAButton from "@/components/CTAButton";
 import Lacuna from "@/components/Lacuna";
 import { site, whatsappLink } from "@/lib/site";
+import { JsonLd, breadcrumbLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Fale Conosco",
-  description: "Fale com a Igreja Nova Terra, em Icoaraci, Belém-PA.",
-};
+  description:
+    "Fale com a Igreja Nova Terra: endereço, horários dos cultos e WhatsApp para conversar, pedir oração ou visitar, em Icoaraci, Belém-PA.",
+  path: "/fale-conosco",
+});
 
 export default function FaleConoscoPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Início", path: "/" },
+          { name: "Fale Conosco", path: "/fale-conosco" },
+        ])}
+      />
       <PageHero
         eyebrow="Fale Conosco"
         title="Fale com a gente"
         description="Estamos aqui para conversar, orar com você e receber sua visita."
       />
-      <section className="mx-auto grid max-w-5xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2">
+      <section className="mx-auto grid max-w-5xl gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-2">
         <div>
           <h2 className="font-serif text-lg font-semibold text-night-900">
             Endereço

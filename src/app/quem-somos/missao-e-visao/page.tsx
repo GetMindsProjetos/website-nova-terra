@@ -1,19 +1,30 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import CTAButton from "@/components/CTAButton";
+import { JsonLd, breadcrumbLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Missão e Visão",
-  description: "Missão e visão da Igreja Nova Terra: ganhar, cuidar e capacitar.",
-};
+  description:
+    "Missão: ganhar, cuidar e capacitar. Visão: tornar cada membro fruto permanente. Conheça a base bíblica da Igreja Nova Terra, em Icoaraci.",
+  path: "/quem-somos/missao-e-visao",
+});
 
 export default function MissaoVisaoPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Início", path: "/" },
+          { name: "Quem Somos", path: "/quem-somos" },
+          { name: "Missão e Visão", path: "/quem-somos/missao-e-visao" },
+        ])}
+      />
       <PageHero eyebrow="Quem Somos" title="Missão e Visão" />
-      <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="rounded-2xl border border-terra-100 bg-terra-50/60 p-6">
-            <p className="text-sm font-semibold uppercase tracking-wide text-terra-600">
+            <p className="text-sm font-semibold uppercase tracking-wide text-terra-800">
               Visão
             </p>
             <p className="mt-2 font-serif text-xl font-semibold text-night-900">
@@ -21,7 +32,7 @@ export default function MissaoVisaoPage() {
             </p>
           </div>
           <div className="rounded-2xl border border-terra-100 bg-terra-50/60 p-6">
-            <p className="text-sm font-semibold uppercase tracking-wide text-terra-600">
+            <p className="text-sm font-semibold uppercase tracking-wide text-terra-800">
               Missão
             </p>
             <p className="mt-2 font-serif text-xl font-semibold text-night-900">
@@ -41,6 +52,13 @@ export default function MissaoVisaoPage() {
           &quot;Avivamento sem multiplicação morre.&quot; Não basta um momento
           de fé — o chamado é multiplicar discípulos, geração após geração.
         </blockquote>
+
+        <div className="mt-10 flex flex-wrap gap-3">
+          <CTAButton href="/redes">Conheça as Redes</CTAButton>
+          <CTAButton href="/fale-conosco" variant="secondary">
+            Fale conosco
+          </CTAButton>
+        </div>
       </article>
     </>
   );

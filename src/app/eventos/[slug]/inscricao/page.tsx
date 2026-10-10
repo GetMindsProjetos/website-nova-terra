@@ -5,6 +5,7 @@ import InscricaoHero from "@/components/InscricaoHero";
 import PalestranteCard from "@/components/PalestranteCard";
 import InscricaoForm from "@/components/InscricaoForm";
 import { getEventoBySlug, formatPreco, formatDataEvento } from "@/lib/eventos";
+import { pageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -18,11 +19,16 @@ const HERO_PREMIUM_SLUG = "encontro-de-empreendedores";
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const evento = await getEventoBySlug(slug);
-  if (!evento) return {};
-  return {
-    title: `Inscrição — ${evento.titulo}`,
-    description: `Inscreva-se no evento ${evento.titulo} da Igreja Nova Terra.`,
-  };
+  if (!evento) return { robots: { index: false, follow: false } };
+  return pageMetadata({
+    title: `Inscrição: ${evento.titulo}`,
+    description: `Inscreva-se no evento ${evento.titulo}, da Igreja Nova Terra. ${evento.descricao}`,
+    path: `/eventos/${evento.slug}/inscricao`,
+    image: evento.imagemUrl
+      ? { url: evento.imagemUrl, alt: evento.titulo }
+      : undefined,
+    noindex: true,
+  });
 }
 
 export default async function InscricaoPage({ params }: Props) {
@@ -70,6 +76,10 @@ export default async function InscricaoPage({ params }: Props) {
           <img
             src={evento.imagemUrl}
             alt={evento.titulo}
+            width={576}
+            height={432}
+            loading="lazy"
+            decoding="async"
             className="mb-8 aspect-[4/3] w-full rounded-2xl object-cover"
           />
         )}
@@ -80,6 +90,10 @@ export default async function InscricaoPage({ params }: Props) {
               src="/eventos/empreendedores/cta.webp"
               alt=""
               aria-hidden="true"
+              width={64}
+              height={64}
+              loading="lazy"
+              decoding="async"
               className="h-16 w-16 shrink-0 rounded-full object-cover shadow-md"
             />
             <h2 className="font-serif text-2xl font-bold text-night-900">

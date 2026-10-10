@@ -1,5 +1,18 @@
 import type { Config } from "tailwindcss";
 
+// A primeira família vem de next/font (variável --font-poppins, definida no layout).
+const fontStack = [
+  "var(--font-poppins)",
+  "ui-sans-serif",
+  "system-ui",
+  "-apple-system",
+  "Segoe UI",
+  "Roboto",
+  "Helvetica Neue",
+  "Arial",
+  "sans-serif",
+];
+
 const config: Config = {
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -26,29 +39,15 @@ const config: Config = {
           800: "#28241f",
         },
       },
+      // Tokens semânticos de elevação dos cartões (mesmos valores de shadow-sm/md).
+      boxShadow: {
+        card: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        "card-hover":
+          "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+      },
       fontFamily: {
-        sans: [
-          "Poppins",
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Arial",
-          "sans-serif",
-        ],
-        serif: [
-          "Poppins",
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Arial",
-          "sans-serif",
-        ],
+        sans: fontStack,
+        serif: fontStack,
       },
     },
   },

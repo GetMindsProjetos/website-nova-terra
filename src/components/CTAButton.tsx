@@ -1,3 +1,5 @@
+// D4: botão laranja com texto night-900; para reverter, troque text-night-900 por text-white nas variantes primary.
+// Contrastes: night-900/terra-600 ≈ 5,6:1 (branco/terra-600 seria 3,11:1); terra-800/branco 6,05:1.
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -9,13 +11,14 @@ type Props = {
   className?: string;
 };
 
-const variants: Record<string, string> = {
+const variants: Record<NonNullable<Props["variant"]>, string> = {
   primary:
-    "bg-terra-600 text-white hover:bg-terra-700 shadow-sm shadow-terra-900/10",
+    "bg-terra-600 text-night-900 hover:bg-terra-500 active:bg-terra-700 shadow-sm shadow-terra-900/10 focus-visible:outline-terra-800",
   secondary:
-    "bg-white text-terra-700 border border-terra-200 hover:bg-terra-50",
+    "bg-white text-terra-800 border border-terra-200 hover:bg-terra-50 focus-visible:outline-terra-800",
+  // Sobre fundo escuro/foto: o véu night-900/30 garante texto branco ≥ 4,5:1.
   ghost:
-    "bg-white/10 text-white border border-white/40 hover:bg-white/20",
+    "bg-night-900/30 text-white border border-white/50 hover:bg-white/20 focus-visible:outline-terra-300",
 };
 
 export default function CTAButton({
@@ -25,7 +28,7 @@ export default function CTAButton({
   external = false,
   className = "",
 }: Props) {
-  const classes = `inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition ${variants[variant]} ${className}`;
+  const classes = `inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 motion-safe:active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${className}`;
 
   if (external) {
     return (

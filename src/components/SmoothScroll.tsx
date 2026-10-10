@@ -1,31 +1,43 @@
 "use client";
 
 import { useEffect } from "react";
-import Lenis from "lenis";
+import type Lenis from "lenis";
+import { registerLenis } from "@/lib/scrollLock";
 
 export default function SmoothScroll() {
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReducedMotion) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Rolagem nativa em dispositivos de toque: não carrega Lenis.
+    if (window.matchMedia("(hover: none), (pointer: coarse)").matches) return;
 
-    const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t: number) => 1 - Math.pow(1 - t, 3),
-      smoothWheel: true,
+    let cancelled = false;
+    let rafId = 0;
+    let lenis: Lenis | null = null;
+
+    import("lenis").then(({ default: LenisCtor }) => {
+      if (cancelled) return;
+      const instance = new LenisCtor({
+        duration: 1.1,
+        easing: (t: number) => 1 - Math.pow(1 - t, 3),
+        smoothWheel: true,
+      });
+      lenis = instance;
+      registerLenis(instance);
+
+      const raf = (time: number) => {
+        instance.raf(time);
+        rafId = requestAnimationFrame(raf);
+      };
+      rafId = requestAnimationFrame(raf);
     });
 
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
-
     return () => {
+      cancelled = true;
       cancelAnimationFrame(rafId);
-      lenis.destroy();
+      if (lenis) {
+        registerLenis(null);
+        lenis.destroy();
+      }
     };
   }, []);
 

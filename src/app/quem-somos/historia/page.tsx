@@ -1,17 +1,28 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Lacuna from "@/components/Lacuna";
+import CTAButton from "@/components/CTAButton";
+import { JsonLd, breadcrumbLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Nossa História",
-  description: "A história da Igreja Nova Terra, em Icoaraci, Belém-PA, desde 2007.",
-};
+  description:
+    "A Igreja Pentecostal Missionária Nova Terra nasceu em 25 de janeiro de 2007, em Icoaraci, Belém do Pará, para propagar o Evangelho de Jesus Cristo.",
+  path: "/quem-somos/historia",
+});
 
 export default function HistoriaPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Início", path: "/" },
+          { name: "Quem Somos", path: "/quem-somos" },
+          { name: "Nossa História", path: "/quem-somos/historia" },
+        ])}
+      />
       <PageHero eyebrow="Quem Somos" title="Nossa História" />
-      <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
         <p className="leading-relaxed text-night-800/80">
           A Igreja Pentecostal Missionária Nova Terra nasceu em 25 de janeiro
           de 2007, em Icoaraci, Belém do Pará, com um propósito simples e
@@ -35,6 +46,13 @@ export default function HistoriaPage() {
         </p>
         <div className="mt-3">
           <Lacuna>número exato de anos de história — dossiê menciona aniversário de 22 anos, tema &quot;No Secreto&quot;</Lacuna>
+        </div>
+
+        <div className="mt-10 flex flex-wrap gap-3">
+          <CTAButton href="/redes">Conheça as Redes</CTAButton>
+          <CTAButton href="/fale-conosco" variant="secondary">
+            Fale conosco
+          </CTAButton>
         </div>
       </article>
     </>

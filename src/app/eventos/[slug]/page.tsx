@@ -5,6 +5,14 @@ import PageHero from "@/components/PageHero";
 import CTAButton from "@/components/CTAButton";
 import ShareButton from "@/components/ShareButton";
 import { formatDataEvento, formatPreco, getEventoBySlug, isEventoEncerrado } from "@/lib/eventos";
+import {
+  JsonLd,
+  absoluteUrl,
+  breadcrumbLd,
+  pageMetadata,
+  siteUrl,
+} from "@/lib/seo";
+import { site } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -13,33 +21,28 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const evento = await getEventoBySlug(slug);
-  if (!evento) return {};
+  if (!evento) {
+    return pageMetadata({
+      title: "Evento",
+      description:
+        "Agenda de eventos da Igreja Nova Terra: calendário das Redes e da igreja, com informações e inscrições, em Icoaraci, Belém-PA.",
+      path: `/eventos/${slug}`,
+      noindex: true,
+    });
+  }
 
-  return {
+  const descricao = evento.dataEvento
+    ? `${evento.descricao} Data: ${formatDataEvento(evento.dataEvento)}.`
+    : evento.descricao;
+
+  return pageMetadata({
     title: evento.titulo,
-    description: evento.descricao,
-    openGraph: {
-      type: "website",
-      title: evento.titulo,
-      description: evento.descricao,
-      images: evento.imagemUrl
-        ? [
-            {
-              url: evento.imagemUrl,
-              width: 1200,
-              height: 900,
-              alt: evento.titulo,
-            },
-          ]
-        : undefined,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: evento.titulo,
-      description: evento.descricao,
-      images: evento.imagemUrl ? [evento.imagemUrl] : undefined,
-    },
-  };
+    description: descricao,
+    path: `/eventos/${evento.slug}`,
+    image: evento.imagemUrl
+      ? { url: evento.imagemUrl, width: 1200, height: 900, alt: evento.titulo }
+      : undefined,
+  });
 }
 
 export default async function EventoDetalhePage({ params }: Props) {
@@ -47,20 +50,67 @@ export default async function EventoDetalhePage({ params }: Props) {
   const evento = await getEventoBySlug(slug);
   if (!evento) notFound();
 
+  // Event só com campos reais (sem local no esquema: location fica de fora).
+  // A página não indica cancelamento; encerrado/aberto mantém EventScheduled.
+  const eventoLd = evento.dataEvento
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        name: evento.titulo,
+        description: evento.descricao,
+        startDate: evento.dataEvento,
+        eventStatus: "https://schema.org/EventScheduled",
+        url: absoluteUrl(`/eventos/${evento.slug}`),
+        ...(evento.imagemUrl ? { image: [absoluteUrl(evento.imagemUrl)] } : {}),
+        ...(evento.palestrante
+          ? { performer: { "@type": "Person", name: evento.palestrante } }
+          : {}),
+        organizer: {
+          "@type": "Church",
+          name: site.fullName,
+          url: siteUrl,
+        },
+        ...(evento.inscricoesAbertas &&
+        (evento.gratuito || evento.preco !== null)
+          ? {
+              offers: {
+                "@type": "Offer",
+                url: absoluteUrl(`/eventos/${evento.slug}/inscricao`),
+                price: evento.gratuito ? 0 : evento.preco,
+                priceCurrency: "BRL",
+                availability: "https://schema.org/InStock",
+              },
+            }
+          : {}),
+      }
+    : null;
+
   return (
     <>
+      {eventoLd && <JsonLd data={eventoLd} />}
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Início", path: "/" },
+          { name: "Eventos", path: "/eventos" },
+          { name: evento.titulo, path: `/eventos/${evento.slug}` },
+        ])}
+      />
       <PageHero
         eyebrow={evento.detalhe ?? "Evento"}
         title={evento.titulo}
         description={evento.descricao}
       />
-      <section className="mx-auto max-w-2xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-2xl px-4 py-14 sm:px-6 sm:py-20">
         {evento.imagemUrl && (
           <div className="relative mb-8 aspect-[4/3] w-full overflow-hidden rounded-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={evento.imagemUrl}
               alt={evento.titulo}
+              width={672}
+              height={504}
+              fetchPriority="high"
+              decoding="async"
               className="h-full w-full object-cover"
             />
             {evento.palestrante && (
@@ -100,7 +150,7 @@ export default async function EventoDetalhePage({ params }: Props) {
           <span
             className={`rounded-full px-3 py-1 text-xs font-semibold ${
               evento.gratuito
-                ? "bg-terra-50 text-terra-700"
+                ? "bg-terra-50 text-terra-800"
                 : "bg-night-900/5 text-night-900"
             }`}
           >
@@ -119,13 +169,13 @@ export default async function EventoDetalhePage({ params }: Props) {
               Inscreva-se
             </CTAButton>
           ) : (
-            <span className="inline-flex items-center justify-center rounded-full border border-terra-100 px-5 py-2.5 text-sm font-medium text-night-800/50">
+            <span className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-terra-100 px-5 py-2.5 text-sm font-medium text-night-800/75">
               {isEventoEncerrado(evento) ? "Inscrições encerradas" : "Sem inscrição necessária"}
             </span>
           )}
           <Link
             href="/eventos"
-            className="inline-flex items-center justify-center rounded-full border border-terra-200 px-5 py-2.5 text-sm font-semibold text-night-800 transition hover:bg-terra-50"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-terra-200 px-5 py-2.5 text-sm font-semibold text-night-800 transition hover:bg-terra-50"
           >
             Ver todos os eventos
           </Link>
@@ -133,7 +183,7 @@ export default async function EventoDetalhePage({ params }: Props) {
 
         {evento.patrocinadores.length > 0 && (
           <div className="mt-12 border-t border-terra-100 pt-8">
-            <p className="text-center text-xs font-semibold uppercase tracking-wide text-night-800/50">
+            <p className="text-center text-xs font-semibold uppercase tracking-wide text-night-800/75">
               Patrocinadores
             </p>
             <div className="mt-4 flex flex-wrap items-center justify-center gap-6">
@@ -144,14 +194,18 @@ export default async function EventoDetalhePage({ params }: Props) {
                     <img
                       src={p.logoUrl}
                       alt={p.nome}
+                      width={56}
+                      height={56}
+                      loading="lazy"
+                      decoding="async"
                       className="h-14 w-14 rounded-lg border border-terra-100 object-contain p-1"
                     />
                   ) : (
-                    <div className="flex h-14 w-14 items-center justify-center rounded-lg border border-terra-100 text-xs font-semibold text-terra-600">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-lg border border-terra-100 text-xs font-semibold text-terra-800">
                       {p.nome.charAt(0)}
                     </div>
                   )}
-                  <span className="text-xs text-night-800/60">{p.nome}</span>
+                  <span className="text-xs text-night-800/75">{p.nome}</span>
                 </div>
               ))}
             </div>

@@ -42,7 +42,7 @@ export default function InscricaoHero({
         />
       </picture>
       <div className="absolute inset-0 bg-gradient-to-t from-night-900/90 via-night-900/40 to-transparent" />
-      <div className="absolute inset-0 bg-black/15" />
+      <div className="absolute inset-0 bg-black/30" />
 
       <div className="relative mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 sm:py-28">
         <Reveal>

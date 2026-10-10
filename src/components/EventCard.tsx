@@ -27,13 +27,17 @@ function RelogioIcon() {
 
 export default function EventCard({ evento }: { evento: Evento }) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-terra-100 bg-terra-50/50 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+    <div className="flex flex-col overflow-hidden rounded-2xl border border-terra-100 bg-terra-50/50 shadow-card transition hover:shadow-card-hover motion-safe:hover:-translate-y-0.5">
       <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-terra-100 via-terra-50 to-white">
         {evento.imagemUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={evento.imagemUrl}
             alt={evento.titulo}
+            width={800}
+            height={600}
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover"
           />
         ) : (
@@ -42,7 +46,7 @@ export default function EventCard({ evento }: { evento: Evento }) {
           </span>
         )}
         {evento.categoria === "empreendedores" && (
-          <span className="absolute right-3 top-3 rounded-full bg-terra-600 px-3 py-1 text-xs font-semibold text-white">
+          <span className="absolute right-3 top-3 rounded-full bg-terra-600 px-3 py-1 text-xs font-semibold text-night-900">
             Empreendedores
           </span>
         )}
@@ -60,7 +64,7 @@ export default function EventCard({ evento }: { evento: Evento }) {
           <span
             className={`rounded-full px-3 py-1 text-xs font-semibold ${
               evento.gratuito
-                ? "bg-terra-50 text-terra-700"
+                ? "bg-terra-50 text-terra-800"
                 : "bg-night-900/5 text-night-900"
             }`}
           >
@@ -74,12 +78,12 @@ export default function EventCard({ evento }: { evento: Evento }) {
         </div>
 
         <h3 className="mt-3 font-serif text-xl font-bold leading-snug text-night-900 sm:text-2xl">
-          <Link href={`/eventos/${evento.slug}`} className="hover:text-terra-700">
+          <Link href={`/eventos/${evento.slug}`} className="hover:text-terra-800">
             {evento.titulo}
           </Link>
         </h3>
         {evento.detalhe && (
-          <p className="mt-1 text-xs font-medium uppercase tracking-wide text-terra-600">
+          <p className="mt-1 text-xs font-medium uppercase tracking-wide text-terra-800">
             {evento.detalhe}
           </p>
         )}
@@ -109,12 +113,12 @@ export default function EventCard({ evento }: { evento: Evento }) {
           {evento.inscricoesAbertas ? (
             <Link
               href={`/eventos/${evento.slug}/inscricao`}
-              className="inline-flex w-full items-center justify-center rounded-full bg-terra-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-700"
+              className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-terra-600 px-5 py-2.5 text-sm font-semibold text-night-900 transition hover:bg-terra-500 active:bg-terra-700"
             >
               Inscreva-se
             </Link>
           ) : (
-            <span className="inline-flex w-full items-center justify-center rounded-full border border-terra-100 px-5 py-2.5 text-sm font-medium text-night-800/50">
+            <span className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full border border-terra-100 px-5 py-2.5 text-sm font-medium text-night-800/75">
               {isEventoEncerrado(evento) ? "Inscrições encerradas" : "Sem inscrição necessária"}
             </span>
           )}

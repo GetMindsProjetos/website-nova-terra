@@ -2,16 +2,26 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+import { JsonLd, breadcrumbLd, pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
   title: "Política de Privacidade",
-  description: "Política de Privacidade da Igreja Nova Terra, em conformidade com a LGPD.",
-};
+  description:
+    "Política de Privacidade da Igreja Nova Terra: quais dados coletamos, como os usamos, dados sensíveis e seus direitos, conforme a LGPD.",
+  path: "/politica-de-privacidade",
+});
 
 export default function PrivacidadePage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Início", path: "/" },
+          { name: "Política de Privacidade", path: "/politica-de-privacidade" },
+        ])}
+      />
       <PageHero eyebrow="Legal" title="Política de Privacidade" />
-      <article className="mx-auto max-w-3xl space-y-6 px-4 py-16 text-sm leading-relaxed text-night-800/80 sm:px-6">
+      <article className="mx-auto max-w-3xl space-y-6 px-4 py-14 sm:py-20 text-sm leading-relaxed text-night-800/80 sm:px-6">
         <div className="rounded-xl border border-dashed border-amber-300 bg-amber-50/60 p-5 text-xs italic text-amber-700">
           Minuta inicial para orientar o desenvolvimento do site. Deve ser
           revisada e aprovada pela liderança da igreja (e, idealmente, por
@@ -73,7 +83,7 @@ export default function PrivacidadePage() {
           ou pelo WhatsApp {site.whatsappDisplay}.
         </p>
 
-        <p className="text-xs text-night-800/50">
+        <p className="text-xs text-night-800/75">
           Última atualização: a definir no lançamento oficial do site.
         </p>
       </article>
