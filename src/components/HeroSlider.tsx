@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import CTAButton from "@/components/CTAButton";
+import MeshBackground from "@/components/MeshBackground";
 
 export type HeroSlide = {
   id: string;
@@ -19,7 +20,7 @@ export type HeroSlide = {
 const AUTOPLAY_MS = 6500;
 
 const controlBase =
-  "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-terra-800/10 text-terra-800 transition hover:bg-terra-800/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terra-800";
+  "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/60 text-night-900 transition hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900";
 
 export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -103,7 +104,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate h-[560px] overflow-hidden border-b border-terra-100 bg-gradient-to-br from-terra-100 via-terra-50 to-white text-night-900 sm:h-[640px] lg:h-[680px]"
+      className="relative isolate h-[560px] overflow-hidden border-b border-terra-100 text-night-900 sm:h-[640px] lg:h-[680px]"
       onMouseEnter={() => setHoverFocusPaused(true)}
       onMouseLeave={() => setHoverFocusPaused(false)}
       onFocus={() => setHoverFocusPaused(true)}
@@ -113,6 +114,8 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       aria-roledescription="carrossel"
       aria-label="Destaques da Igreja Nova Terra"
     >
+      <MeshBackground className="-z-10" />
+
       <div
         className="absolute inset-0"
         aria-live={autoRotation ? "off" : "polite"}
@@ -136,7 +139,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
             >
               <div className="relative mx-auto flex h-full max-w-3xl flex-col items-center justify-center px-4 pb-16 text-center sm:px-6">
                 {slide.eyebrow && (
-                  <p className="text-sm font-semibold uppercase tracking-widest text-terra-800">
+                  <p className="text-sm font-semibold uppercase tracking-widest text-night-900">
                     {slide.eyebrow}
                   </p>
                 )}
@@ -144,7 +147,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                   {slide.title}
                 </Heading>
                 {slide.subtitle && (
-                  <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-night-800/80 sm:text-lg">
+                  <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-night-900 sm:text-lg">
                     {slide.subtitle}
                   </p>
                 )}
@@ -156,6 +159,11 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                         href={btn.href}
                         variant={btn.variant ?? "primary"}
                         external={btn.external}
+                        className={
+                          (btn.variant ?? "primary") === "primary"
+                            ? "ring-2 ring-white/80"
+                            : ""
+                        }
                       >
                         {btn.label}
                       </CTAButton>
@@ -192,7 +200,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
           </button>
 
           <div className="absolute inset-x-0 bottom-3 z-10 flex justify-center px-2">
-            <div className="flex max-w-full flex-wrap items-center justify-center gap-1 rounded-full bg-white/70 p-1">
+            <div className="flex max-w-full flex-wrap items-center justify-center gap-1 rounded-full bg-white/60 p-1">
               <button
                 type="button"
                 onClick={prev}
@@ -229,14 +237,14 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                   onClick={() => goTo(index)}
                   aria-label={`Ir para o slide ${index + 1} de ${slides.length}`}
                   aria-current={index === activeIndex ? "true" : undefined}
-                  className="group flex h-11 min-w-[2.75rem] items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terra-800"
+                  className="group flex h-11 min-w-[2.75rem] items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-night-900"
                 >
                   <span
                     aria-hidden="true"
                     className={`block h-2 rounded-full transition-all motion-reduce:transition-none ${
                       index === activeIndex
-                        ? "w-6 bg-terra-600"
-                        : "w-2 bg-terra-800/70 group-hover:bg-terra-800/90"
+                        ? "w-6 bg-night-900"
+                        : "w-2 bg-night-900/50 group-hover:bg-night-900/80"
                     }`}
                   />
                 </button>

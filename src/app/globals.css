@@ -46,6 +46,130 @@ body {
   overflow-x: clip;
 }
 
+/* Fundo "mesh" laranja com toques de amarelo (hero e rodapé): manchas radiais
+   em movimento lento, só transform (barato, sem filter: blur). Suave de
+   propósito: o tom mais saturado é terra-500 a 35%; o resto é terra-300/400 e
+   amarelos claros, então night-900 (texto) passa de 7:1 em qualquer ponto. */
+.mesh {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(180deg, #fffaf5 0%, #fff1e4 100%);
+}
+
+/* Bordas esmaecendo para branco, como no efeito de referência. */
+.mesh::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(255 255 255 / 0.85) 0%,
+    rgb(255 255 255 / 0) 22%,
+    rgb(255 255 255 / 0) 78%,
+    rgb(255 255 255 / 0.85) 100%
+  );
+}
+
+.mesh__blob {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+}
+
+/* terra-300 */
+.mesh__blob--a {
+  top: -75%;
+  left: 18%;
+  width: max(95vw, 700px);
+  height: max(95vw, 700px);
+  background: radial-gradient(closest-side, rgb(251 174 127 / 0.9), rgb(251 174 127 / 0));
+  animation: mesh-a 17s ease-in-out infinite;
+}
+
+/* terra-400 */
+.mesh__blob--b {
+  top: -40%;
+  right: -15%;
+  width: max(75vw, 600px);
+  height: max(75vw, 600px);
+  background: radial-gradient(closest-side, rgb(249 139 72 / 0.6), rgb(249 139 72 / 0));
+  animation: mesh-b 11s ease-in-out infinite;
+}
+
+/* amarelo (#fcd34d) */
+.mesh__blob--c {
+  bottom: -75%;
+  left: 15%;
+  width: max(90vw, 680px);
+  height: max(90vw, 680px);
+  background: radial-gradient(closest-side, rgb(252 211 77 / 1), rgb(252 211 77 / 0));
+  animation: mesh-c 23s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+/* terra-500: mancha mais profunda, bem suave */
+.mesh__blob--d {
+  top: -20%;
+  left: 30%;
+  width: max(50vw, 420px);
+  height: max(50vw, 420px);
+  background: radial-gradient(closest-side, rgb(248 114 33 / 0.35), rgb(248 114 33 / 0));
+  animation: mesh-d 9s ease-in-out infinite;
+}
+
+/* amarelo claro (#fde68a) */
+.mesh__blob--e {
+  top: -30%;
+  left: -10%;
+  width: max(80vw, 620px);
+  height: max(46vw, 360px);
+  background: radial-gradient(closest-side, rgb(253 230 138 / 0.95), rgb(253 230 138 / 0));
+  animation: mesh-e 19s ease-in-out infinite;
+}
+
+/* terra-400, menor e mais rápida */
+.mesh__blob--f {
+  top: 10%;
+  right: 8%;
+  width: max(36vw, 320px);
+  height: max(36vw, 320px);
+  background: radial-gradient(closest-side, rgb(249 139 72 / 0.5), rgb(249 139 72 / 0));
+  animation: mesh-f 14s ease-in-out infinite;
+}
+
+/* Movimentos distintos por mancha (nenhum igual ao outro):
+   a varredura horizontal, b balanço vertical, c órbita, d pulso,
+   e diagonal com giro (elipse), f zigue-zague rápido. */
+@keyframes mesh-a {
+  0%, 100% { transform: translate3d(-24vw, 0, 0) scale(1); }
+  50% { transform: translate3d(26vw, 8vh, 0) scale(1.25); }
+}
+@keyframes mesh-b {
+  0%, 100% { transform: translate3d(8vw, -6vh, 0) scale(1); }
+  50% { transform: translate3d(-12vw, 14vh, 0) scale(1.15); }
+}
+@keyframes mesh-c {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  25% { transform: translate3d(22vw, -9vh, 0) scale(1.1); }
+  50% { transform: translate3d(0, -18vh, 0) scale(0.95); }
+  75% { transform: translate3d(-22vw, -9vh, 0) scale(1.1); }
+}
+@keyframes mesh-d {
+  0%, 100% { transform: translate3d(-6vw, 2vh, 0) scale(0.75); }
+  50% { transform: translate3d(8vw, -3vh, 0) scale(1.6); }
+}
+@keyframes mesh-e {
+  0%, 100% { transform: translate3d(-8vw, -4vh, 0) rotate(-18deg) scale(1); }
+  50% { transform: translate3d(34vw, 12vh, 0) rotate(28deg) scale(1.2); }
+}
+@keyframes mesh-f {
+  0%, 100% { transform: translate3d(-20vw, 6vh, 0) scale(0.9); }
+  25% { transform: translate3d(-4vw, -10vh, 0) scale(1.1); }
+  50% { transform: translate3d(18vw, 8vh, 0) scale(0.85); }
+  75% { transform: translate3d(6vw, -6vh, 0) scale(1.2); }
+}
+
 /* .reveal só é aplicado pelo componente Reveal após a hidratação, e apenas
    em elementos abaixo da dobra; sem JS o conteúdo permanece visível. */
 .reveal {
@@ -63,6 +187,10 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .mesh__blob {
+    animation: none;
   }
 
   .reveal {
