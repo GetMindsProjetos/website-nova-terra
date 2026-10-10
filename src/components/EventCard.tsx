@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { formatDataEvento, formatPreco, type Evento } from "@/lib/eventos";
+import { formatDataEvento, formatPreco, isEventoEncerrado, type Evento } from "@/lib/eventos";
 import ShareButton from "@/components/ShareButton";
 
 const iconesPorCategoria: Record<Evento["categoria"], string> = {
@@ -115,7 +115,7 @@ export default function EventCard({ evento }: { evento: Evento }) {
             </Link>
           ) : (
             <span className="inline-flex w-full items-center justify-center rounded-full border border-terra-100 px-5 py-2.5 text-sm font-medium text-night-800/50">
-              Sem inscrição necessária
+              {isEventoEncerrado(evento) ? "Inscrições encerradas" : "Sem inscrição necessária"}
             </span>
           )}
         </div>
