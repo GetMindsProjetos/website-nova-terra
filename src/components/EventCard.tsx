@@ -26,19 +26,23 @@ function RelogioIcon() {
 }
 
 export default function EventCard({ evento }: { evento: Evento }) {
+  const href = `/eventos/${evento.slug}`;
+
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-terra-100 bg-terra-50/50 shadow-card transition hover:shadow-card-hover motion-safe:hover:-translate-y-0.5">
-      <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-terra-100 via-terra-50 to-white">
+    // Card inteiro clicável: o link do título cobre o card (after:inset-0);
+    // compartilhar e o botão ficam acima (z-10) para continuarem clicáveis.
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-terra-100 bg-terra-50/50 shadow-card transition focus-within:ring-2 focus-within:ring-terra-600 hover:shadow-card-hover motion-safe:hover:-translate-y-0.5">
+      <div className="relative aspect-[3/2] overflow-hidden bg-gradient-to-br from-terra-100 via-terra-50 to-white">
         {evento.imagemUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={evento.imagemUrl}
-            alt={evento.titulo}
-            width={800}
-            height={600}
+            alt=""
+            width={600}
+            height={400}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition duration-300 motion-safe:group-hover:scale-[1.03]"
           />
         ) : (
           <span className="flex h-full w-full items-center justify-center text-4xl text-terra-400" aria-hidden="true">
@@ -46,23 +50,23 @@ export default function EventCard({ evento }: { evento: Evento }) {
           </span>
         )}
         {evento.categoria === "empreendedores" && (
-          <span className="absolute right-3 top-3 rounded-full bg-terra-600 px-3 py-1 text-xs font-semibold text-white">
+          <span className="absolute right-2.5 top-2.5 rounded-full bg-terra-600 px-2.5 py-0.5 text-xs font-semibold text-white">
             Empreendedores
           </span>
         )}
         {evento.palestrante && (
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent px-4 pb-3 pt-10">
-            <p className="font-serif text-lg font-bold uppercase italic text-white sm:text-xl">
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent px-3 pb-2 pt-8">
+            <p className="truncate font-serif text-base font-bold uppercase italic text-white">
               {evento.palestrante}
             </p>
           </div>
         )}
       </div>
 
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col p-4">
         <div className="flex items-center justify-between gap-2">
           <span
-            className={`rounded-full px-3 py-1 text-xs font-semibold ${
+            className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
               evento.gratuito
                 ? "bg-terra-50 text-terra-800"
                 : "bg-night-900/5 text-night-900"
@@ -70,26 +74,31 @@ export default function EventCard({ evento }: { evento: Evento }) {
           >
             {evento.gratuito ? "Gratuito" : formatPreco(evento.preco ?? 0)}
           </span>
-          <ShareButton
-            title={evento.titulo}
-            text={`Confira: ${evento.titulo} — Igreja Nova Terra`}
-            path={`/eventos/${evento.slug}`}
-          />
+          <span className="relative z-10">
+            <ShareButton
+              title={evento.titulo}
+              text={`Confira: ${evento.titulo} — Igreja Nova Terra`}
+              path={href}
+            />
+          </span>
         </div>
 
-        <h3 className="mt-3 font-serif text-xl font-bold leading-snug text-night-900 sm:text-2xl">
-          <Link href={`/eventos/${evento.slug}`} className="hover:text-terra-800">
+        <h3 className="mt-2 line-clamp-2 font-serif text-lg font-bold leading-snug text-night-900">
+          <Link
+            href={href}
+            className="outline-none after:absolute after:inset-0 after:content-[''] group-hover:text-terra-800"
+          >
             {evento.titulo}
           </Link>
         </h3>
         {evento.detalhe && (
-          <p className="mt-1 text-xs font-medium uppercase tracking-wide text-terra-800">
+          <p className="mt-0.5 truncate text-xs font-medium uppercase tracking-wide text-terra-800">
             {evento.detalhe}
           </p>
         )}
 
         {(evento.dataEvento || evento.horaEvento) && (
-          <div className="mt-2 flex flex-wrap items-center gap-4 text-sm text-night-800/70">
+          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-night-800/70">
             {evento.dataEvento && (
               <span className="flex items-center gap-1.5">
                 <CalendarioIcon />
@@ -105,20 +114,20 @@ export default function EventCard({ evento }: { evento: Evento }) {
           </div>
         )}
 
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-night-800/70">
+        <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-night-800/70">
           {evento.descricao}
         </p>
 
-        <div className="mt-5">
+        <div className="mt-3">
           {evento.inscricoesAbertas ? (
             <Link
-              href={`/eventos/${evento.slug}/inscricao`}
-              className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-terra-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-700 active:bg-terra-800"
+              href={href}
+              className="relative z-10 inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-terra-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-terra-700 active:bg-terra-800"
             >
               Inscreva-se
             </Link>
           ) : (
-            <span className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full border border-terra-100 px-5 py-2.5 text-sm font-medium text-night-800/75">
+            <span className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full border border-terra-100 px-5 py-2 text-sm font-medium text-night-800/75">
               {isEventoEncerrado(evento) ? "Inscrições encerradas" : "Sem inscrição necessária"}
             </span>
           )}
