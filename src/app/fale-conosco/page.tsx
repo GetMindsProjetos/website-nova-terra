@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import CTAButton from "@/components/CTAButton";
 import Lacuna from "@/components/Lacuna";
+import ContatoForm from "@/components/ContatoForm";
 import { site, whatsappLink } from "@/lib/site";
 import { JsonLd, breadcrumbLd, pageMetadata } from "@/lib/seo";
 
@@ -24,7 +26,7 @@ export default function FaleConoscoPage() {
       <PageHero
         eyebrow="Fale Conosco"
         title="Fale com a gente"
-        description="Estamos aqui para conversar, orar com você e receber sua visita."
+        description="Estamos aqui para conversar, orar com você e receber sua visita. Envie um pedido de oração, tire uma dúvida ou receba as novidades da igreja."
       />
       <section className="mx-auto grid max-w-5xl gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-2">
         <div>
@@ -65,11 +67,29 @@ export default function FaleConoscoPage() {
           </div>
         </div>
 
+        <div
+          id="formulario"
+          className="scroll-mt-24 rounded-2xl border border-terra-100 bg-white p-5 shadow-card sm:p-6"
+        >
+          <h2 className="font-serif text-xl font-bold text-night-900">
+            Envie uma mensagem
+          </h2>
+          <p className="mt-1 text-sm text-night-800">
+            Sua mensagem chega à equipe de acolhimento da igreja.
+          </p>
+          <div className="mt-5">
+            <Suspense fallback={null}>
+              <ContatoForm />
+            </Suspense>
+          </div>
+        </div>
+      </section>
+      <section className="mx-auto max-w-5xl px-4 pb-16 sm:px-6">
         <div className="overflow-hidden rounded-2xl border border-terra-100">
           <iframe
             title="Localização da Igreja Nova Terra"
             src={`https://www.google.com/maps?q=${encodeURIComponent(site.address)}&output=embed`}
-            className="h-full min-h-[320px] w-full"
+            className="h-[320px] w-full"
             loading="lazy"
           />
         </div>

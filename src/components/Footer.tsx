@@ -33,6 +33,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
     links: [
       byHref("/blog"),
       byHref("/fale-conosco"),
+      { href: "/fale-conosco?assunto=oracao#formulario", label: "Pedido de oração" },
       { href: "/politica-de-privacidade", label: "Política de Privacidade" },
     ],
   },
